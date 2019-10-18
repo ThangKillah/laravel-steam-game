@@ -223,8 +223,8 @@
                 </div>
                 <div class="nav navbar-right">
                     <ul>
-                        <li class="hidden-xs-down"><a href="login.html">Login</a></li>
-                        <li class="hidden-xs-down"><a href="register.html">Register</a></li>
+                        <li class="hidden-xs-down"><a href="{{ route('login') }}">Login</a></li>
+                        <li class="hidden-xs-down"><a href="{{ route('register') }}">Register</a></li>
                         <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>

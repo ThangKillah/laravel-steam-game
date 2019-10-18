@@ -23,20 +23,12 @@
 <!-- header -->
 <div class="fixed-header">
     @include('sub.menu')
-    <!-- /header -->
 
-    <!-- main -->
-    <section class="breadcrumbs">
-        <div class="container">
-            @yield('breadcrumb')
-        </div>
-    </section>
+    @yield('breadcrumb')
 
     @yield('content')
 
-    <!-- footer -->
     @include('sub.footer')
-    <!-- /footer -->
 </div>
 <!-- vendor js -->
 <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>

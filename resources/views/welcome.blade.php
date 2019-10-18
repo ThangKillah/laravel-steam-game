@@ -3,7 +3,11 @@
 @section('title', 'Blank Page')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('home') }}
+    <section class="breadcrumbs">
+        <div class="container">
+            {{ Breadcrumbs::render('home') }}
+        </div>
+    </section>
 @endsection
 
 @section('content')
