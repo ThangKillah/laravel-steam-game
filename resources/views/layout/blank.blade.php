@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gaming - @yield('title')</title>
+    <title>{{ __('Gaming') }} - @yield('title')</title>
     <!-- vendor css -->
     <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700') }}">
     <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -24,10 +24,7 @@
     <!-- main -->
     <section class="breadcrumbs">
         <div class="container">
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Blank Page</li>
-            </ol>
+            @yield('breadcrumb')
         </div>
     </section>
 
