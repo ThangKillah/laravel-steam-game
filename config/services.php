@@ -45,4 +45,9 @@ return [
         'redirect' => env('GOOGLE_APP_CALLBACK_URL'),
     ],
 
+    'twitch' => [
+        'client_id' => env('TWITCH_APP_ID'),
+        'client_secret' => env('TWITCH_APP_SECRET'),
+        'redirect' => env('TWITCH_APP_CALLBACK_URL'),
+    ],
 ];
