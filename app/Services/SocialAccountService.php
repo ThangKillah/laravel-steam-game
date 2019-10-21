@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 use App\Model\SocialAccount;
 use App\User;
@@ -28,7 +29,7 @@ class SocialAccountService
                 $user = User::create([
                     'email' => $email,
                     'name' => $providerUser->getName(),
-                    'password' => $providerUser->getName(),
+                    'password' => Hash::make(str_random(10)),
                 ]);
             }
 
