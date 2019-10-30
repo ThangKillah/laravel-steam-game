@@ -19,7 +19,7 @@
                         </div>
                         <div class="card-block">
                             <form action="profile.html">
-                                <a class="btn btn-social btn-facebook btn-block btn-icon-left" href="" role="button"><i class="fa fa-facebook"></i> Connect with Facebook</a>
+                                @include('sub.social')
                                 <div class="divider">
                                     <span>or</span>
                                 </div>

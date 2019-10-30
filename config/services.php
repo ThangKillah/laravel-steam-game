@@ -50,4 +50,9 @@ return [
         'client_secret' => env('TWITCH_APP_SECRET'),
         'redirect' => env('TWITCH_APP_CALLBACK_URL'),
     ],
+
+    'recaptcha' => [
+        'site_key' => env('NOCAPTCHA_SITEKEY'),
+        'secret_key' => env('NOCAPTCHA_SECRET')
+    ],
 ];

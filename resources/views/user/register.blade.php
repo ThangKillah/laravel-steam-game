@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-block">
                             <form action="profile.html">
-                                <a class="btn btn-social btn-google-plus btn-block btn-icon-left" href="redirect/facebook" role="button"><i class="fa fa-google-plus"></i> Register with Google Plus</a>
+                                @include('sub.social')
                                 <div class="divider"><span>or</span></div>
                                 <div class="form-group input-icon-left m-b-10">
                                     <i class="fa fa-user"></i>
@@ -37,7 +37,7 @@
                                 <div class="divider"><span>I am not a robot</span></div>
                                 <div class="g-recaptcha-outer">
                                     <script src='https://www.google.com/recaptcha/api.js'></script>
-                                    <div class="g-recaptcha" data-sitekey="6LeBwhwUAAAAAG1RDj-rS2Wu4WYNoV021q0z-LNY"></div>
+                                    <div class="g-recaptcha" data-sitekey="{{ $recaptcha_site_key }}"></div>
                                 </div>
                                 <div class="divider"><span>Terms of Service</span></div>
                                 <label class="custom-control custom-checkbox custom-checkbox-primary custom-checked">

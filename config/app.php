@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //Laravel\Socialite\SocialiteServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class, // add
+        Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,6 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
 
     ],
 
@@ -228,6 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
+        'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
+        'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
     ],
 
 ];
