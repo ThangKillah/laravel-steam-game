@@ -14,7 +14,8 @@
                             <h4 class="card-title"><i class="fa fa-user-plus"></i> Register a new account</h4>
                         </div>
                         <div class="card-block">
-                            <form action="profile.html">
+                            <form action="{{ route('register') }}" method="post">
+                                @csrf
                                 @include('sub.social')
                                 <div class="divider"><span>or</span></div>
                                 <div class="form-group input-icon-left m-b-10">

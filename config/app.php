@@ -164,6 +164,7 @@ return [
         //Laravel\Socialite\SocialiteServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class, // add
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
         /*
          * Package Service Providers...
