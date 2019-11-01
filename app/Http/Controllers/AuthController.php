@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\RegisterRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
@@ -15,9 +15,9 @@ class AuthController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        dd($this->userRepository->all());
-        dd($request);
+        //dd($this->userRepository->all());
+        dd($request->all());
     }
 }

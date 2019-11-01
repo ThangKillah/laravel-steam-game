@@ -14,43 +14,76 @@
                             <h4 class="card-title"><i class="fa fa-user-plus"></i> Register a new account</h4>
                         </div>
                         <div class="card-block">
-                            <form action="{{ route('register') }}" method="post">
+                            <form id="form-register" action="{{ route('register') }}" method="post">
                                 @csrf
                                 @include('sub.social')
                                 <div class="divider"><span>or</span></div>
-                                <div class="form-group input-icon-left m-b-10">
+                                <div class="form-group input-icon-left m-b-10 @error('name') has-danger @enderror">
                                     <i class="fa fa-user"></i>
-                                    <input type="text" class="form-control form-control-secondary" placeholder="Username">
+                                    <input type="text"
+                                           name="name"
+                                           value="{{ old('name') }}"
+                                           class="form-control form-control-secondary"
+                                           placeholder="Username">
+                                    @error('name')
+                                        <small class="form-text">{{ $message }}</small>
+                                    @enderror
                                 </div>
-                                <div class="form-group input-icon-left m-b-10">
+                                <div class="form-group input-icon-left m-b-10 @error('email') has-danger @enderror">
                                     <i class="fa fa-envelope"></i>
-                                    <input type="email" class="form-control form-control-secondary" placeholder="Email Address">
+                                    <input type="email"
+                                           class="form-control form-control-secondary"
+                                           name="email"
+                                           value="{{ old('email') }}"
+                                           placeholder="Email Address">
+                                    @error('email')
+                                    <small class="form-text">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="divider"><span>Security</span></div>
-                                <div class="form-group input-icon-left m-b-10">
+                                <div class="form-group input-icon-left m-b-10 @error('password') has-danger @enderror">
                                     <i class="fa fa-lock"></i>
-                                    <input type="password" class="form-control form-control-secondary" placeholder="Password">
+                                    <input type="password"
+                                           class="form-control form-control-secondary"
+                                           name="password"
+                                           id="password"
+                                           value="{{ old('password') }}"
+                                           placeholder="Password">
+                                    @error('password')
+                                    <small class="form-text">{{ $message }}</small>
+                                    @enderror
                                 </div>
-                                <div class="form-group input-icon-left m-b-10">
+                                <div class="form-group input-icon-left m-b-10 @error('password_confirmation') has-danger @enderror">
                                     <i class="fa fa-unlock"></i>
-                                    <input type="password" class="form-control form-control-secondary" placeholder="Repeat Password">
+                                    <input type="password"
+                                           class="form-control form-control-secondary"
+                                           name="password_confirmation"
+                                           value="{{ old('password_confirmation') }}"
+                                           placeholder="Repeat Password">
+                                    @error('password_confirmation')
+                                    <small class="form-text">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="divider"><span>I am not a robot</span></div>
                                 <div class="g-recaptcha-outer">
                                     <script src='https://www.google.com/recaptcha/api.js'></script>
                                     <div class="g-recaptcha" data-sitekey="{{ $recaptcha_site_key }}"></div>
                                 </div>
-                                <div class="divider"><span>Terms of Service</span></div>
-                                <label class="custom-control custom-checkbox custom-checkbox-primary custom-checked">
-                                    <input type="checkbox" class="custom-control-input" checked="">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Subscribe to monthly newsletter</span>
-                                </label>
-                                <label class="custom-control custom-checkbox custom-checkbox-primary">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Accept <a href="#" data-toggle="modal" data-target="#terms">terms of service</a></span>
-                                </label>
+                                <input type="hidden"  name="recaptcha" id="recaptcha">
+                                @error('g-recaptcha-response')
+                                    <small class="form-text" style="color: #ff4a38">{{ $message }}</small>
+                                @enderror
+{{--                                <div class="divider"><span>Terms of Service</span></div>--}}
+{{--                                <label class="custom-control custom-checkbox custom-checkbox-primary custom-checked">--}}
+{{--                                    <input type="checkbox" class="custom-control-input" checked="">--}}
+{{--                                    <span class="custom-control-indicator"></span>--}}
+{{--                                    <span class="custom-control-description">Subscribe to monthly newsletter</span>--}}
+{{--                                </label>--}}
+{{--                                <label class="custom-control custom-checkbox custom-checkbox-primary">--}}
+{{--                                    <input type="checkbox" class="custom-control-input">--}}
+{{--                                    <span class="custom-control-indicator"></span>--}}
+{{--                                    <span class="custom-control-description">Accept <a href="#" data-toggle="modal" data-target="#terms">terms of service</a></span>--}}
+{{--                                </label>--}}
                                 <button type="submit" class="btn btn-primary m-t-10 btn-block">Complete Registration</button>
                             </form>
                         </div>
@@ -95,3 +128,72 @@
     </section>
     <!-- /main -->
 @endsection
+
+@push('js')
+    <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script>
+        $().ready(function() {
+            $.validator.addMethod('checkPass', function (value) {
+                return /^[a-zA-Z0-9]+$/.test(value);
+            }, 'Password only include number and letter.');
+
+            $.validator.addMethod('checkCaptcha', function (value) {
+                return $('#g-recaptcha-response').val().length > 0
+            }, 'Please check captcha i am not a robot');
+
+
+
+            $("#form-register").validate({
+                // onfocusout: false,
+                // onkeyup: false,
+                // onclick: false,
+                ignore: [],
+                success: function(label,element) {
+                    label.parent().removeClass('error');
+                    label.remove();
+                },
+                errorElement : 'small',
+                errorPlacement: function(error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                rules: {
+                    "name": {
+                        required: true,
+                        maxlength: 255
+                    },
+                    "recaptcha": {
+                        checkCaptcha : true
+                    },
+                    "email": {
+                        required: true,
+                        maxlength: 255
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6,
+                        checkPass : true
+                    },
+                    "password_confirmation": {
+                        equalTo: "#password",
+                    }
+                },
+                messages: {
+                    "password": {
+                        required: "Please enter your password",
+                    },
+                    "password_confirmation": {
+                        equalTo: "Please enter same password confirm",
+                    },
+                    "recaptcha": {
+                        required: "Please check i am not a robot."
+                    }
+                }
+            });
+        });
+    </script>
+@endpush
