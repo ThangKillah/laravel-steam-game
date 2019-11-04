@@ -26,8 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|regex:/^[a-zA-Z0-9]+$/',
-            'password_confirmation' => 'required|confirmed',
+            'password' => 'required|min:6|confirmed|regex:/^[a-zA-Z0-9]+$/',
             'g-recaptcha-response' => 'required|captcha'
         ];
     }

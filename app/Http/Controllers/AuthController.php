@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -17,7 +16,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        //dd($this->userRepository->all());
-        dd($request->all());
+        $this->userRepository->register($request->all());
+        return redirect()->route('home');
     }
 }

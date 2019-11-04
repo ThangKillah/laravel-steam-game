@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\UserRepository;
 use App\Model\User;
 use App\Validators\UserValidator;
+use Illuminate\Support\Facades\Hash;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
+use Sentinel;
 
 /**
  * Class UserRepositoryEloquent.
@@ -44,5 +45,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function register($params = [])
+    {
+        $params['password'] = Hash::make($params['password']);
+        $user = $this->create($params);
+        dd($user);
+        Sentinel::login($user);
+    }
+
 }
