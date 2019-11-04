@@ -131,8 +131,10 @@
 
 @push('js')
     <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('messages.js') }}"></script>
     <script>
         $().ready(function() {
+            console.log(Lang.get('auth.failed'));
             $.validator.addMethod('checkPass', function (value) {
                 return /^[a-zA-Z0-9]+$/.test(value);
             }, 'Password only include number and letter.');
