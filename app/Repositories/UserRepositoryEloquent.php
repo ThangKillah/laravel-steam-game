@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Model\User;
 use App\Validators\UserValidator;
-use Illuminate\Support\Facades\Hash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Sentinel;
@@ -48,10 +47,15 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function register($params = [])
     {
-        $params['password'] = Hash::make($params['password']);
-        $user = $this->create($params);
-        dd($user);
-        Sentinel::login($user);
+        $credentials = [
+            'email' => $params['email'],
+            'name' => $params['name'],
+            'password' => $params['password'],
+        ];
+
+        $user = Sentinel::register($credentials);
+
+        return $user;
     }
 
 }

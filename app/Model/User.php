@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -11,7 +10,7 @@ use Prettus\Repository\Traits\TransformableTrait;
  *
  * @package namespace App\Model;
  */
-class User extends Model implements Transformable
+class User extends \Cartalyst\Sentinel\Users\EloquentUser implements Transformable
 {
     use TransformableTrait;
 
@@ -23,7 +22,8 @@ class User extends Model implements Transformable
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'permissions',
     ];
 
 }
