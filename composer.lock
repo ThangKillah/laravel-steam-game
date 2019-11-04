@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-  "content-hash": "1ae8b07c2b5210c92ed7de06e580d410",
+  "content-hash": "0005c7b5b3afe52e6b51bc55e7c888c9",
     "packages": [
         {
           "name": "anhskohbo/no-captcha",
@@ -1097,6 +1097,53 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
+          "name": "iignatov/lightopenid",
+          "version": "1.0.0",
+          "source": {
+            "type": "git",
+            "url": "https://github.com/WillSkates/LightOpenID.git",
+            "reference": "15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa"
+          },
+          "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/WillSkates/LightOpenID/zipball/15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa",
+            "reference": "15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa",
+            "shasum": ""
+          },
+          "require": {
+            "php": ">=5.2"
+          },
+          "type": "library",
+          "autoload": {
+            "classmap": [
+              "openid.php",
+              "provider/provider.php"
+            ]
+          },
+          "notification-url": "https://packagist.org/downloads/",
+          "license": [
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Ignat Ignatov",
+              "homepage": "https://github.com/iignatov/LightOpenID"
+            },
+            {
+              "name": "Mewp",
+              "homepage": "https://code.google.com/p/lightopenid/"
+            }
+          ],
+          "description": "Lightweight PHP5 library for easy OpenID authentication.",
+          "homepage": "https://github.com/iignatov/LightOpenID",
+          "keywords": [
+            "Authentication",
+            "OpenId",
+            "security"
+          ],
+          "time": "2014-01-27T06:01:05+00:00"
+        },
+      {
             "name": "jakub-onderka/php-console-color",
             "version": "v0.2",
             "source": {
@@ -2569,6 +2616,44 @@
             "time": "2019-09-25T06:06:35+00:00"
         },
         {
+          "name": "socialiteproviders/steam",
+          "version": "v1.1",
+          "source": {
+            "type": "git",
+            "url": "https://github.com/SocialiteProviders/Steam.git",
+            "reference": "c6f372646c01e96258ebf603644e95e0e82eeeb7"
+          },
+          "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/SocialiteProviders/Steam/zipball/c6f372646c01e96258ebf603644e95e0e82eeeb7",
+            "reference": "c6f372646c01e96258ebf603644e95e0e82eeeb7",
+            "shasum": ""
+          },
+          "require": {
+            "iignatov/lightopenid": "~1.0",
+            "php": "^5.6 || ^7.0",
+            "socialiteproviders/manager": "~2.0 || ~3.0"
+          },
+          "type": "library",
+          "autoload": {
+            "psr-4": {
+              "SocialiteProviders\\Steam\\": ""
+            }
+          },
+          "notification-url": "https://packagist.org/downloads/",
+          "license": [
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Christopher Eklund",
+              "email": "eklundchristopher@gmail.com"
+            }
+          ],
+          "description": "Steam OpenID Provider for Laravel Socialite",
+          "time": "2019-01-11T19:48:14+00:00"
+        },
+      {
             "name": "socialiteproviders/twitch",
             "version": "v5.1",
             "source": {

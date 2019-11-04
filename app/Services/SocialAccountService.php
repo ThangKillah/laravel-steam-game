@@ -27,10 +27,16 @@ class SocialAccountService
             $user = User::whereEmail($email)->first();
 
             if (!$user) {
+                $userName = $providerUser->getName();
+
+                if ($social == 'steam') {
+                    $responseUser = $providerUser->user;
+                    $userName = $responseUser['personaname'];
+                }
 
                 $user = User::create([
                     'email' => $email,
-                    'name' => $providerUser->getName(),
+                    'name' => $userName,
                     'password' => Hash::make(Str::random(10)),
                 ]);
             }

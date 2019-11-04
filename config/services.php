@@ -51,6 +51,12 @@ return [
         'redirect' => env('TWITCH_APP_CALLBACK_URL'),
     ],
 
+    'steam' => [
+        'client_id' => null,
+        'client_secret' => env('STEAM_KEY'),
+        'redirect' => env('STEAM_REDIRECT_URI')
+    ],
+
     'recaptcha' => [
         'site_key' => env('NOCAPTCHA_SITEKEY'),
         'secret_key' => env('NOCAPTCHA_SECRET')
