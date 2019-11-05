@@ -11,6 +11,9 @@
 @endsection
 
 @section('content')
+    @if(Sentinel::check())
+        <h1>sasdsa</h1>
+    @endif
     <section class="blank">
         <!-- add content -->
     </section>

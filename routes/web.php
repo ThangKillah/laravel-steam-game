@@ -24,6 +24,7 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/register', 'AuthController@register')->name('register');
+Route::get('/logout', 'AuthController@logout')->name('logout');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');

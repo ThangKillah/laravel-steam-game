@@ -18,6 +18,6 @@ class SocialAuthController extends Controller
         $user = SocialAccountService::createOrGetUser(Socialite::driver($social)->user(), $social);
         Sentinel::login($user);
 
-        return redirect()->to('/home');
+        return redirect()->to('/');
     }
 }

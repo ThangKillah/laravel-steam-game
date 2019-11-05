@@ -7,6 +7,7 @@ use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Contracts\User as ProviderUser;
+use Sentinel;
 
 class SocialAccountService
 {
@@ -34,11 +35,13 @@ class SocialAccountService
                     $userName = $responseUser['personaname'];
                 }
 
-                $user = User::create([
+                $credentials = [
                     'email' => $email,
                     'name' => $userName,
                     'password' => Hash::make(Str::random(10)),
-                ]);
+                ];
+
+                $user = Sentinel::registerAndActivate($credentials);
             }
 
             $account->user()->associate($user);

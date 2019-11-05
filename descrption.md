@@ -6,3 +6,5 @@ menu :
     -Video : 
     -Blog : 
     -New
+    
+php artisan translator:update
