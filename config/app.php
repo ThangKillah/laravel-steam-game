@@ -166,6 +166,7 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        Translator\Framework\TranslatorServiceProvider::class,
 
         /*
          * Package Service Providers...

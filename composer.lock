@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de7800173887f2fe8e1c460d1afcf6fc",
+    "content-hash": "6d6d8200a880cfa587ffd9b9012aa7db",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -4191,6 +4191,61 @@
                 "minifier"
             ],
             "time": "2019-06-28T18:11:46+00:00"
+        },
+        {
+            "name": "thiagocordeiro/laravel-translator",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagocordeiro/laravel-translator.git",
+                "reference": "ced2ef67c94b9fbf896663247b8a6aa67cdd0f28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagocordeiro/laravel-translator/zipball/ced2ef67c94b9fbf896663247b8a6aa67cdd0f28",
+                "reference": "ced2ef67c94b9fbf896663247b8a6aa67cdd0f28",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": ">=5.4.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "composer/composer": "^1.8",
+                "phpstan/phpstan": "^0.11.8",
+                "phpunit/phpunit": "^8.0",
+                "slevomat/coding-standard": "^5.0",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Translator\\Framework\\TranslatorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Translator\\": "src/"
+                },
+                "files": [
+                    "src/Framework/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Cordeiro",
+                    "email": "thiagoguetten@gmail.com"
+                }
+            ],
+            "description": "Search translation keys and insert into json to be translated",
+            "time": "2019-10-13T21:46:10+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
