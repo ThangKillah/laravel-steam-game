@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Model\SocialAccount;
-use App\User;
+use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Contracts\User as ProviderUser;
