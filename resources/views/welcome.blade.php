@@ -12,7 +12,7 @@
 
 @section('content')
     @if(Sentinel::check())
-        <h1>sasdsa</h1>
+        {{ Sentinel::getUser() }}
     @endif
     <section class="blank">
         <!-- add content -->

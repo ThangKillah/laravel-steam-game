@@ -23,8 +23,17 @@ Route::get('/login', function () {
     return view('user.login');
 })->name('login');
 
+Route::post('/login-with-disqus', 'AuthController@loginWithDisqus')->name('login-with-disqus');
+
 Route::post('/register', 'AuthController@register')->name('register');
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
+
+
+Route::get('/test', function () {
+    return view('test');
+})->name('test');
+
+

@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface UserRepository extends RepositoryInterface
 {
     public function register($params = []);
+
+    public function loginDisqus(int $userId);
 }

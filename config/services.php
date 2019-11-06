@@ -61,4 +61,9 @@ return [
         'site_key' => env('NOCAPTCHA_SITEKEY'),
         'secret_key' => env('NOCAPTCHA_SECRET')
     ],
+
+    'disqus' => [
+        'secret_key' => env('DISQUS_SECRET_KEY'),
+        'public_key' => env('DISQUS_PUBLIC_KEY')
+    ],
 ];
