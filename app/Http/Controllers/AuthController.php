@@ -34,7 +34,7 @@ class AuthController extends Controller
             'id' => ['required', 'min:' . config('hashids.connections.main.length')],
         ]);
 
-        $userId = Hashids::decode($request->get('id'))[0];
+        $userId = \Hashids::decode($request->get('id'))[0];
 
         return $this->userRepository->loginDisqus($userId);
     }

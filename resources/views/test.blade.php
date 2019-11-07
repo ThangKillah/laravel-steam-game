@@ -41,9 +41,9 @@
          */
 
         var disqus_config = function () {
-            this.page.url = 'https://blog-game.com/test';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.url = 'https://blog-game.com/comment';  // Replace PAGE_URL with your page's canonical URL variable
             //this.page.identifier = '1 https://disqus-sso-demo.glitch.me/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            this.page.title = 'Disqus SSO quick start';
+            this.page.title = 'ThangBT Gaming';
             this.page.api_key = 'V40BtVqpsHNRRqiNacQ6MtuSABY6o6dAh5X1ORUiMMzsfzo2FAPGicVSTAFRFMwy';
             // this.sso = {
             //     name:   "SampleNews",
@@ -59,7 +59,7 @@
         (function () {  // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
 
-            s.src = '//ssoglitch.disqus.com/embed.js';
+            s.src = 'https://https-blog-game-com.disqus.com/embed.js';
 
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
@@ -71,6 +71,7 @@
                 reload: true,
                 config: function () {
                     this.page.remote_auth_s3 = newAuth;
+                    this.page.api_key = 'V40BtVqpsHNRRqiNacQ6MtuSABY6o6dAh5X1ORUiMMzsfzo2FAPGicVSTAFRFMwy';
                 }
             });
         };
@@ -90,6 +91,7 @@
                 });
         }
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-            Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
 @endpush

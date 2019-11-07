@@ -26,10 +26,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
+     * Specify Validator class name
+     *
+     * @return mixed
+     */
     public function validator()
     {
 
@@ -81,12 +81,18 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function loginDisqus(int $userId)
     {
-        $user = $this->find($userId);
+        //        $user = $this->find($userId);
+
+        //        $data = array(
+        //            "id" => $user->id,
+        //            "username" => $user->name,
+        //            "email" => $user->email
+        //        );
 
         $data = array(
-            "id" => $user->id,
-            "username" => $user->name,
-            "email" => $user->email
+            "id" => 1334123,
+            "username" => 'thangbt1307',
+            "email" => 'buithang1307@gmail.com'
         );
 
         $message = base64_encode(json_encode($data));

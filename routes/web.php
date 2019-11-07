@@ -32,7 +32,7 @@ Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 
-Route::get('/test', function () {
+Route::get('/comment', function () {
     return view('test');
 })->name('test');
 
