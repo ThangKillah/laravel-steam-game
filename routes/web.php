@@ -26,6 +26,7 @@ Route::get('/login', function () {
 Route::post('/login-with-disqus', 'AuthController@loginWithDisqus')->name('login-with-disqus');
 
 Route::post('/register', 'AuthController@register')->name('register');
+Route::post('/login', 'AuthController@login')->name('postLogin');
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
