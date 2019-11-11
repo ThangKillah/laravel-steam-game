@@ -37,4 +37,6 @@ Route::get('/comment', function () {
     return view('test');
 })->name('test');
 
+Route::get('test-game', 'GamingController@test');
+
 
