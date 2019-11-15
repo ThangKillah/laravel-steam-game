@@ -27,5 +27,5 @@ return [
      * Adjust this to 5000 if you are on the "Pro" tier or in the Partner Program
      * or to 0 (to turn it off) if you are in the "Enterprise" tier.
      */
-    'offset_limit' => 150,
+    'offset_limit' => 0,
 ];
