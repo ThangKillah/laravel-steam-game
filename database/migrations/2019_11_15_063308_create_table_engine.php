@@ -15,11 +15,10 @@ class CreateTableEngine extends Migration
     {
         Schema::create('engines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('description');
-            $table->string('logo');
+            //$table->text('description');
+            $table->string('logo')->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->string('url');
             $table->timestamps();
         });
     }

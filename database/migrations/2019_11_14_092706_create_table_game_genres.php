@@ -15,6 +15,8 @@ class CreateTableGameGenres extends Migration
     {
         Schema::create('game_genres', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('genre_id');
+            $table->integer('game_id');
             $table->timestamps();
         });
     }

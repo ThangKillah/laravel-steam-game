@@ -15,13 +15,12 @@ class CreateTableCompany extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('changed_company_id')->default(0); //The new ID for a company that has gone through a merger or restructuring
-            $table->integer('country'); // ISO 3166-1 country code
-            $table->text('description');
-            $table->string('logo');
+            $table->integer('country')->nullable(); // ISO 3166-1 country code
+            $table->text('description')->nullable();
+            $table->string('logo')->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->string('url');
+            $table->json('websites')->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,9 +12,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        $this->call(CategorySeeder::class);
-//        $this->call(DateFormatSeeder::class);
-//        $this->call(PlatformSeeder::class);
-        $this->call(ThemeSeeder::class);
+        DB::beginTransaction();
+        try {
+            $this->call(CategorySeeder::class);
+            $this->call(DateFormatSeeder::class);
+            $this->call(PlatformSeeder::class);
+            $this->call(ThemeSeeder::class);
+            $this->call(ModeSeeder::class);
+            $this->call(GenreSeeder::class);
+            $this->call(GameSeeder::class);
+
+            DB::commit();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            DB::rollback();
+        }
     }
 }

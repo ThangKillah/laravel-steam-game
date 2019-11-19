@@ -17,10 +17,10 @@ class CreateTableReleaseDates extends Migration
             $table->bigIncrements('id');
             $table->integer('format_date_id');
             $table->integer('game_id');
-            $table->timestamp('date');
+            $table->timestamp('date')->nullable();
             $table->string('human'); // A human readable representation of the date
-            $table->integer('m'); //The month as an integer starting at 1 (January)
-            $table->integer('y'); //The year in full (2018)
+            $table->integer('m')->nullable(); //The month as an integer starting at 1 (January)
+            $table->integer('y')->nullable(); //The year in full (2018)
             $table->integer('platform_id');
             $table->integer('region');
             $table->timestamps();
