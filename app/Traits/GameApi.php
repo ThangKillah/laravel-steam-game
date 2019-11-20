@@ -27,10 +27,10 @@ trait GameApi
             //        whereHas('release_dates', function ($q) {
             //            $q->whereIn('platform.id', [48, 49, 6]);
             //        })
-            ->whereDate('first_release_date', '>=', '2015-01-01')
+            ->whereDate('first_release_date', '>=', '2015-01-01') // condition
             ->where('category', 0)
             ->whereNotNull('pulse_count')
-            ->orderBy('popularity', 'desc')
+            ->orderBy('popularity', 'desc') // order by
             ->orderBy('pulse_count', 'desc')
             ->with([
                 'cover',
