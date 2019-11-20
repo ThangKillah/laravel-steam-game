@@ -181,7 +181,7 @@ class GameSeeder extends Seeder
                             $website = [];
                             if (!empty($company->websites)) {
                                 foreach ($company->websites as $web) {
-                                    if ($web instanceof \MarcReichel\IGDBLaravel\Models\Website) {
+                                    if ($web instanceof \MarcReichel\IGDBLaravel\Models\CompanyWebsite) {
                                         array_push($website, [
                                             'category' => $web->category,
                                             'url' => $web->url
