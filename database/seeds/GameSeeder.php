@@ -17,6 +17,8 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
+        ini_set('memory_limit', '1024M');
+
         $arrGames = [];
         $arrEngines = [];
         $idEngines = [];
@@ -38,7 +40,7 @@ class GameSeeder extends Seeder
         $arrGameReleaseDate = [];
         $arrGameThemes = [];
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 1000; $i++) {
             $games = $this->getGame($i);
             if ($games->isEmpty()) {
                 break;
@@ -91,7 +93,7 @@ class GameSeeder extends Seeder
                     'aggregated_rating_count' => $game->aggregated_rating_count,
                     'first_release_date' => $game->first_release_date,
                     'follows' => empty($game->follows) ? 0 : $game->follows,
-                    'hypes' => empty($game->follows) ? 0 : $game->hypes,
+                    'hypes' => empty($game->hypes) ? 0 : $game->hypes,
                     'name' => $game->name,
                     'popularity' => $game->popularity,
                     'pulse_count' => $game->pulse_count,
@@ -295,18 +297,26 @@ class GameSeeder extends Seeder
             }
         }
 
-        DB::table('games')->insert($arrGames);
-        DB::table('engines')->insert($arrEngines);
-        DB::table('game_engines')->insert($arrEngineGames);
-        DB::table('keywords')->insert($arrKeyword);
-        DB::table('keyword_games')->insert($arrKeywordGame);
-        DB::table('companies')->insert($arrCompany);
-        DB::table('involved_companies')->insert($arrCompanyDevelop);
-        DB::table('multiplayer_modes')->insert($arrMultipleMode);
-        DB::table('game_modes')->insert($arrGameMode);
-        DB::table('game_genres')->insert($arrGameGenres);
-        DB::table('game_platforms')->insert($arrGamePlatforms);
-        DB::table('release_dates')->insert($arrGameReleaseDate);
-        DB::table('game_themes')->insert($arrGameThemes);
+
+        $this->insertChunk('games', $arrGames);
+        $this->insertChunk('engines', $arrEngines);
+        $this->insertChunk('game_engines', $arrEngineGames);
+        $this->insertChunk('keywords', $arrKeyword);
+        $this->insertChunk('keyword_games', $arrKeywordGame);
+        $this->insertChunk('companies', $arrCompany);
+        $this->insertChunk('involved_companies', $arrCompanyDevelop);
+        $this->insertChunk('multiplayer_modes', $arrMultipleMode);
+        $this->insertChunk('game_modes', $arrGameMode);
+        $this->insertChunk('game_genres', $arrGameGenres);
+        $this->insertChunk('game_platforms', $arrGamePlatforms);
+        $this->insertChunk('release_dates', $arrGameReleaseDate);
+        $this->insertChunk('game_themes', $arrGameThemes);
+    }
+
+    public function insertChunk($nameTable, $arrays)
+    {
+        foreach (array_chunk($arrays, 1000) as $t) {
+            DB::table($nameTable)->insert($t);
+        }
     }
 }

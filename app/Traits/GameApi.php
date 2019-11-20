@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use MarcReichel\IGDBLaravel\Models\Game;
+use MarcReichel\IGDBLaravel\Models\Platform;
 
 trait GameApi
 {
@@ -11,16 +12,26 @@ trait GameApi
         $limit = 100;
         $offset = ($page - 1) * $limit;
 
-        //dd(Theme::all());
+        $platforms = Platform::where('name', 'Mac')
+            ->orWhere('name', 'Linux')
+            ->orWhere('name', 'PC (Microsoft Windows)')
+            ->orWhere('name', 'Nintendo Switch')
+            ->orWhere('name', 'PlayStation 4')
+            ->orWhere('name', 'Xbox One')
+            ->orWhere('name', 'Xbox 360')
+            ->orWhere('name', 'PlayStation 3')
+            ->with(['platform_logo', 'websites'])
+            ->get();
 
-        $games = Game:: whereIn('platforms', [48, 49, 6])
+        $games = Game:: whereIn('platforms', $platforms->pluck('id')->toArray())
             //        whereHas('release_dates', function ($q) {
             //            $q->whereIn('platform.id', [48, 49, 6]);
             //        })
-            ->whereDate('first_release_date', '>=', '2017-01-01')
+            ->whereDate('first_release_date', '>=', '2015-01-01')
             ->where('category', 0)
-            ->where('popularity', '>=', 5)
+            ->whereNotNull('pulse_count')
             ->orderBy('popularity', 'desc')
+            ->orderBy('pulse_count', 'desc')
             ->with([
                 'cover',
                 'game_engines',

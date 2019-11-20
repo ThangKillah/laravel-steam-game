@@ -18,7 +18,7 @@ class CreateTablePlatforms extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('logo');
-            $table->text('des');
+            $table->text('des')->nullable();
             $table->json('websites');
             $table->timestamps();
         });
