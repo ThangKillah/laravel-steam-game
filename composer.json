@@ -23,6 +23,7 @@
         "prettus/l5-repository": "^2.6",
         "socialiteproviders/steam": "^1.1",
         "socialiteproviders/twitch": "^5.1",
+        "stichoza/google-translate-php": "^4.0",
         "thiagocordeiro/laravel-translator": "^1.0",
         "vinkla/hashids": "^7.0"
     },
