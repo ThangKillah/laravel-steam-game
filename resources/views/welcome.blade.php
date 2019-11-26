@@ -21,7 +21,7 @@
     @if(Sentinel::check())
         {{ Sentinel::getUser() }}
     @endif
-    <div class="variable slider d-flex mb-5 bg-dark p-2">
+    <div class="variable slider d-flex mb-5 p-2">
         <div class="item youtube">
             <iframe class="embed-player slide-media"
                     src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=1&fs=0&iv_load_policy=3&rel=0&showinfo=0&loop=1&playlist=QV5EXOFcdrQ&start=1"
