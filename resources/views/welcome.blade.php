@@ -21,14 +21,44 @@
     @if(Sentinel::check())
         {{ Sentinel::getUser() }}
     @endif
-    <div class="variable slider d-flex mb-5 p-2">
+
+    <div class="slicker-show-up slider d-flex mb-5 p-2">
         <div class="item youtube">
             <iframe class="embed-player slide-media"
-                    src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=1&fs=0&iv_load_policy=3&rel=0&showinfo=0&loop=1&playlist=QV5EXOFcdrQ&start=1"
-                    frameborder="1"
-                    allowfullscreen>
+                    src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=1&fs=1&iv_load_policy=3&rel=0&showinfo=0&loop=1&start=1"
+                    frameborder="0"
+                    allowfullscreen
+            >
             </iframe>
         </div>
+        <div class="game-list-inline-item">
+            <a class="img-box" href="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg"
+               data-lightbox='{"disqus": true, "gallery": "uncharted"}'>
+                <img class="img-responsive" src="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg"
+                     alt="">
+                <div class="overlay">
+                    <div class="text"><i class="fa fa-search-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="game-list-inline-item">
+            <a class="img-box" href="https://images.igdb.com/igdb/image/upload/t_original/co1re8.jpg"
+               data-lightbox='{"disqus": true, "gallery": "uncharted"}'>
+                <img class="img-responsive" src="https://images.igdb.com/igdb/image/upload/t_original/co1re8.jpg"
+                     alt="">
+                <div class="overlay">
+                    <div class="text"><i class="fa fa-search-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="slicker-show-up slider d-flex mb-5 p-2">
+        {{--        <div class="media-thumbs-scroll media-thumbs-scroll-left">--}}
+        {{--            <i style="line-height: 60px; font-size: 60px;" class="fa fa-angle-left" aria-hidden="true"></i>--}}
+        {{--        </div>--}}
         <div class="game-list-inline-item">
             <a href="/games/immortal-unchained"><span>Overwatch</span>
                 <img
@@ -83,13 +113,15 @@
 
 @push('js')
     <script type="text/javascript" src="{{ asset('plugins/slick/js/slick.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/lightbox/lightbox.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $(".variable").slick({
-                centerMode: true,
-                centerPadding: '60px',
-                //autoplay: true,
-                infinite: true,
+            $(".slicker-show-up").slick({
+                // centerMode: true,
+                // centerPadding: '60px',
+                //infinite: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
                 variableWidth: true,
                 responsive: [
                     {
@@ -121,6 +153,15 @@
                 ],
             });
         });
+    </script>
+    <script>
+        (function ($) {
+            "use strict";
+            // lightbox
+            $('[data-lightbox]').lightbox({
+                disqus: 'gameforestyakuzieu'
+            });
+        })(jQuery);
     </script>
 @endpush
 

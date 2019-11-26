@@ -44,17 +44,17 @@ small.error {
     color: black !important;
 }
 
-.slick-slide {
-    opacity: .6;
-}
+/*.slick-slide {*/
+/*    opacity: .6;*/
+/*}*/
 
-.slick-active {
-    opacity: .5;
-}
+/*.slick-active {*/
+/*    opacity: .5;*/
+/*}*/
 
-.slick-current {
-    opacity: 1;
-}
+/*.slick-current {*/
+/*    opacity: 1;*/
+/*}*/
 
 .slick-next {
     margin-right: 72px !important;
@@ -68,7 +68,7 @@ small.error {
 .slick-prev:before {
     font: 40px/1 'FontAwesome' !important;
     content: "\f104" !important;
-    font-size: 60px !important;
+    font-size: 50px !important;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 20px;
     color: white !important;
@@ -77,7 +77,7 @@ small.error {
 .slick-next:before {
     font: 40px/1 'FontAwesome' !important;
     content: "\f105" !important;
-    font-size: 60px !important;
+    font-size: 50px !important;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 5px 20px;
     color: white !important;
@@ -112,10 +112,10 @@ small.error {
 
 .slick-slide img {
     display: block;
-    cursor: pointer;
 }
 
 .img-responsive {
+    cursor: pointer;
     display: block;
     max-width: 100%;
     height: 300px;
@@ -126,5 +126,64 @@ small.error {
     min-width: 500px;
     height: 300px;
 }
+
+.slicker-show-up {
+    visibility: hidden;
+}
+
+.slick-initialized {
+    visibility: visible;
+}
+
+.slide-media {
+    min-width: 500px;
+    height: 300px;
+}
+
+.img-box:hover > .overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.text {
+    color: white;
+    position: absolute;
+    line-height: 270px;
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/*.media-thumbs-scroll {*/
+/*    position: absolute;*/
+/*    z-index: 300;*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*    margin-top: 100px;*/
+/*    text-align: center;*/
+/*    background-color: rgba(0,0,0,0.6);*/
+/*    color: white;*/
+/*    font-size: 30px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.media-thumbs-scroll-left {*/
+/*    margin-left: 7px;*/
+/*}*/
 
 /*End Slick Custom css*/
