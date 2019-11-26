@@ -2,6 +2,13 @@
 
 @section('title', 'Blank Page')
 
+@push('styles')
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick.css') }}"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick-theme.css') }}"/>
+@endpush
+
 @section('breadcrumb')
     <section class="breadcrumbs">
         <div class="container">
@@ -14,8 +21,106 @@
     @if(Sentinel::check())
         {{ Sentinel::getUser() }}
     @endif
-    <section class="blank">
-        <!-- add content -->
-    </section>
+    <div class="variable slider d-flex mb-5 bg-dark p-2">
+        <div class="item youtube">
+            <iframe class="embed-player slide-media"
+                    src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=1&fs=0&iv_load_policy=3&rel=0&showinfo=0&loop=1&playlist=QV5EXOFcdrQ&start=1"
+                    frameborder="1"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="game-list-inline-item">
+            <a href="/games/immortal-unchained"><span>Overwatch</span>
+                <img
+                        alt="adasd"
+                        class="img-responsive"
+                        src="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg">
+            </a>
+        </div>
+        <div class="game-list-inline-item">
+            <a href="/games/immortal-unchained"><span>Overwatch</span>
+                <img
+                        alt="adasd"
+                        class="img-responsive"
+                        src="https://images.igdb.com/igdb/image/upload/t_original/co1re8.jpg">
+            </a>
+        </div>
+        <div class="game-list-inline-item">
+            <a href="/games/immortal-unchained"><span>Overwatch</span>
+                <img
+                        alt="adasd"
+                        class="img-responsive"
+                        src="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg">
+            </a>
+        </div>
+        <div class="game-list-inline-item">
+            <a href="/games/immortal-unchained"><span>Overwatch</span>
+                <img
+                        alt="adasd"
+                        class="img-responsive"
+                        src="https://images.igdb.com/igdb/image/upload/t_original/co1re8.jpg">
+            </a>
+        </div>
+        <div class="game-list-inline-item">
+            <a href="/games/immortal-unchained"><span>Overwatch</span>
+                <img
+                        alt="adasd"
+                        class="img-responsive"
+                        src="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg">
+            </a>
+        </div>
+        <div class="game-list-inline-item">
+            <a href="/games/immortal-unchained"><span>Overwatch</span>
+                <img
+                        alt="adasd"
+                        class="img-responsive"
+                        src="https://images.igdb.com/igdb/image/upload/t_original/co1re8.jpg">
+            </a>
+        </div>
+    </div>
     <!-- /main -->
 @endsection
+
+@push('js')
+    <script type="text/javascript" src="{{ asset('plugins/slick/js/slick.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".variable").slick({
+                centerMode: true,
+                centerPadding: '60px',
+                //autoplay: true,
+                infinite: true,
+                variableWidth: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            //dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    },
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ],
+            });
+        });
+    </script>
+@endpush
+

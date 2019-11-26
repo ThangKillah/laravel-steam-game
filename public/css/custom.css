@@ -21,3 +21,109 @@
 small.error {
     color: #ff4a38;
 }
+
+/*Slick Custom css*/
+
+.slider {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.slick-slide {
+    margin: 0px 20px;
+    transition: all ease-in-out .3s;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: black !important;
+}
+
+.slick-slide {
+    opacity: .6;
+}
+
+.slick-active {
+    opacity: .5;
+}
+
+.slick-current {
+    opacity: 1;
+}
+
+.slick-next {
+    margin-right: 72px !important;
+}
+
+.slick-prev {
+    margin-left: 30px !important;
+    z-index: 20;
+}
+
+.slick-prev:before {
+    font: 40px/1 'FontAwesome' !important;
+    content: "\f104" !important;
+    font-size: 60px !important;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 20px;
+    color: white !important;
+}
+
+.slick-next:before {
+    font: 40px/1 'FontAwesome' !important;
+    content: "\f105" !important;
+    font-size: 60px !important;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 20px;
+    color: white !important;
+}
+
+.game-list-inline-item {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    max-width: 200px;
+    margin: 0 7px;
+}
+
+.game-list-inline-item a {
+    display: block;
+}
+
+.game-list-inline-item span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 0;
+    margin: 0;
+    width: 100%;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7) 50%);
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+
+}
+
+.slick-slide img {
+    display: block;
+    cursor: pointer;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: 300px;
+}
+
+.slick-slide iframe {
+    position: relative;
+    min-width: 500px;
+    height: 300px;
+}
+
+/*End Slick Custom css*/
