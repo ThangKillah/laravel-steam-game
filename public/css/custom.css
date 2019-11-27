@@ -121,11 +121,11 @@ small.error {
     height: 300px;
 }
 
-.slick-slide iframe {
-    position: relative;
-    min-width: 500px;
-    height: 300px;
-}
+/*.slick-slide iframe {*/
+/*    position: relative;*/
+/*    min-width: 500px;*/
+/*    height: 300px;*/
+/*}*/
 
 .slicker-show-up {
     visibility: hidden;

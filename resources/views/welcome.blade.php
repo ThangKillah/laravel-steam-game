@@ -23,14 +23,14 @@
     @endif
 
     <div class="slicker-show-up slider d-flex mb-5 p-2">
-        <div class="item youtube">
-            <iframe class="embed-player slide-media"
-                    src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=1&fs=1&iv_load_policy=3&rel=0&showinfo=0&loop=1&start=1"
-                    frameborder="0"
-                    allowfullscreen
-            >
-            </iframe>
-        </div>
+        {{--        <div class="item youtube">--}}
+        {{--            <iframe class="embed-player slide-media"--}}
+        {{--                    src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=1&fs=1&iv_load_policy=3&rel=0&showinfo=0&loop=1&start=1"--}}
+        {{--                    frameborder="0"--}}
+        {{--                    allowfullscreen--}}
+        {{--            >--}}
+        {{--            </iframe>--}}
+        {{--        </div>--}}
         <div class="game-list-inline-item">
             <a class="img-box" href="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg"
                data-lightbox='{"disqus": true, "gallery": "uncharted"}'>
