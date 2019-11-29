@@ -31,7 +31,7 @@ small.error {
 }
 
 .slick-slide {
-    margin: 0px 20px;
+    margin: 0 20px;
     transition: all ease-in-out .3s;
 }
 
@@ -63,6 +63,14 @@ small.error {
 .slick-prev {
     margin-left: 33px !important;
     z-index: 20;
+}
+
+.main-slider .slick-next {
+    margin-right: 82px !important;
+}
+
+.main-slider .slick-prev {
+    margin-left: 45px !important;
 }
 
 .slick-prev:before {
