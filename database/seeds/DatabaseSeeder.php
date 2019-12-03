@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             $this->call(ModeSeeder::class);
             $this->call(GenreSeeder::class);
             $this->call(GameSeeder::class);
-
+            $this->call(GameSpotReviewSeeder::class);
             DB::commit();
         } catch (Exception $e) {
             Log::info($e->getMessage());

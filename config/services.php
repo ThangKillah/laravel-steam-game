@@ -66,4 +66,11 @@ return [
         'secret_key' => env('DISQUS_SECRET_KEY'),
         'public_key' => env('DISQUS_PUBLIC_KEY')
     ],
+
+    'gamespot' => [
+        'url_review' => 'http://www.gamespot.com/api/reviews/',
+        'key' => env('GAMESPOT_API_KEY'),
+        'status_ok' => 200,
+        'limit' => 100
+    ]
 ];

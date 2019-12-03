@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Traits\GameApi;
+use App\Traits\GameSpotApi;
 
 class GamingController extends Controller
 {
-    use GameApi;
+    use GameApi, GameSpotApi;
 
     public function test()
     {
-        $game = $this->getGame(1);
-        dd($game);
+        $review = $this->getReview(1);
+        //$game = $this->getGame(1);
+        dd($review);
     }
 }

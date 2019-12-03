@@ -27,7 +27,7 @@ trait GameApi
             //        whereHas('release_dates', function ($q) {
             //            $q->whereIn('platform.id', [48, 49, 6]);
             //        })
-            ->whereDate('first_release_date', '>=', '2015-01-01') // condition
+            ->whereDate('first_release_date', '>=', config('constant.date_api_init')) // condition
             ->where('category', 0)
             ->whereNotNull('pulse_count')
             ->orderBy('popularity', 'desc') // order by

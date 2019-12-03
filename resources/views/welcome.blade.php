@@ -8,6 +8,7 @@
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick-theme.css') }}"/>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css"/>
+    <link rel="stylesheet" href="{{ asset('plugins/jquery-bar-rating-master/dist/themes/bars-square.css') }}">
 @endpush
 
 @section('breadcrumb')
@@ -24,6 +25,23 @@
     @endif
 
     <div class="container">
+        <div class="row" style="margin-bottom: 50px;">
+            <div class="col">
+                <div class="box box-blue box-example-square">
+                    <div class="box-header">Square Rating</div>
+                    <div class="box-body">
+                        <select id="example-square" name="rating" autocomplete="off" hidden>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="main-slider" id="main-slider">
             <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="xfJPCenjZzY"></div>
             <div id="player2" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
@@ -115,8 +133,16 @@
     <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
     <script type="text/javascript" src="{{ asset('plugins/slick/js/slick.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/lightbox/lightbox.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-bar-rating-master/dist/jquery.barrating.min.js') }}"></script>
     <script>
         $(document).ready(function () {
+            $('#example-square').barrating({
+                theme: 'bars-square',
+                // Specify a theme
+                showValues: true,
+                showSelectedRating: true
+            });
+
             new Plyr('#player', {
                 //youtube: { controls: 10 }
             });
