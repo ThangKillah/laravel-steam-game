@@ -43,7 +43,7 @@
         </div>
 
         <div class="main-slider" id="main-slider">
-            <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="xfJPCenjZzY"></div>
+            <div id="player1" data-plyr-provider="youtube" data-plyr-embed-id="xfJPCenjZzY"></div>
             <div id="player2" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
         </div>
 
@@ -143,11 +143,50 @@
                 showSelectedRating: true
             });
 
-            new Plyr('#player', {
+
+            var slideWrapper = $("#main-slider");
+
+            function postMessageToPlayer(player, command) {
+                if (player == null || command == null) return;
+                player.contentWindow.postMessage(JSON.stringify(command), "*");
+            }
+
+            function playPauseVideo(slick, control) {
+                var currentSlide, slideType, startTime, player, video;
+
+                currentSlide = slick.find(".slick-current");
+                player = currentSlide.find("iframe").get(0);
+                switch (control) {
+                    case "play":
+                        postMessageToPlayer(player, {
+                            "event": "command",
+                            "func": "playVideo"
+                        });
+                        break;
+                    case "pause":
+                        postMessageToPlayer(player, {
+                            "event": "command",
+                            "func": "pauseVideo"
+                        });
+                        break;
+                }
+            }
+
+            slideWrapper.on("beforeChange", function (event, slick) {
+                slick = $(slick.$slider);
+                playPauseVideo(slick, "pause");
+            });
+
+            slideWrapper.on("afterChange", function (event, slick) {
+                slick = $(slick.$slider);
+                playPauseVideo(slick, "play");
+            });
+
+            const player1 = new Plyr('#player1', {
                 //youtube: { controls: 10 }
             });
 
-            new Plyr('#player2', {
+            const player2 = new Plyr('#player2', {
                 /* options */
             });
 
