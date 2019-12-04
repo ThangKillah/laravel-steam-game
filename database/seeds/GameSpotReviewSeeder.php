@@ -14,7 +14,7 @@ class GameSpotReviewSeeder extends Seeder
 
     public function run()
     {
-        DB::table('gamespot_reviews')->truncate();
+        DB::table('reviews')->truncate();
 
         for ($i = 1; $i <= 10000; $i++) {
             $reviews = $this->getReview($i);
@@ -25,6 +25,18 @@ class GameSpotReviewSeeder extends Seeder
                     $data = [];
                     foreach ($reviews['results'] as $item) {
                         if (!empty($item['game'])) {
+
+                            $arrPlat = [];
+                            if (!empty($item['releases'])) {
+                                foreach ($item['releases'] as $plat) {
+                                    $arrPlat[] = $plat['platform'];
+                                }
+                            }
+                            $arrPlat = array_intersect(
+                                $arrPlat,
+                                ['Linux', 'PC', 'PlayStation 3', 'Xbox 360', 'Mac', 'PlayStation 4', 'Xbox One', 'Nintendo Switch']
+                            );
+
                             $insertData = [
                                 'id_review' => $item['id'],
                                 'authors' => $item['authors'],
@@ -41,12 +53,14 @@ class GameSpotReviewSeeder extends Seeder
                                 'image' => json_encode($item['image']),
                                 'game' => explode("/", $item['game']["site_detail_url"])[3],
                                 'created_at' => now(),
-                                'updated_at' => now()
+                                'updated_at' => now(),
+                                'platform' => empty($arrPlat) ? null : $arrPlat[array_rand($arrPlat)],
+                                'stt' => 2
                             ];
                             array_push($data, $insertData);
                         }
                     }
-                    DB::table('gamespot_reviews')->insert($data);
+                    DB::table('reviews')->insert($data);
                 }
             }
         }

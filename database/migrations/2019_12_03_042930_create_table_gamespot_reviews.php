@@ -13,11 +13,11 @@ class CreateTableGamespotReviews extends Migration
      */
     public function up()
     {
-        Schema::create('gamespot_reviews', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('id_review');
             $table->string('authors');
-            $table->string('title')->index('title_gamespot');
+            $table->string('title')->index('title_reviews');
             $table->text('deck')->nullable();
             $table->longText('body');
             $table->text('good')->nullable();
@@ -28,6 +28,8 @@ class CreateTableGamespotReviews extends Migration
             $table->double('score');
             $table->string('review_type');
             $table->string('game')->nullable();
+            $table->string('platform')->nullable();
+            $table->smallInteger('stt');
             $table->string('site_detail_url');
             $table->timestamps();
         });
