@@ -14,7 +14,7 @@ class GameSpotReviewSeeder extends Seeder
 
     public function run()
     {
-        DB::table('reviews')->truncate();
+        $reviewIds = \App\Model\Review::all()->pluck('gamespot_id')->toArray();
 
         for ($i = 1; $i <= 10000; $i++) {
             $reviews = $this->getReview($i);
@@ -24,7 +24,7 @@ class GameSpotReviewSeeder extends Seeder
                 } else {
                     $data = [];
                     foreach ($reviews['results'] as $item) {
-                        if (!empty($item['game'])) {
+                        if (!empty($item['game']) && !in_array($item['id'], $reviewIds)) {
 
                             $arrPlat = [];
                             if (!empty($item['releases'])) {
@@ -38,7 +38,7 @@ class GameSpotReviewSeeder extends Seeder
                             );
 
                             $insertData = [
-                                'id_review' => $item['id'],
+                                'gamespot_id' => $item['id'],
                                 'authors' => $item['authors'],
                                 'title' => $item['title'],
                                 'deck' => $item['deck'],

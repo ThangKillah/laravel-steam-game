@@ -69,6 +69,7 @@ return [
 
     'gamespot' => [
         'url_review' => 'http://www.gamespot.com/api/reviews/',
+        'url_blog' => 'http://www.gamespot.com/api/articles/',
         'key' => env('GAMESPOT_API_KEY'),
         'status_ok' => 200,
         'limit' => 100

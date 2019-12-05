@@ -15,7 +15,7 @@ class CreateTableGamespotReviews extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_review');
+            $table->integer('gamespot_id')->nullable();
             $table->string('authors');
             $table->string('title')->index('title_reviews');
             $table->text('deck')->nullable();

@@ -11,7 +11,7 @@ class GamingController extends Controller
 
     public function test()
     {
-        $review = $this->getReview(1);
+        $review = $this->getBlog(1);
         //$game = $this->getGame(1);
         dd($review);
     }

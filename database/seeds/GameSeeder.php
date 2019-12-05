@@ -3,6 +3,7 @@
 use App\Traits\GameApi;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use MarcReichel\IGDBLaravel\Models\CompanyWebsite;
 use MarcReichel\IGDBLaravel\Models\GameEngine;
 use MarcReichel\IGDBLaravel\Models\GameVideo;
 
@@ -73,11 +74,13 @@ class GameSeeder extends Seeder
                 $arrWebsites = [];
                 if (!empty($game->websites)) {
                     foreach ($game->websites as $web) {
-                        array_push($arrWebsites, [
-                            'id' => $web->id,
-                            'category' => $web->category,
-                            'url' => $web->url
-                        ]);
+                        if (!empty($web->id)) {
+                            array_push($arrWebsites, [
+                                'id' => $web->id,
+                                'category' => $web->category,
+                                'url' => $web->url
+                            ]);
+                        }
                     }
                 }
 
@@ -181,7 +184,7 @@ class GameSeeder extends Seeder
                             $website = [];
                             if (!empty($company->websites)) {
                                 foreach ($company->websites as $web) {
-                                    if ($web instanceof \MarcReichel\IGDBLaravel\Models\CompanyWebsite) {
+                                    if ($web instanceof CompanyWebsite) {
                                         array_push($website, [
                                             'category' => $web->category,
                                             'url' => $web->url

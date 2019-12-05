@@ -22,9 +22,10 @@ class DatabaseSeeder extends Seeder
             $this->call(GenreSeeder::class);
             $this->call(GameSeeder::class);
             $this->call(GameSpotReviewSeeder::class);
+            $this->call(GameSpotBlogSeeder::class);
             DB::commit();
         } catch (Exception $e) {
-            Log::info($e->getMessage());
+            Log::info($e);
             DB::rollback();
         }
     }
