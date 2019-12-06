@@ -53,7 +53,7 @@
                    data-lightbox='{"disqus": true, "gallery": "uncharted"}'>
                     <img class="img-responsive" src="https://images.igdb.com/igdb/image/upload/t_original/co1rh5.jpg"
                          alt="">
-                    <div class="overlay">
+                    <div class="overlay-img">
                         <div class="text"><i class="fa fa-search-plus" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                    data-lightbox='{"disqus": true, "gallery": "uncharted"}'>
                     <img class="img-responsive" src="https://images.igdb.com/igdb/image/upload/t_original/co1re8.jpg"
                          alt="">
-                    <div class="overlay">
+                    <div class="overlay-img">
                         <div class="text"><i class="fa fa-search-plus" aria-hidden="true"></i>
                         </div>
                     </div>

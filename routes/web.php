@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('home-demo');
+
 
 Route::get('/register', function () {
     return view('user.register');
@@ -38,5 +39,9 @@ Route::get('/comment', function () {
 })->name('test');
 
 Route::get('test-game', 'GamingController@test');
+Route::get('home', 'GamingController@home');
+
+
+
 
 

@@ -142,12 +142,12 @@ small.error {
     height: 300px;
 }
 
-.img-box:hover > .overlay {
+.img-box:hover > .overlay-img {
     opacity: 1;
     cursor: pointer;
 }
 
-.overlay {
+.overlay-img {
     position: absolute;
     top: 0;
     bottom: 0;
