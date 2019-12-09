@@ -5,6 +5,7 @@ use App\Model\AssociationBlog;
 use App\Model\Blog;
 use App\Traits\GameSpotApi;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class GameSpotBlogSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class GameSpotBlogSeeder extends Seeder
                         [
                             'authors' => $blog['authors'],
                             'title' => $blog['title'],
+                            'slug' => Str::slug($blog['title'], '-'),
                             'deck' => $blog['deck'],
                             'body' => $blog['body'],
                             'image' => json_encode($blog['image']),

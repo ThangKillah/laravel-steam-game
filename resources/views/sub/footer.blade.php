@@ -2,9 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-5">
-                <h4 class="footer-title">About Gameforest</h4>
-                <p>Gameforest is a Bootstrap Gaming theme. Build your own gaming theme with gameforest and you will love to use it. Clean and pure coded HTML, CSS files what is included in your downloaded package.</p>
-                <p>Attached more then 60+ HTML pages and customized elements. Copy and paste your favourite section or build your own so easily.</p>
+                <h4 class="footer-title">About Game Immortal</h4>
+                <p>Keep track of your gaming history with the games you’ve played, are playing, and will play.</p>
+                <p>Discover something new to play, no matter the platform!</p>
+                <p>Create lists and save what matters to you.</p>
+                <p>Hang out with fellow gamers and be social.</p>
             </div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="footer-title">Platform</h4>
@@ -12,17 +14,19 @@
                     <div class="col">
                         <ul>
                             <li><a href="#">Playstation 4</a></li>
+                            <li><a href="#">Playstation 3</a></li>
                             <li><a href="#">Xbox One</a></li>
+                            <li><a href="#">Xbox 360</a></li>
                             <li><a href="#">PC</a></li>
-                            <li><a href="#">Steam</a></li>
+                            <li><a href="#">Nintendo Switch</a></li>
+                            <li><a href="#">Linux</a></li>
                         </ul>
                     </div>
                     <div class="col">
                         <ul>
                             <li><a href="games.html">Games</a></li>
                             <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="videos.html">Videos</a></li>
-                            <li><a href="forums.html">Forums</a></li>
+                            <li><a href="videos.html">Blog</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,14 +43,9 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-social">
-                <a href="https://facebook.com/yakuthemes" target="_blank" data-toggle="tooltip" title="facebook"><i class="fa fa-facebook"></i></a>
-                <a href="https://twitter.com/yakuthemes" target="_blank" data-toggle="tooltip" title="twitter"><i class="fa fa-twitter"></i></a>
-                <a href="https://steamcommunity.com/id/yakuzi" target="_blank" data-toggle="tooltip" title="steam"><i class="fa fa-steam"></i></a>
-                <a href="https://www.twitch.tv/" target="_blank" data-toggle="tooltip" title="twitch"><i class="fa fa-twitch"></i></a>
-                <a href="https://www.youtube.com/user/1YAKUZI" target="_blank" data-toggle="tooltip" title="youtube"><i class="fa fa-youtube"></i></a>
-            </div>
-            <p>Copyright &copy; 2017 <a href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730" target="_blank">Gameforest</a>. All rights reserved.</p>
+            <p>Copyright &copy; 2020 <a
+                        href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730"
+                        target="_blank">Game Immortal</a>. All rights reserved.</p>
         </div>
     </div>
 </footer>

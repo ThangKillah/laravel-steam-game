@@ -19,6 +19,7 @@ class CreateTableBlogs extends Migration
             $table->string('author_id')->default(0);
             $table->integer('gamespot_id')->nullable();
             $table->string('title');
+            $table->string('slug');
             $table->text('deck')->nullable();
             $table->longText('body');
             $table->json('image');

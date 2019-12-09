@@ -2,6 +2,7 @@
 
 use App\Traits\GameSpotApi;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class GameSpotReviewSeeder extends Seeder
 {
@@ -41,6 +42,7 @@ class GameSpotReviewSeeder extends Seeder
                                 'gamespot_id' => $item['id'],
                                 'authors' => $item['authors'],
                                 'title' => $item['title'],
+                                'slug' => Str::slug($item['title'], '-'),
                                 'deck' => $item['deck'],
                                 'body' => $item['body'],
                                 'good' => $item['good'],

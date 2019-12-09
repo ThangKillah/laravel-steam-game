@@ -18,6 +18,7 @@ class CreateTableGamespotReviews extends Migration
             $table->integer('gamespot_id')->nullable();
             $table->string('authors');
             $table->string('title')->index('title_reviews');
+            $table->string('slug');
             $table->text('deck')->nullable();
             $table->longText('body');
             $table->text('good')->nullable();
