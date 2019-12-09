@@ -10,6 +10,17 @@ function urlBlogImage($jsonImage)
     return $urlOrigin;
 }
 
+function urlReviewImage($jsonImage)
+{
+    $image = json_decode($jsonImage, true);
+    $urlOrigin = $image['original'];
+    if (strpos($urlOrigin, 'gamespot1') !== false) {
+        return str_replace("/original/", "/screen_tiny/", $urlOrigin);
+    }
+    return $urlOrigin;
+}
+
+
 function badgesBlog($cates)
 {
     if (empty($cates)) {
@@ -24,3 +35,7 @@ function badgesBlog($cates)
     return implode(", ", $arr);
 }
 
+function showImageGameUrl($coverId)
+{
+    return 'https://images.igdb.com/igdb/image/upload/t_screenshot_big/' . $coverId . '.jpg';
+}

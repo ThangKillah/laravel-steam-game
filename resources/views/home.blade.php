@@ -20,10 +20,19 @@
                                 <a href="blog-post.html">{{ $top->title }}</a>
                             </h2>
                             <div class="post-meta">
-                            <span><i class="fa fa-clock-o"></i> Julye 28, 2017 by <a
-                                        href="profile.html">Venom</a></span>
-                                <span><a href="blog-post.html#comments"><i
-                                                class="fa fa-comment-o"></i> 98 comments</a></span>
+                            <span><i class="fa fa-clock-o"></i> {{ $top->blog_date }} by <a
+                                        href="profile.html">{{ $top->authors }}</a></span>
+                                <span>
+                                    <a href="blog-post.html#comments">
+                                        <i class="fa fa-eye"></i>
+                                        @if($top->count_view == 0)
+                                            {{ rand(50,100) }}
+                                        @else
+                                            {{ $top->count_view }}
+                                        @endif
+                                        views
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -72,10 +81,10 @@
                         <div class="post">
                             <h2 class="post-title"><a href="blog-post.html">{{ $blog->title }}</a></h2>
                             <div class="post-meta">
-                                <span><i class="fa fa-clock-o"></i> June 16, 2017 by <a
+                                <span><i class="fa fa-clock-o"></i> {{ $blog->blog_date }} by <a
                                             href="profile.html">{{ $blog->authors }}</a></span>
                                 <span>
-                                <a href="blog-post.html#comments"><i class="fa fa-comment-o"></i> 98 comments</a>
+                            <a href="blog-post.html#comments"><i class="fa fa-eye"></i> {{ rand(50,100) }} views</a>
                             </span>
                             </div>
                             <div class="post-thumbnail">
@@ -87,23 +96,9 @@
                         </div>
                     @endforeach
 
-                    <div class="pagination-results">
-                        <span>Showing 10 to 20 of 48 results</span>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
-                                                aria-hidden="true"><i class="fa fa-angle-left"></i></span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="separate"><span>...</span></li>
-                                <li class="page-item"><a class="page-link" href="#">25</a></li>
-                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-                                                aria-hidden="true"><i class="fa fa-angle-right"></i></span></a></li>
-                            </ul>
-                        </nav>
+                    <div class="pagination-results d-flex justify-content-between">
+                        <span>Showing {{ $blogs->perPage() }} to {{ $blogs->count() * $blogs->currentPage() }} of {{ $blogs->total() }} results</span>
+                        {{ $blogs->links() }}
                     </div>
                     <!-- /.post -->
                 </div>
@@ -114,138 +109,49 @@
                         <!-- widget-games -->
                         <div class="widget widget-games">
                             <h5 class="widget-title">Upcoming Games</h5>
-                            <a href="#"
-                               style="background-image: url('https://i1.ytimg.com/vi/mW4LMCtoIkg/mqdefault.jpg')">
-                                <span class="overlay"></span>
-                                <div class="widget-block">
-                                    <div class="count">1</div>
-                                    <div class="description">
-                                        <h5 class="title">Horizon: Zero Dawn The Frozen Wilds</h5>
-                                        <span class="date">November 14, 2017</span>
+                            @foreach($upcomingGames as $key => $game)
+                                <a href="#"
+                                   style="background-image: url('{{ showImageGameUrl($game->cover) }}')">
+                                    <span class="overlay"></span>
+                                    <div class="widget-block">
+                                        <div class="count">{{ $key + 1 }}</div>
+                                        <div class="description">
+                                            <h5 class="title">{{ $game->name }}</h5>
+                                            <span class="date">November 14, 2017</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a href="#"
-                               style="background-image: url('https://i1.ytimg.com/vi/GaERL8Nrl9k/mqdefault.jpg')">
-                                <span class="overlay"></span>
-                                <div class="widget-block">
-                                    <div class="count">2</div>
-                                    <div class="description">
-                                        <h5 class="title">Tom Clancy's Ghost Recon: Wildlands</h5>
-                                        <span class="date">August 29, 2017</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#"
-                               style="background-image: url('https://i1.ytimg.com/vi/feqIj5PaqCQ/mqdefault.jpg')">
-                                <span class="overlay"></span>
-                                <div class="widget-block">
-                                    <div class="count">3</div>
-                                    <div class="description">
-                                        <h5 class="title">Call of Duty WW2</h5>
-                                        <span class="date">December 15, 2017</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#"
-                               style="background-image: url('https://i.ytimg.com/vi/N1NsF9c90f0/mqdefault.jpg')">
-                                <span class="overlay"></span>
-                                <div class="widget-block">
-                                    <div class="count">4</div>
-                                    <div class="description">
-                                        <h5 class="title">Final Fantasy VII</h5>
-                                        <span class="date">Q3 2018</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#"
-                               style="background-image: url('https://i1.ytimg.com/vi/xUGRjNzGz3o/mqdefault.jpg')">
-                                <span class="overlay"></span>
-                                <div class="widget-block">
-                                    <div class="count">5</div>
-                                    <div class="description">
-                                        <h5 class="title">Mass Effect Andromeda</h5>
-                                        <span class="date">Q1, 2018</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- widget post  -->
-                        <div class="widget widget-post">
-                            <h5 class="widget-title">Recommends</h5>
-                            <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/4BLkEJu9szM/mqdefault.jpg"
-                                                          alt=""></a>
-                            <h4><a href="blog-post.html">Titanfall 2's Trophies Only Have 3 Multiplayer</a></h4>
-                            <span><i class="fa fa-clock-o"></i> June 12, 2017</span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel neque sed ante
-                                facilisis efficitur.</p>
-                        </div>
-
-                        <!-- widget facebook -->
-                        <div class="widget">
-                            <h5 class="widget-title">Follow Us on Facebook</h5>
-                            <div id="fb-root"></div>
-                            <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-                            <script id="facebook-jssdk"
-                                    src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.8"></script>
-                            <script>
-                                (function (d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id)) return;
-                                    js = d.createElement(s);
-                                    js.id = id;
-                                    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));
-                            </script>
-                            <div class="fb-page" data-href="https://www.facebook.com/yakuthemes"
-                                 data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
-                                 data-show-facepile="true"></div>
+                                </a>
+                            @endforeach
                         </div>
 
                         <!-- widget post -->
                         <div class="widget widget-post">
-                            <h5 class="widget-title">Popular on Gameforest</h5>
-                            <a href="blog-post.html"><img src="img/blog/blog-widget-popular-1.jpg" alt=""></a>
-                            <h4><a href="blog-post.html">Red Dead Redemption Being Modded Into GTA5 Multiplayer</a></h4>
-                            <span><i class="fa fa-clock-o"></i> June 16, 2017</span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel neque sed anter.</p>
+                            <h5 class="widget-title">Reviews</h5>
                             <ul class="widget-list">
-                                <li>
-                                    <div class="widget-img"><a href="blog-post.html"><img
-                                                    src="img/blog/blog-widget-1.jpg" alt=""></a></div>
-                                    <div>
-                                        <h4><a href="blog-post.html">Dead Island 2 and Escape Impressions</a></h4>
-                                        <span>June 16, 2017</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="widget-img"><a href="blog-post.html"><img
-                                                    src="img/blog/blog-widget-2.jpg" alt=""></a></div>
-                                    <div>
-                                        <h4><a href="blog-post.html">How to Finish Mafia 3 With All of Your
-                                                Underbosses</a></h4>
-                                        <span>May 30, 2017</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="widget-img"><a href="blog-post.html"><img
-                                                    src="img/blog/blog-widget-3.jpg" alt=""></a></div>
-                                    <div>
-                                        <h4><a href="blog-post.html">Spider-Man Spin-Off, Venom, Gets Release Date</a>
-                                        </h4>
-                                        <span>June 10, 2017</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="widget-img"><a href="blog-post.html"><img
-                                                    src="img/blog/blog-widget-4.jpg" alt=""></a></div>
-                                    <div>
-                                        <h4><a href="blog-post.html">Is Ghost Recon: Wildlands Worth Your Time?</a></h4>
-                                        <span>June 16, 2017</span>
-                                    </div>
-                                </li>
+                                @foreach($topReviews as $review)
+                                    <li>
+                                        <div class="widget-img">
+                                            <a href="blog-post.html" style="position: relative">
+                                                <img src="{{ urlReviewImage($review->image) }}" alt="">
+                                                <div class="score-review">
+                                                    @if($review->score >= 8)
+                                                        <span class="badge badge-primary">{{ $review->score }}</span>
+                                                    @elseif($review->score <8 && $review->score >= 7)
+                                                        <span class="badge badge-success">{{ $review->score }}</span>
+                                                    @elseif($review->score < 7 && $review->score >= 4)
+                                                        <span class="badge badge-warning">{{ $review->score }}</span>
+                                                    @else
+                                                        <span class="badge badge-danger">{{ $review->score }}</span>
+                                                    @endif
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <h4><a href="blog-post.html">{{ $review->title }}</a></h4>
+                                            <span>{{ $review->date_by_format }}</span>
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
 
@@ -372,70 +278,6 @@
         </div>
     </section>
 
-    <section class="p-t-35 p-b-10">
-        <div class="container">
-            <h6 class="subtitle">Recommended Posts</h6>
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <div class="card card-widget">
-                        <div class="card-img">
-                            <a href="blog-post-carousel.html">
-                                <img src="img/blog/blog-related-1.jpg" alt="Injustice 2 Story Mode Superman Ending">
-                            </a>
-                        </div>
-                        <div class="card-block">
-                            <h4 class="card-title"><a href="blog-post-carousel.html">Injustice 2 Story Mode Clark Ending
-                                    Scene</a></h4>
-                            <div class="card-meta"><span><i class="fa fa-clock-o"></i> July 21, 2017</span></div>
-                            <p>Injustice 2's Story Mode features hours of cinematic cutscenes.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-3">
-                    <div class="card card-widget">
-                        <div class="card-img">
-                            <a href="blog-post-video.html"><img src="img/blog/blog-related-2.jpg"
-                                                                alt="New Injustice 2 Video Explains The Gear System"></a>
-                        </div>
-                        <div class="card-block">
-                            <h4 class="card-title"><a href="blog-post-video.html">New Injustice 2 Video Explains The
-                                    Gear System</a></h4>
-                            <div class="card-meta"><span><i class="fa fa-clock-o"></i> June 19, 2017</span></div>
-                            <p>Following the new trailer dedicated to The Flash.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-3">
-                    <div class="card card-widget">
-                        <div class="card-img">
-                            <a href="blog-post-disqus.html"><img src="img/blog/blog-related-3.jpg"
-                                                                 alt="An Extra Week Of Double Rewards In GTA V"></a>
-                        </div>
-                        <div class="card-block">
-                            <h4 class="card-title"><a href="blog-post-disqus.html">An Extra Week Of Double Rewards In
-                                    GTA V</a></h4>
-                            <div class="card-meta"><span><i class="fa fa-clock-o"></i> June 18, 2017</span></div>
-                            <p>Grand Theft Auto V players are getting an extra week to earn.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card card-widget">
-                        <div class="card-img">
-                            <a href="blog-post-hero.html"><img src="img/blog/blog-related-4.jpg"
-                                                               alt="BioShock: The Collection PC System Requirements Revealed"></a>
-                        </div>
-                        <div class="card-block">
-                            <h4 class="card-title"><a href="blog-post-hero.html">BioShock: The Collection PC System
-                                    Requirements Revealed</a></h4>
-                            <div class="card-meta"><span><i class="fa fa-clock-o"></i> June 09, 2017</span></div>
-                            <p>2K revealed the PC system requirements for BioShock.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- /main -->
 @endsection
 

@@ -8,17 +8,10 @@ use Illuminate\Support\Facades\Log;
 
 trait GameSpotApi
 {
-    private $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
-
     public function callAPIQuery($url, $query)
     {
-        $response = $this->client->request(
+        $client = new Client();
+        $response = $client->request(
             'GET',
             $url,
             [

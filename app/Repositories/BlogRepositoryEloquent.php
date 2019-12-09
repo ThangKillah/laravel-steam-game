@@ -53,6 +53,5 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 ->orderBy('publish_date', 'DESC')
                 ->limit(config('constant.limit_top_blog'));
         })->all();
-        // TODO: Implement getTopBlog() method.
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -25,5 +26,10 @@ class Blog extends Model implements Transformable
     public function category()
     {
         return $this->hasMany('App\Model\AssociationBlog', 'blog_id', 'id');
+    }
+
+    public function getBlogDateAttribute()
+    {
+        return Carbon::parse($this->publish_date)->format('M d, Y');
     }
 }

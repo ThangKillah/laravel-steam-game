@@ -219,3 +219,28 @@ small.error {
 /*}*/
 
 /*End Slick Custom css*/
+
+.score-review {
+    position: absolute;
+    bottom: -33px;
+}
+
+.score-review .badge {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0;
+    font-size: 13px;
+    font-weight: bold;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+    bottom: 8px;
+    left: 8px;
+    right: auto;
+    top: auto
+}
+
+.widget-post .widget-list li > div.widget-img {
+    width: 150px !important;
+}

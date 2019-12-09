@@ -2,17 +2,16 @@
 
 namespace App\Model;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Review.
+ * Class Game.
  *
  * @package namespace App\Model;
  */
-class Review extends Model implements Transformable
+class Game extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -22,9 +21,4 @@ class Review extends Model implements Transformable
      * @var array
      */
     protected $fillable = [];
-
-    public function getDateByFormatAttribute()
-    {
-        return Carbon::parse($this->publish_date)->format('M d, Y');
-    }
 }

@@ -39,7 +39,7 @@ Route::get('/comment', function () {
 })->name('test');
 
 Route::get('test-game', 'GamingController@test');
-Route::get('home', 'GamingController@home');
+Route::get('home', 'GamingController@home')->name('home');
 
 
 
