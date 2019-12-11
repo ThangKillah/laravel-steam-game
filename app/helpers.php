@@ -5,6 +5,9 @@ function urlBlogImage($jsonImage)
     $image = json_decode($jsonImage, true);
     $urlOrigin = $image['original'];
     if (strpos($urlOrigin, 'gamespot1') !== false) {
+//        if(\Request::route()->getName() == 'blog-detail'){
+//            return $urlOrigin;
+//        }
         return str_replace("/original/", "/screen_kubrick/", $urlOrigin);
     }
     return $urlOrigin;

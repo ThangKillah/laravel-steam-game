@@ -41,7 +41,7 @@ return [
 
         'main' => [
             'salt' => 'thangbt',
-            'length' => '20',
+            'length' => '5',
         ],
 
         'alternative' => [

@@ -31,7 +31,6 @@ class CreateTableGamespotReviews extends Migration
             $table->string('game')->nullable();
             $table->string('platform')->nullable();
             $table->smallInteger('stt');
-            $table->string('site_detail_url');
             $table->timestamps();
         });
     }

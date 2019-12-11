@@ -248,3 +248,67 @@ small.error {
 .owl-carousel .owl-item img {
     max-height: 600px;
 }
+
+/*BLOG CSS*/
+
+.post-single iframe {
+    height: 100%;
+    min-height: 600px !important;
+}
+
+.post-single a {
+    color: #00AFF0 !important;
+}
+
+.post-single {
+    font-size: 18px !important;
+}
+
+/*css Gamespot*/
+
+.typography-format [data-embed-type="pinbox"], [data-embed-type="pinbox"] {
+    margin-bottom: 1.3rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-top: 1px solid rgba(0, 84, 209, 0.25);
+    border-bottom: 1px solid rgba(0, 84, 209, 0.25);
+}
+
+[data-embed-type="pinbox"] {
+    margin-bottom: 1.3rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    border-left: 2px solid #0054d1;
+    border-right: 2px solid #0054d1;
+}
+
+.typography-format [data-embed-type="pinbox"] .associated-header, [data-embed-type="pinbox"] .associated-header {
+    margin-bottom: 0.75em;
+    color: #000;
+    font-weight: bold;
+}
+
+[data-embed-type="pinbox"] .associated-header {
+    font-style: italic;
+}
+
+.typography-format [data-embed-type="pinbox"] ul, [data-embed-type="pinbox"] ul {
+    margin-bottom: 0;
+    color: #0054d1;
+}
+
+[data-embed-type="pinbox"] ul {
+    margin-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.symbol {
+    fill: currentColor;
+    position: relative;
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
+}
+
+/*end css gamespot*/

@@ -14,4 +14,6 @@ interface BlogRepository extends RepositoryInterface
     public function getTopBlog();
 
     public function getBlogSearch($condition = []);
+
+    public function getBlogDetail($slug, $id);
 }

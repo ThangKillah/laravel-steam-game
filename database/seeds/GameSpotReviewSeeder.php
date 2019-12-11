@@ -51,7 +51,6 @@ class GameSpotReviewSeeder extends Seeder
                                 'edit_date' => $item['update_date'],
                                 'score' => $item['score'],
                                 'review_type' => $item['review_type'],
-                                'site_detail_url' => $item['site_detail_url'],
                                 'image' => json_encode($item['image']),
                                 'game' => explode("/", $item['game']["site_detail_url"])[3],
                                 'created_at' => now(),

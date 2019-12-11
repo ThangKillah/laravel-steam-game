@@ -6,6 +6,7 @@ use App\Model\Blog;
 use App\Validators\BlogValidator;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Vinkla\Hashids\Facades\Hashids;
 
 /**
  * Class BlogRepositoryEloquent.
@@ -53,5 +54,25 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 ->orderBy('publish_date', 'DESC')
                 ->limit(config('constant.limit_top_blog'));
         })->all();
+    }
+
+    public function getBlogDetail($slug, $id)
+    {
+        try {
+            $idDecode = Hashids::decode($id)[0];
+        } catch (\Exception $exception) {
+            return [];
+        }
+
+        return $this->scopeQuery(function ($query) use ($slug, $idDecode) {
+            return $query
+                ->with([
+                    'category.association'
+                ])
+                ->where([
+                    'slug' => $slug,
+                    'id' => $idDecode
+                ]);
+        })->first();
     }
 }

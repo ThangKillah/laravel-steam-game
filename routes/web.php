@@ -41,6 +41,9 @@ Route::get('/comment', function () {
 Route::get('test-game', 'GamingController@test');
 Route::get('home', 'GamingController@home')->name('home');
 
+//Blog
+Route::get('blogs/{id}/{slug}.html', 'BlogController@detail')->name('blog-detail');
+
 
 
 
