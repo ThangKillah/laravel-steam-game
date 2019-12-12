@@ -6,4 +6,6 @@ return [
     'limit_top_blog' => 5,
     'limit_upcoming_game' => 15,
     'limit_top_review' => 10,
+    'limit_related_blog' => 4,
+    'paginate_blog' => 6,
 ];

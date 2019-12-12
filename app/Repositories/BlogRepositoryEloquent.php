@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Model\Blog;
-use App\Validators\BlogValidator;
+use Illuminate\Database\Eloquent\Builder;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Vinkla\Hashids\Facades\Hashids;
@@ -41,7 +41,7 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
             ])
                 ->orderBy('count_view', 'DESC')
                 ->orderBy('publish_date', 'DESC');
-        })->paginate(5);
+        })->paginate(config('constant.paginate_blog'));
     }
 
     public function getTopBlog()
@@ -74,5 +74,34 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                     'id' => $idDecode
                 ]);
         })->first();
+    }
+
+    public function getRelatedBlog($category)
+    {
+        $blogId = 0;
+        $associationIds = [];
+        if (!empty($category)) {
+            foreach ($category as $cate) {
+                $blogId = $cate->blog_id;
+                if ($cate->association->type == 'games') {
+                    $associationIds[] = $cate->association->id;
+                }
+            }
+        }
+
+        if (empty($associationIds)) {
+            return [];
+        }
+
+        return $this->scopeQuery(function ($query) use ($associationIds, $blogId) {
+            return $query
+                ->where('id', '!=', $blogId)
+                ->whereHas('category', function (Builder $queryBuilder) use ($associationIds) {
+                    $queryBuilder->whereIn('association_id', $associationIds);
+                })
+                ->orderBy('count_view', 'DESC')
+                ->orderBy('publish_date', 'DESC')
+                ->limit(config('constant.limit_related_blog'));
+        })->all();
     }
 }

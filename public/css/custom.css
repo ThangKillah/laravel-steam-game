@@ -251,6 +251,10 @@ small.error {
 
 /*BLOG CSS*/
 
+.post figure {
+    width: 100% !important;
+}
+
 .post-single iframe {
     height: 100%;
     min-height: 600px !important;

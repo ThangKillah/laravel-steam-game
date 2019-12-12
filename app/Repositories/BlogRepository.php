@@ -16,4 +16,6 @@ interface BlogRepository extends RepositoryInterface
     public function getBlogSearch($condition = []);
 
     public function getBlogDetail($slug, $id);
+
+    public function getRelatedBlog($category);
 }

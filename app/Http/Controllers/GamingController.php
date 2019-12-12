@@ -39,6 +39,7 @@ class GamingController extends Controller
         $blogs = $this->blogRepository->getBlogSearch();
 
         $topBlog = $this->blogRepository->getTopBlog();
+
         return view('home')->with([
             'topBlog' => $topBlog,
             'blogs' => $blogs,
