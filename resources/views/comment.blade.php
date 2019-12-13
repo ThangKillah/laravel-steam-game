@@ -152,7 +152,8 @@
             let comment_id = $(this).data('comment');
             let place;
             place = $("form[data-comment='" + comment_id + "']");
-            place.html('<div class="text-editor">\n' +
+            place.html(
+                '                            <div class="text-editor">\n' +
                 '                                <div class="form-group">\n' +
                 '                                    <div class="summernote"></div>\n' +
                 '                                </div>\n' +
