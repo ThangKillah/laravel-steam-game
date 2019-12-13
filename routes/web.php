@@ -41,6 +41,8 @@ Route::get('/comment', function () {
 Route::get('test-game', 'GamingController@test');
 Route::get('home', 'GamingController@home')->name('home');
 
+Route::get('check-login-ajax', 'AuthController@checkLoginAjax');
+
 //Blog
 Route::get('blogs/{id}/{slug}.html', 'BlogController@detail')->name('blog-detail');
 Route::get('comments', 'CommentController@ajaxGetComment')->name('get-comment');

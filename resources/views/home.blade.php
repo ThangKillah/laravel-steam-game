@@ -1,6 +1,6 @@
 @extends('layout.blank')
 
-@section('title', __('Home'))
+@section('title', 'Discover something new to play, no matter the platform!')
 
 @push('styles')
     <link href="{{ asset('plugins/owl-carousel/css/owl.carousel.min.css') }}" rel="stylesheet">

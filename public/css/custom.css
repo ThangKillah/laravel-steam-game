@@ -316,3 +316,7 @@ small.error {
 }
 
 /*end css gamespot*/
+
+.note-editor .card-header {
+    display: flex !important;
+}

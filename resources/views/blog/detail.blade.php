@@ -1,6 +1,6 @@
 @extends('layout.blank')
 
-@section('title', 'Blank Page')
+@section('title', $blog->title)
 
 @section('breadcrumb')
     <section class="breadcrumbs">
@@ -95,7 +95,7 @@
                         </div>
                     @endif
 
-                    @include('comment', ['comments' => $comments])
+                    @include('comment', ['comments' => $comments, 'totalComment' => $commentsCount])
                 </div>
             </div>
         </div>

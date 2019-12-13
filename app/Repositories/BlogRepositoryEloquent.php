@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Model\Blog;
+use App\Model\Comment;
 use Illuminate\Database\Eloquent\Builder;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -69,6 +70,9 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 ->with([
                     'category.association'
                 ])
+                ->withCount(['comments' => function (Builder $query) {
+                    $query->where('type', Comment::BLOG);
+                }])
                 ->where([
                     'slug' => $slug,
                     'id' => $idDecode

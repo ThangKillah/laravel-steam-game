@@ -61,4 +61,16 @@ class AuthController extends Controller
             ->withInput()
             ->with('errLogin', $err);
     }
+
+    public function checkLoginAjax()
+    {
+        if (Sentinel::check()) {
+            return json_encode([
+                'status' => 'ok',
+                'user_id' => Sentinel::getUser()->hashId
+            ]);
+        } else return json_encode([
+            'status' => 'fail'
+        ]);
+    }
 }

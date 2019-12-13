@@ -32,4 +32,9 @@ class Blog extends Model implements Transformable
     {
         return Carbon::parse($this->publish_date)->format('M d, Y');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'core_id', 'id');
+    }
 }

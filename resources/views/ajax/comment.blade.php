@@ -1,6 +1,6 @@
 @if($comments->total() >= 1)
     @foreach($comments as $comment)
-        <li>
+        <li class="li-comment">
             <div class="comment">
                 <div class="comment-avatar">
                     <a href="profile.html"><img src="{{ asset('img/avatar.png') }}" alt="avatar"></a>
@@ -28,23 +28,28 @@
                     <div class="comment-footer">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                            <li><a href="#"><i class="icon-reply"></i> Reply</a></li>
+                            <li><a class="reply-btn" data-comment="{{ $comment->id }}" href="#"><i
+                                            class="icon-reply"></i> Reply</a>
+                            </li>
                             <li><a href="#"><i class="fa fa-clock-o"></i> 3 hours ago</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            @if(count($comment->reply) >= 1)
-                <ul class="reply">
+
+
+            <ul class="reply ul-reply">
+                @if(count($comment->reply) >= 1)
                     @foreach($comment->reply as $reply)
-                        <li>
+                        <li class="li-reply">
                             <div class="comment">
                                 <div class="comment-avatar"><img src="{{ asset('img/avatar.png') }}" alt="">
                                 </div>
                                 <div class="comment-post">
                                     <div class="comment-header">
                                         <div class="comment-author">
-                                            <h5><a href="profile.html">{{ $reply->user->name }}</a></h5>
+                                            <h5><a class="name-author" href="profile.html">{{ $reply->user->name }}</a>
+                                            </h5>
                                             <span>Member</span>
                                         </div>
                                         <div class="comment-action">
@@ -64,7 +69,8 @@
                                     <div class="comment-footer">
                                         <ul>
                                             <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                            <li><a href="#"><i class="icon-reply"></i> Reply</a></li>
+                                            <li><a class="reply-btn" data-comment="{{ $reply->parent_id }}" href="#"><i
+                                                            class="icon-reply"></i> Reply</a></li>
                                             <li><a href="#"><i class="fa fa-clock-o"></i> 24 minutes ago</a>
                                             </li>
                                         </ul>
@@ -73,8 +79,10 @@
                             </div>
                         </li>
                     @endforeach
-                </ul>
-            @endif
+                @endif
+                <form class="reply-editor" data-comment="{{ $comment->id }}">
+                </form>
+            </ul>
         </li>
     @endforeach
 @endif

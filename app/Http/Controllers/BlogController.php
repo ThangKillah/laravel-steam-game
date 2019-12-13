@@ -19,6 +19,7 @@ class BlogController extends Controller
     public function detail($id, $slug)
     {
         $blog = $this->blogRepository->getBlogDetail($slug, $id);
+
         if (empty($blog)) {
             return abort(404);
         }
@@ -51,7 +52,8 @@ class BlogController extends Controller
             'blog' => $blog,
             'relatedBlog' => $relatedBlog,
             'associations' => $associations,
-            'comments' => $comments
+            'comments' => $comments,
+            'commentsCount' => $blog->comments_count
         ]);
     }
 }
