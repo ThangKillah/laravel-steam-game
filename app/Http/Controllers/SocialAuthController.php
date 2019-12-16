@@ -9,10 +9,15 @@ use Socialite;
 
 class SocialAuthController extends Controller
 {
+    public function getKeyEncode()
+    {
+        return str_replace('.', '', request()->ip()) . '_url';
+    }
+
     public function redirect($social, Request $request)
     {
         if ($request->has('nextUrl')) {
-            session()->put(str_replace('.', '', $request->ip()) . '_url', $request->get('nextUrl'));
+            session()->put($this->getKeyEncode(), $request->get('nextUrl'));
         }
         return Socialite::driver($social)->redirect();
     }
