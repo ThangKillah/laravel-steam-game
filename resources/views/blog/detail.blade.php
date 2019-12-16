@@ -107,7 +107,12 @@
         $(document).ready(function () {
             $(document).on('click', 'a', function (e) {
                 let url = $(this).attr('href');
-                if (url.indexOf('#') === -1) {
+                if (url.indexOf('#') === -1
+                    && url.indexOf('redirect/facebook') === -1
+                    && url.indexOf('redirect/google') === -1
+                    && url.indexOf('redirect/steam') === -1
+                    && url.indexOf('redirect/twitch') === -1
+                ) {
                     e.preventDefault();
                     window.open(url, '_blank');
                 }

@@ -20,7 +20,7 @@
                         <div class="card-block">
                             <form action="{{ route('postLogin') }}" method="post">
                                 @csrf
-                                @include('sub.social')
+                                @include('sub.social', ['nextUrl' => app('request')->has('nextUrl') ? app('request')->input('nextUrl') : ''])
                                 <div class="divider">
                                     <span>or</span>
                                 </div>

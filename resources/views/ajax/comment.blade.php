@@ -31,7 +31,7 @@
                             <li><a class="reply-btn" data-comment="{{ $comment->id }}" href="#"><i
                                             class="icon-reply"></i> Reply</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-clock-o"></i> 3 hours ago</a></li>
+                            <li><a href="#"><i class="fa fa-clock-o"></i> {{ $comment->created_at }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                             <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
                                             <li><a class="reply-btn" data-comment="{{ $reply->parent_id }}" href="#"><i
                                                             class="icon-reply"></i> Reply</a></li>
-                                            <li><a href="#"><i class="fa fa-clock-o"></i> 24 minutes ago</a>
+                                            <li><a href="#"><i class="fa fa-clock-o"></i> {{ $reply->created_at }}</a>
                                             </li>
                                         </ul>
                                     </div>

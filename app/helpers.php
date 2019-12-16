@@ -42,3 +42,11 @@ function showImageGameUrl($coverId)
 {
     return 'https://images.igdb.com/igdb/image/upload/t_screenshot_big/' . $coverId . '.jpg';
 }
+
+function showUrlSocial($social, $nextUrl)
+{
+    if (empty($nextUrl)) {
+        return route('social-redirect', ['social' => $social]);
+    }
+    return route('social-redirect', ['social' => $social]) . '?nextUrl=' . $nextUrl;
+}

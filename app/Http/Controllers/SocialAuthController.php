@@ -2,22 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\SocialAccountService;
+use Exception;
+use Illuminate\Http\Request;
 use Sentinel;
 use Socialite;
 
 class SocialAuthController extends Controller
 {
-    public function redirect($social)
+    public function redirect($social, Request $request)
     {
+        if ($request->has('nextUrl')) {
+            session()->put(str_replace('.', '', $request->ip()) . '_url', $request->get('nextUrl'));
+        }
         return Socialite::driver($social)->redirect();
     }
 
     public function callback($social)
     {
-        $user = SocialAccountService::createOrGetUser(Socialite::driver($social)->user(), $social);
-        Sentinel::login($user);
-
-        return redirect()->to('/');
+        dd(session()->all());
+        try {
+//            $user = SocialAccountService::createOrGetUser(Socialite::driver($social)->user(), $social);
+//            Sentinel::login($user);
+            dd(session()->get('_previous'));
+            return redirect()->to('/');
+        } catch (Exception $exception) {
+            return abort(404);
+        }
     }
 }

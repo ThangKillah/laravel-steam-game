@@ -30,7 +30,7 @@ Route::post('/register', 'AuthController@register')->name('register');
 Route::post('/login', 'AuthController@login')->name('postLogin');
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
-Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('social-redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 
