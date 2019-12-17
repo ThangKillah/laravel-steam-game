@@ -8,7 +8,9 @@
 
 @section('content')
     <!-- main -->
-    <section class="bg-image player p-y-70" style="background-image: url('https://img.youtube.com/vi/1GWRDuL04-Q/maxresdefault.jpg');" data-property="{videoURL:'1GWRDuL04-Q',containment:'self', stopMovieOnBlur:false, showControls: false, realfullscreen: true, showYTLogo: false, quality: 'highres',autoPlay:true,loop:true,opacity:1}">
+    <section class="bg-image player p-y-70"
+             style="background-image: url('https://img.youtube.com/vi/1GWRDuL04-Q/maxresdefault.jpg');"
+             data-property="{videoURL:'1GWRDuL04-Q',containment:'self', stopMovieOnBlur:false, showControls: false, realfullscreen: true, showYTLogo: false, quality: 'highres',autoPlay:true,loop:true,opacity:1}">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -18,7 +20,7 @@
                             <h4 class="card-title"><i class="fa fa-sign-in"></i> Login to your account</h4>
                         </div>
                         <div class="card-block">
-                            <form action="{{ route('postLogin') }}" method="post">
+                            <form id="form-login" action="{{ route('postLogin') }}" method="post">
                                 @csrf
                                 @include('sub.social', ['nextUrl' => app('request')->has('nextUrl') ? app('request')->input('nextUrl') : ''])
                                 <div class="divider">
@@ -65,10 +67,48 @@
 
 @push('js')
     <script src="{{ asset('plugins/ytplayer/jquery.mb.YTPlayer.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('messages.js') }}"></script>
     <script>
-        (function($) {
+        (function ($) {
             "use strict";
             $(".player").mb_YTPlayer();
         })(jQuery);
+    </script>
+    <script>
+        $().ready(function () {
+            //console.log(Lang.get('auth.failed'));
+            $.validator.addMethod('checkPass', function (value) {
+                return /^[a-zA-Z0-9]+$/.test(value);
+            }, 'Password only include number and letter.');
+
+            $("#form-login").validate({
+                ignore: [],
+                success: function (label, element) {
+                    label.parent().removeClass('error');
+                    label.remove();
+                },
+                errorElement: 'small',
+                errorPlacement: function (error, element) {
+                    let placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                rules: {
+                    "email": {
+                        required: true,
+                        maxlength: 255
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6,
+                        checkPass: true
+                    },
+                },
+            });
+        });
     </script>
 @endpush

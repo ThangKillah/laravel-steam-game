@@ -259,14 +259,14 @@
             let comment_id = $(this).data('comment');
             let place;
             place = $("form[data-comment='" + comment_id + "']");
-            place.html(
+            place.hide().html(
                 '                            <div class="text-editor">\n' +
                 '                                <div class="form-group">\n' +
                 '                                    <div class="summernote"></div>\n' +
                 '                                </div>\n' +
                 '                                <button class="btn btn-primary btn-comment">Submit Comment</button>' +
                 '                                <button class="btn btn-danger btn-comment-close">Cancel</button>\n' +
-                '                            </div>');
+                '                            </div>').fadeIn(1000);
             initEditor();
         });
 

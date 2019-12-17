@@ -16,7 +16,7 @@
                         <div class="card-block">
                             <form id="form-register" action="{{ route('register') }}" method="post">
                                 @csrf
-                                @include('sub.social')
+                                @include('sub.social', ['nextUrl' => app('request')->has('nextUrl') ? app('request')->input('nextUrl') : ''])
                                 <div class="divider"><span>or</span></div>
                                 <div class="form-group input-icon-left m-b-10 @error('name') has-danger @enderror">
                                     <i class="fa fa-user"></i>
@@ -73,17 +73,6 @@
                                 @error('g-recaptcha-response')
                                     <small class="form-text" style="color: #ff4a38">{{ $message }}</small>
                                 @enderror
-{{--                                <div class="divider"><span>Terms of Service</span></div>--}}
-{{--                                <label class="custom-control custom-checkbox custom-checkbox-primary custom-checked">--}}
-{{--                                    <input type="checkbox" class="custom-control-input" checked="">--}}
-{{--                                    <span class="custom-control-indicator"></span>--}}
-{{--                                    <span class="custom-control-description">Subscribe to monthly newsletter</span>--}}
-{{--                                </label>--}}
-{{--                                <label class="custom-control custom-checkbox custom-checkbox-primary">--}}
-{{--                                    <input type="checkbox" class="custom-control-input">--}}
-{{--                                    <span class="custom-control-indicator"></span>--}}
-{{--                                    <span class="custom-control-description">Accept <a href="#" data-toggle="modal" data-target="#terms">terms of service</a></span>--}}
-{{--                                </label>--}}
                                 <button type="submit" class="btn btn-primary m-t-10 btn-block">Complete Registration</button>
                             </form>
                         </div>
@@ -133,8 +122,8 @@
     <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('messages.js') }}"></script>
     <script>
-        $().ready(function() {
-            console.log(Lang.get('auth.failed'));
+        $().ready(function () {
+            //console.log(Lang.get('auth.failed'));
             $.validator.addMethod('checkPass', function (value) {
                 return /^[a-zA-Z0-9]+$/.test(value);
             }, 'Password only include number and letter.');
