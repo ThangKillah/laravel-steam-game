@@ -112,6 +112,8 @@
                     && url.indexOf('redirect/google') === -1
                     && url.indexOf('redirect/steam') === -1
                     && url.indexOf('redirect/twitch') === -1
+                    && url.indexOf('register?nextUrl') === -1
+                    && url.indexOf('login?nextUrl') === -1
                 ) {
                     e.preventDefault();
                     window.open(url, '_blank');

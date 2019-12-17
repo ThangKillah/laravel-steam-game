@@ -48,5 +48,14 @@ function showUrlSocial($social, $nextUrl)
     if (empty($nextUrl)) {
         return route('social-redirect', ['social' => $social]);
     }
-    return route('social-redirect', ['social' => $social]) . '?nextUrl=' . $nextUrl;
+    $scrollTo = '';
+    if (\Illuminate\Support\Facades\Route::currentRouteName() === "blog-detail") {
+        $scrollTo = '#comments';
+    }
+    return route('social-redirect', ['social' => $social]) . '?nextUrl=' . $nextUrl . $scrollTo;
+}
+
+function redirectSignIn($type)
+{
+    return route($type) . '?nextUrl=' . \Illuminate\Support\Facades\Request::url();
 }
