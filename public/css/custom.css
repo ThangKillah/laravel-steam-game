@@ -320,3 +320,7 @@ small.error {
 .note-editor .card-header {
     display: flex !important;
 }
+
+.text-editor .card {
+    margin-bottom: 0 !important;
+}

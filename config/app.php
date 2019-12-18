@@ -167,6 +167,7 @@ return [
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
         Translator\Framework\TranslatorServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -234,9 +235,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
-        'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
-        'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+        'Reminder' => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
+        'Sentinel' => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

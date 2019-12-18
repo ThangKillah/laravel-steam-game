@@ -28,8 +28,12 @@
                     <div class="comment-footer">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                            <li><a class="reply-btn" data-comment="{{ $comment->id }}" href="#"><i
-                                            class="icon-reply"></i> Reply</a>
+                            <li><a class="reply-btn"
+                                   data-comment="{{ $comment->id }}"
+                                   data-name="{{ $comment->user->name }}"
+                                   data-user="{{ hashId($comment->user_id) }}"
+                                   href="#">
+                                    <i class="icon-reply"></i> Reply</a>
                             </li>
                             <li><a href="#"><i class="fa fa-clock-o"></i> {{ $comment->created_at }}</a></li>
                         </ul>
@@ -69,8 +73,13 @@
                                     <div class="comment-footer">
                                         <ul>
                                             <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                            <li><a class="reply-btn" data-comment="{{ $reply->parent_id }}" href="#"><i
-                                                            class="icon-reply"></i> Reply</a></li>
+                                            <li><a class="reply-btn"
+                                                   data-comment="{{ $reply->parent_id }}"
+                                                   data-name="{{ $reply->user->name }}"
+                                                   data-user="{{ hashId($reply->user_id) }}"
+                                                   href="#">
+                                                    <i class="icon-reply"></i> Reply</a>
+                                            </li>
                                             <li><a href="#"><i class="fa fa-clock-o"></i> {{ $reply->created_at }}</a>
                                             </li>
                                         </ul>

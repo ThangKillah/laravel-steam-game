@@ -22,4 +22,9 @@ class CommentController extends Controller
             'comments' => $comments
         ]);
     }
+
+    public function uploadImage(Request $request)
+    {
+        return 'https://blog-game.com/img/avatar.png';
+    }
 }

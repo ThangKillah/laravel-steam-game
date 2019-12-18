@@ -59,3 +59,8 @@ function redirectSignIn($type)
 {
     return route($type) . '?nextUrl=' . \Illuminate\Support\Facades\Request::url();
 }
+
+function hashId($id)
+{
+    return \Vinkla\Hashids\Facades\Hashids::encode($id);
+}

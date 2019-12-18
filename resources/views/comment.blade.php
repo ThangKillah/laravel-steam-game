@@ -23,107 +23,21 @@
         @endif
     </div>
 
-    <div class="text-editor mt-5">
-        <div class="form-group">
-            <div class="summernote"></div>
+    <form data-comment="0">
+        <div class="text-editor mt-5">
+            <div class="form-group">
+                <div class="summernote"></div>
+                <small class="error" hidden></small>
+            </div>
+            <button class="btn btn-primary btn-comment">Submit Comment</button>
         </div>
-        <button class="btn btn-primary btn-comment">Submit Comment</button>
-    </div>
+    </form>
 
     <div id="loading-gif">
     </div>
 
     <ul id="comments-list">
-        @if($comments->total() >= 1)
-            @foreach($comments as $comment)
-                <li class="li-comment">
-                    <div class="comment">
-                        <div class="comment-avatar">
-                            <a href="profile.html"><img src="{{ asset('img/avatar.png') }}" alt="avatar"></a>
-                        </div>
-                        <div class="comment-post">
-                            <div class="comment-header">
-                                <div class="comment-author">
-                                    <h5><a href="profile.html">{{ $comment->user->name }}</a></h5>
-                                    <span>Member</span>
-                                </div>
-                                <div class="comment-action">
-                                    <div class="dropdown float-right">
-                                        <a href="#" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">Moderate</a>
-                                            <a class="dropdown-item" href="#">Embed</a>
-                                            <a class="dropdown-item" href="#">Report</a>
-                                            <a class="dropdown-item" href="#">Mark as spam</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {!! $comment->content !!}
-                            <div class="comment-footer">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                    <li><a class="reply-btn" data-comment="{{ $comment->id }}" href="#"><i
-                                                    class="icon-reply"></i>
-                                            Reply</a></li>
-                                    <li><a href="#"><i class="fa fa-clock-o"></i> {{ $comment->created_at }}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    @if(count($comment->reply) >= 1)
-                        <ul class="reply ul-reply">
-                            @foreach($comment->reply as $reply)
-                                <li class="li-reply">
-                                    <div class="comment">
-                                        <div class="comment-avatar"><img src="{{ asset('img/avatar.png') }}" alt="">
-                                        </div>
-                                        <div class="comment-post">
-                                            <div class="comment-header">
-                                                <div class="comment-author">
-                                                    <h5><a class="name-author" href="#">{{ $reply->user->name }}</a>
-                                                    </h5>
-                                                    <span>Member</span>
-                                                </div>
-                                                <div class="comment-action">
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" data-toggle="dropdown" aria-haspopup="true"
-                                                           aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Moderate</a>
-                                                            <a class="dropdown-item" href="#">Embed</a>
-                                                            <a class="dropdown-item" href="#">Report</a>
-                                                            <a class="dropdown-item" href="#">Mark as spam</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {!! $reply->content !!}
-                                            <div class="comment-footer">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                                    <li><a class="reply-btn" data-comment="{{ $reply->parent_id }}"
-                                                           href="#"><i
-                                                                    class="icon-reply"></i>
-                                                            Reply</a></li>
-                                                    <li><a href="#"><i
-                                                                    class="fa fa-clock-o"></i> {{ $reply->created_at }}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                            <form class="reply-editor" data-comment="{{ $comment->id }}">
-                            </form>
-                        </ul>
-                    @endif
-                </li>
-            @endforeach
-        @endif
+        @include('ajax.comment', ['comments' => $comments])
     </ul>
 
     @if($comments->currentPage() < $comments->lastPage())
@@ -171,45 +85,102 @@
 @push('js')
     <script src="{{ asset('plugins/summernote/summernote-bs4.js') }}"></script>
     <script>
-        function initEditor() {
-            $('.summernote').summernote({
-                height: 200,
+        function uploadImage(file, comment_id) {
+            let data = new FormData();
+            data.append('file', file, file.name);
+            console.log(comment_id + '_id');
+            $.ajax({
+                method: 'POST',
+                url: '{{ route('upload-image-comment') }}',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                success: function (img) {
+                    let editor = $("form[data-comment='" + comment_id + "']");
+                    editor.find('.summernote').summernote('insertImage', img);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus + " " + errorThrown);
+                }
+            });
+        }
+
+        function initEditor(comment_id, content = null) {
+            let editor = $("form[data-comment='" + comment_id + "']");
+            editor.find('.summernote').summernote({
+                callbacks: {
+                    onImageUpload: function (files) {
+                        for (let i = 0; i < files.length; i++) {
+                            uploadImage(files[i], comment_id);
+                        }
+                    },
+                    // onMediaDelete: function(files, editor, welEditable)
+                    // {
+                    //     var imageUrl = $(files[0]).attr('src');
+                    //     var image = imageUrl.split('/');
+                    //     console.log(image);
+                    // }
+                },
+                height: 150,
                 toolbar: [
                     ['style', ['bold', 'italic', 'underline']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ["insert", ["link", "picture"]],
                 ]
             });
+
+            if (content !== null) {
+                editor.find('.summernote').summernote("code", content);
+            }
         }
 
-        //click reply
+        function changeContent(comment_id, content) {
+            let editor = $("form[data-comment='" + comment_id + "']");
+            editor.find('.summernote').summernote("code", content);
+        }
+
+        //click close cancel comment
         $(document).on("click", '.btn-comment-close', function (event) {
             event.preventDefault();
             $(this).closest('form').html('');
         });
 
-        //click close cancel comment
+        //click reply
         $(document).on("click", '.reply-btn', function (event) {
             event.preventDefault();
             let comment_id = $(this).data('comment');
             let place;
+            let content = '<span class="tag-user">@' + $(this).data('name') + ':&nbsp;</span>';
             place = $("form[data-comment='" + comment_id + "']");
-            place.hide().html(
-                '                            <div class="text-editor">\n' +
-                '                                <div class="form-group">\n' +
-                '                                    <div class="summernote"></div>\n' +
-                '                                </div>\n' +
-                '                                <button class="btn btn-primary btn-comment">Submit Comment</button>' +
-                '                                <button class="btn btn-danger btn-comment-close">Cancel</button>\n' +
-                '                            </div>').fadeIn(1000);
-            initEditor();
+            if (!$.trim(place.html()).length) {
+                place.hide().html(
+                    '                            <div class="text-editor">\n' +
+                    '                                <div class="form-group">\n' +
+                    '                                    <div class="summernote"></div>\n' +
+                    '                                    <small class="error" hidden></small>\n' +
+                    '                                </div>\n' +
+                    '                                <button class="btn btn-primary btn-comment">Submit Comment</button>' +
+                    '                                <button class="btn btn-danger btn-comment-close">Cancel</button>\n' +
+                    '                            </div>').fadeIn(1000);
+                initEditor(comment_id, content);
+            } else {
+                changeContent(comment_id, content)
+            }
         });
+
 
         $(document).on("click", '.btn-comment', function (event) {
             event.preventDefault();
             let summernote = $(this).closest('div').find('.summernote');
             let content = summernote.summernote('code');
             let clean_content = content.replace(/<\/?[^>]+(>|$)/g, "");
+
+            console.log(content);
+            let check = true;
+            if (clean_content.length === 0 || clean_content >= 255) {
+
+            }
 
             $.ajax({
                 type: "GET",
@@ -242,7 +213,7 @@
                 });
             });
 
-            initEditor();
+            initEditor(0);
         });
     </script>
 @endpush
