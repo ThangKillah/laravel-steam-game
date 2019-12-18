@@ -47,8 +47,10 @@
     // which relies on CSS being loaded function
     function CSSDone() {
         console.log('done loaded css');
-        $('#loading').fadeOut();
-        setTimeout(function(){ $('#loading').fadeOut(); }, 10000);
+        $('#loading').fadeOut(1000);
+        setTimeout(function () {
+            $('#loading').fadeOut();
+        }, 10000);
     };
 
     // load me some stylesheet
