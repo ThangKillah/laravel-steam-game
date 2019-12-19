@@ -27,7 +27,8 @@
       "stevebauman/location": "^5.0",
       "stichoza/google-translate-php": "^4.0",
       "thiagocordeiro/laravel-translator": "^1.0",
-      "vinkla/hashids": "^7.0"
+      "vinkla/hashids": "^7.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class CommentController extends Controller
 {
@@ -25,6 +26,28 @@ class CommentController extends Controller
 
     public function uploadImage(Request $request)
     {
-        return 'https://blog-game.com/img/avatar.png';
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $filename = time() . $image->getClientOriginalName();
+
+            $image_resize = Image::make($image->getRealPath())->encode('jpg');
+
+            $path = public_path(config('constant.image_comment_path'));
+            if (!file_exists($path)) {
+                mkdir($path, 666, true);
+            }
+
+            if ($image_resize->height() > config('constant.height_image_resize')) {
+                $image_resize->resize(null, config('constant.height_image_resize'), function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+            $image_resize->save($path . $filename);
+            return config('services.homepage_url') . config('constant.image_comment_path') . $filename;
+        }
+        return json_encode([
+            'message' => 'Not found image'
+        ]);
     }
 }

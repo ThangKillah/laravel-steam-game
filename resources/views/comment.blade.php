@@ -87,7 +87,7 @@
     <script>
         function uploadImage(file, comment_id) {
             let data = new FormData();
-            data.append('file', file, file.name);
+            data.append('image', file, file.name);
             console.log(comment_id + '_id');
             $.ajax({
                 method: 'POST',

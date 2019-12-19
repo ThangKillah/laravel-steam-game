@@ -8,4 +8,6 @@ return [
     'limit_top_review' => 10,
     'limit_related_blog' => 4,
     'paginate_blog' => 5,
+    'image_comment_path' => '/storage/comments/img/',
+    'height_image_resize' => 600
 ];
