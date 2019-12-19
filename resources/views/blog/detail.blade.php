@@ -95,7 +95,12 @@
                         </div>
                     @endif
 
-                    @include('comment', ['comments' => $comments, 'totalComment' => $commentsCount])
+                    @include('comment', [
+                        'comments' => $comments,
+                        'totalComment' => $commentsCount,
+                        'core_id' => $blog->id,
+                        'type' => \App\Model\Comment::BLOG
+                        ])
                 </div>
             </div>
         </div>

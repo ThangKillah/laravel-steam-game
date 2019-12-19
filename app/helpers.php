@@ -64,3 +64,11 @@ function hashId($id)
 {
     return \Vinkla\Hashids\Facades\Hashids::encode($id);
 }
+
+function getUserId()
+{
+    if (\Cartalyst\Sentinel\Laravel\Facades\Sentinel::check()) {
+        return hashId(\Cartalyst\Sentinel\Laravel\Facades\Sentinel::getUser()->id);
+    }
+    return 0;
+}

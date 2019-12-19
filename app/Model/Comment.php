@@ -25,7 +25,9 @@ class Comment extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'type', 'user_id', 'core_id', 'content', 'like'
+    ];
 
 
     public function reply()

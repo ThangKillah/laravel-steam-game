@@ -3,8 +3,9 @@
 @endpush
 
 <div id="comments" class="comments anchor">
-    <input id="type" hidden value="{{ $comments->first()->type ?? 'no-comment' }}">
-    <input id="core_id" hidden value="{{ $comments->first()->core_id ?? 'no-comment' }}">
+    <input id="type" hidden value="{{ $type }}">
+    <input id="core_id" hidden value="{{ $core_id }}">
+    <input id="is_login" hidden value="{{ getUserId() }}">
 
     <div class="comments-header">
         <h5><i class="fa fa-comment-o m-r-5"></i> Comments ({{ $totalComment }})</h5>
@@ -27,9 +28,9 @@
         <div class="text-editor mt-5">
             <div class="form-group">
                 <div class="summernote"></div>
-                <small class="error" hidden></small>
+                <small data-comment="0" class="error"></small>
             </div>
-            <button class="btn btn-primary btn-comment">Submit Comment</button>
+            <button data-comment="0" class="btn btn-primary btn-comment">Submit Comment</button>
         </div>
     </form>
 
@@ -146,21 +147,31 @@
             $(this).closest('form').html('');
         });
 
+        $(document).on("summernote.change", '.summernote', function (event) {
+            if (!$(this).summernote('isEmpty')) {
+                $(this).closest('form').find('.error').html('');
+            }
+        });
+
         //click reply
         $(document).on("click", '.reply-btn', function (event) {
             event.preventDefault();
             let comment_id = $(this).data('comment');
             let place;
-            let content = '<span class="tag-user">@' + $(this).data('name') + ':&nbsp;</span>';
+
+            let content = '';
+            if ($(this).data('user') !== $('#is_login').val()) {
+                content = '<span class="tag-user">@' + $(this).data('name') + ':&nbsp;</span>';
+            }
             place = $("form[data-comment='" + comment_id + "']");
             if (!$.trim(place.html()).length) {
                 place.hide().html(
                     '                            <div class="text-editor">\n' +
                     '                                <div class="form-group">\n' +
                     '                                    <div class="summernote"></div>\n' +
-                    '                                    <small class="error" hidden></small>\n' +
+                    '                                    <small class="error"></small>\n' +
                     '                                </div>\n' +
-                    '                                <button class="btn btn-primary btn-comment">Submit Comment</button>' +
+                    '                                <button data-comment="' + comment_id + '" class="btn btn-primary btn-comment">Submit Comment</button>' +
                     '                                <button class="btn btn-danger btn-comment-close">Cancel</button>\n' +
                     '                            </div>').fadeIn(1000);
                 initEditor(comment_id, content);
@@ -174,26 +185,35 @@
             event.preventDefault();
             let summernote = $(this).closest('div').find('.summernote');
             let content = summernote.summernote('code');
-            let clean_content = content.replace(/<\/?[^>]+(>|$)/g, "");
 
             console.log(content);
-            let check = true;
-            if (clean_content.length === 0 || clean_content >= 255) {
 
+            if ($('#is_login').val() != 0) {
+                if (summernote.summernote('isEmpty')) {
+                    $(this).closest('form').find('.error').html('sadasdad');
+                } else {
+                    postComment(content, $(this).data('comment'))
+                }
+            } else {
+                $('#modal-login').modal('show');
             }
+        });
 
+        function postComment(content, parent_id) {
             $.ajax({
-                type: "GET",
-                url: "/check-login-ajax",
+                url: "{{ route('post-comment') }}",
+                type: "POST",
+                data: {
+                    type: $('#type').val(),
+                    core_id: $('#core_id').val(),
+                    content: content,
+                    parent_id: parent_id
+                },
                 success: function (data) {
-                    let response = JSON.parse(data);
-                    if (response.status === 'fail') {
-                        console.log(JSON.parse(data).status);
-                        $('#modal-login').modal('show');
-                    }
+                    console.log(data);
                 }
             });
-        });
+        }
 
 
         $(document).ready(function () {

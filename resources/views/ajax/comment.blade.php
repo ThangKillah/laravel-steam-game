@@ -42,7 +42,7 @@
             </div>
 
 
-            <ul class="reply ul-reply">
+            <ul class="reply ul-reply" data-comment="{{ $comment->id }}">
                 @if(count($comment->reply) >= 1)
                     @foreach($comment->reply as $reply)
                         <li class="li-reply">
@@ -74,7 +74,7 @@
                                         <ul>
                                             <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
                                             <li><a class="reply-btn"
-                                                   data-comment="{{ $reply->parent_id }}"
+                                                   data-comment="{{ $comment->id }}"
                                                    data-name="{{ $reply->user->name }}"
                                                    data-user="{{ hashId($reply->user_id) }}"
                                                    href="#">
