@@ -239,6 +239,7 @@
                 success: function (data) {
                     $('.btn-success-notify').click();
                     if (parent_id === 0) {
+                        initEditor(0, '');
                         $('#comments-list').prepend(data);
                     } else {
                         let form = $("form[data-comment='" + parent_id + "']");
