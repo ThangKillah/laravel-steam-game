@@ -20,7 +20,7 @@ class CommentController extends Controller
 
     public function ajaxGetComment(Request $request)
     {
-        $comments = $this->commentRepository->getCommentByBlog($request->get('core_id'));
+        $comments = $this->commentRepository->getCommentByBlog($request->get('core_id'), $request->input('sortBy'));
 
         return view('ajax.comment')->with([
             'comments' => $comments

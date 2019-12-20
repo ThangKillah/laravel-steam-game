@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Model\Comment;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
@@ -11,7 +12,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CommentRepository extends RepositoryInterface
 {
-    public function getCommentByBlog($blogId);
+    public function getCommentByBlog($blogId, $sortBy = Comment::LATEST);
 
     public function postCommentAjax($data = []);
 }

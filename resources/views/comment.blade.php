@@ -6,20 +6,16 @@
     <input id="type" hidden value="{{ $type }}">
     <input id="core_id" hidden value="{{ $core_id }}">
     <input id="is_login" hidden value="{{ getUserId() }}">
+    <input id="max_page" hidden value="{{ $comments->lastPage() }}">
 
     <div class="comments-header">
         <h5><i class="fa fa-comment-o m-r-5"></i> Comments ({{ $totalComment }})</h5>
         @if($comments->total() > 1)
             <div class="dropdown float-right">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Sorted by Best
-                    <span class="caret"></span></button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item active" href="#">Best</a>
-                    <a class="dropdown-item" href="#">Latest</a>
-                    <a class="dropdown-item" href="#">Oldest</a>
-                    <a class="dropdown-item" href="#">Random</a>
-                </div>
+                <select class="form-control" id="sort-comment">
+                    <option value="{{ \App\Model\Comment::LATEST }}">Sort by latest</option>
+                    <option value="{{ \App\Model\Comment::OLDEST }}">Sort by oldest</option>
+                </select>
             </div>
         @endif
     </div>
@@ -256,16 +252,39 @@
         $(document).ready(function () {
             "use strict";
             var page = 2;
+
+            $('#sort-comment').on('change', function () {
+                $('#btn-load-more').show();
+                page = 1;
+                $.ajax({
+                    type: "GET",
+                    url: "/ajax-comments?page=" + page + '&core_id=' + $('#core_id').val() + '&type=' + $('#type').val() + '&sortBy=' + $('#sort-comment').val(),
+                    success: function (data) {
+                        $("#comments-list").html(data);
+                        $('#loading-gif').html('');
+                        if (page == $('#max_page').val()) {
+                            $('#btn-load-more').hide(1000);
+                        }
+                        page = page + 1;
+                    }
+                });
+            });
+
+
             $("#btn-load-more").click(function (event) {
                 event.preventDefault();
                 $('#loading-gif').html('<a class="btn btn-primary text-left m-t-15 btn-block" href="#comments" role="button"><i class="fa fa-spinner fa-pulse m-r-5"></i> Loading more comments</a>');
                 $.ajax({
                     type: "GET",
-                    url: "/comments?page=" + page + '&core_id=' + $('#core_id').val() + '&type=' + $('#type').val(),
+                    url: "/ajax-comments?page=" + page + '&core_id=' + $('#core_id').val() + '&type=' + $('#type').val() + '&sortBy=' + $('#sort-comment').val(),
                     success: function (data) {
                         $("#comments-list").append(data);
                         $('#loading-gif').html('');
+                        if (page == $('#max_page').val()) {
+                            $('#btn-load-more').hide(1000);
+                        }
                         page = page + 1;
+
                     }
                 });
             });

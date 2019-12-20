@@ -20,6 +20,10 @@ class Comment extends Model implements Transformable
     const REVIEW = 2;
     const GAME = 3;
 
+    const BEST = 1;
+    const LATEST = 2;
+    const OLDEST = 3;
+
     /**
      * The attributes that are mass assignable.
      *
