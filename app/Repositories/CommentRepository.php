@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface CommentRepository extends RepositoryInterface
 {
     public function getCommentByBlog($blogId);
+
+    public function postCommentAjax($data = []);
 }

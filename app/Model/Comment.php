@@ -26,7 +26,7 @@ class Comment extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'type', 'user_id', 'core_id', 'content', 'like'
+        'type', 'user_id', 'core_id', 'content', 'like', 'parent_id'
     ];
 
 
@@ -37,7 +37,7 @@ class Comment extends Model implements Transformable
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public static function getCreatedAtAttribute($value)

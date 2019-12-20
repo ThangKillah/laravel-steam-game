@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostComment;
 use App\Repositories\CommentRepository;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class CommentController extends Controller
@@ -49,5 +52,17 @@ class CommentController extends Controller
         return json_encode([
             'message' => 'Not found image'
         ]);
+    }
+
+    public function postComment(PostComment $request)
+    {
+        if (Sentinel::check()) {
+            return $this->commentRepository->postCommentAjax($request->all());
+        } else {
+            return json_encode([
+                'status' => Response::HTTP_UNAUTHORIZED,
+                'message' => 'Need to login'
+            ]);
+        }
     }
 }

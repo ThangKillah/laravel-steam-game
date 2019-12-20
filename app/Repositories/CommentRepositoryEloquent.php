@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Model\Comment;
 use App\Validators\CommentValidator;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -43,7 +44,29 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
                     'type' => Comment::BLOG,
                     'core_id' => $blogId
                 ]);
-        })->paginate(1);
+        })->paginate(10);
     }
 
+    public function postCommentAjax($data = [])
+    {
+        $commentDB = $this->create([
+            'type' => $data['type'],
+            'core_id' => $data['core_id'],
+            'content' => $data['content'],
+            'parent_id' => $data['parent_id'],
+            'user_id' => Sentinel::getUser()->id
+        ]);
+
+        $comment = $this->scopeQuery(function ($query) use ($commentDB) {
+            return $query
+                ->with(['reply.user', 'user'])
+                ->where('id', '=', $commentDB->id);
+        })->first();
+
+        if ($comment->parent_id === 0) {
+            return view('sub.item_comment')->with(['comment' => $comment]);
+        } else {
+            return view('sub.item_reply')->with(['reply' => $comment]);
+        }
+    }
 }

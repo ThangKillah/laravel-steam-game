@@ -339,6 +339,7 @@
 (function () {
     Lang = new Lang();
     Lang.setMessages({
+        "en.content": 'Content is required and must be at lease 255 characters.',
         "en.auth": {
             "failed": "These credentials do not match our records.",
             "throttle": "Too many login attempts. Please try again in :seconds seconds."

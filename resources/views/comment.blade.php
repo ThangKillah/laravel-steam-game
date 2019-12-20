@@ -83,13 +83,33 @@
     </div>
 @endpush
 
+<button hidden type="button" class="btn-success-notify"
+        data-notification="success"
+        data-toggle="notification"
+        data-alignment="right"
+        data-title="{{ __('Post comment successful') }}"></button>
+
+<button hidden type="button" class="btn-danger-notify"
+        data-notification="danger"
+        data-toggle="notification"
+        data-alignment="right"
+        data-title="{{ __('Something is wrong') }}"></button>
+
 @push('js')
     <script src="{{ asset('plugins/summernote/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('plugins/notification/notification.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('messages.js') }}" charset="utf-8"></script>
+    <script>
+        (function ($) {
+            "use strict";
+            // notification
+            $('[data-toggle="notification"]').notification();
+        })(jQuery);
+    </script>
     <script>
         function uploadImage(file, comment_id) {
             let data = new FormData();
             data.append('image', file, file.name);
-            console.log(comment_id + '_id');
             $.ajax({
                 method: 'POST',
                 url: '{{ route('upload-image-comment') }}',
@@ -102,7 +122,7 @@
                     editor.find('.summernote').summernote('insertImage', img);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(textStatus + " " + errorThrown);
+                    $('.btn-danger-notify').click();
                 }
             });
         }
@@ -151,6 +171,10 @@
             if (!$(this).summernote('isEmpty')) {
                 $(this).closest('form').find('.error').html('');
             }
+
+            if ($('#is_login').val() == 0) {
+                $('#modal-login').modal('show');
+            }
         });
 
         //click reply
@@ -161,7 +185,7 @@
 
             let content = '';
             if ($(this).data('user') !== $('#is_login').val()) {
-                content = '<span class="tag-user">@' + $(this).data('name') + ':&nbsp;</span>';
+                content = '<span class="tag-user">@' + $(this).data('name') + ':</span><span>&nbsp;</span>';
             }
             place = $("form[data-comment='" + comment_id + "']");
             if (!$.trim(place.html()).length) {
@@ -186,11 +210,9 @@
             let summernote = $(this).closest('div').find('.summernote');
             let content = summernote.summernote('code');
 
-            console.log(content);
-
             if ($('#is_login').val() != 0) {
                 if (summernote.summernote('isEmpty')) {
-                    $(this).closest('form').find('.error').html('sadasdad');
+                    $(this).closest('form').find('.error').html(Lang.get('content'));
                 } else {
                     postComment(content, $(this).data('comment'))
                 }
@@ -200,6 +222,11 @@
         });
 
         function postComment(content, parent_id) {
+            if (parent_id !== 0) {
+                let form = $("form[data-comment='" + parent_id + "']");
+                form.hide(1000).html('').show();
+            }
+
             $.ajax({
                 url: "{{ route('post-comment') }}",
                 type: "POST",
@@ -210,7 +237,16 @@
                     parent_id: parent_id
                 },
                 success: function (data) {
-                    console.log(data);
+                    $('.btn-success-notify').click();
+                    if (parent_id === 0) {
+                        $('#comments-list').prepend(data);
+                    } else {
+                        let form = $("form[data-comment='" + parent_id + "']");
+                        $(data).insertBefore(form);
+                    }
+                },
+                error: function (request, status, error) {
+                    $('.btn-danger-notify').click();
                 }
             });
         }
