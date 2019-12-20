@@ -26,7 +26,7 @@ class PostComment extends FormRequest
         return [
             'type' => 'required',
             'core_id' => 'required',
-            'content' => 'required|max:255',
+            'content' => 'required',
             'parent_id' => 'required',
         ];
     }

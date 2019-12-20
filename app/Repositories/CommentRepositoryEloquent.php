@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Model\Comment;
+use App\Traits\Helper;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -14,6 +15,8 @@ use Prettus\Repository\Eloquent\BaseRepository;
  */
 class CommentRepositoryEloquent extends BaseRepository implements CommentRepository
 {
+    use Helper;
+
     /**
      * Specify Model class name
      *
@@ -58,7 +61,7 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
         $commentDB = $this->create([
             'type' => $data['type'],
             'core_id' => $data['core_id'],
-            'content' => $data['content'],
+            'content' => $this->contentImageEncodeBase64($data['content']),
             'parent_id' => $data['parent_id'],
             'user_id' => Sentinel::getUser()->id
         ]);

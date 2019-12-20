@@ -103,42 +103,9 @@
         })(jQuery);
     </script>
     <script>
-        function uploadImage(file, comment_id) {
-            let data = new FormData();
-            data.append('image', file, file.name);
-            $.ajax({
-                method: 'POST',
-                url: '{{ route('upload-image-comment') }}',
-                contentType: false,
-                cache: false,
-                processData: false,
-                data: data,
-                success: function (img) {
-                    let editor = $("form[data-comment='" + comment_id + "']");
-                    editor.find('.summernote').summernote('insertImage', img);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    $('.btn-danger-notify').click();
-                }
-            });
-        }
-
         function initEditor(comment_id, content = null) {
             let editor = $("form[data-comment='" + comment_id + "']");
             editor.find('.summernote').summernote({
-                callbacks: {
-                    onImageUpload: function (files) {
-                        for (let i = 0; i < files.length; i++) {
-                            uploadImage(files[i], comment_id);
-                        }
-                    },
-                    // onMediaDelete: function(files, editor, welEditable)
-                    // {
-                    //     var imageUrl = $(files[0]).attr('src');
-                    //     var image = imageUrl.split('/');
-                    //     console.log(image);
-                    // }
-                },
                 height: 150,
                 toolbar: [
                     ['style', ['bold', 'italic', 'underline']],

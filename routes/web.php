@@ -47,7 +47,6 @@ Route::get('ajax-comments', 'CommentController@ajaxGetComment')->name('get-comme
 
 
 //Comment
-Route::post('upload-image-comment', 'CommentController@uploadImage')->name('upload-image-comment');
 Route::post('post-comment', 'CommentController@postComment')->name('post-comment');
 
 
