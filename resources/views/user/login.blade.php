@@ -22,6 +22,9 @@
                         <div class="card-block">
                             <form id="form-login" action="{{ route('postLogin') }}" method="post">
                                 @csrf
+                                <input type="hidden"
+                                       value="{{ app('request')->has('nextUrl') ? app('request')->input('nextUrl') : '' }}"
+                                       name="nextUrl">
                                 @include('sub.social', ['nextUrl' => app('request')->has('nextUrl') ? app('request')->input('nextUrl') : ''])
                                 <div class="divider">
                                     <span>or</span>

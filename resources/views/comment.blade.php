@@ -207,23 +207,27 @@
             let div_editor = $(".edit-comment[data-comment='" + comment_id + "']");
             let content = div_editor.find('.summernote').summernote('code');
 
-            $.ajax({
-                url: "{{ route('ajax-edit-comment') }}",
-                type: "POST",
-                data: {
-                    comment_id: comment_id,
-                    content: content,
-                },
-                success: function (data) {
-                    $('.btn-success-notify').click();
-                    div_content.html(data);
-                    $(".content-html[data-comment='" + comment_id + "']").removeClass('d-none');
-                    $(".edit-comment[data-comment='" + comment_id + "']").addClass('d-none');
-                },
-                error: function (request, status, error) {
-                    $('.btn-danger-notify').click();
-                }
-            });
+            if (div_editor.find('.summernote').summernote('isEmpty')) {
+                $(".comment[data-comment='" + comment_id + "']").find('.error').html(Lang.get('content'));
+            } else {
+                $.ajax({
+                    url: "{{ route('ajax-edit-comment') }}",
+                    type: "POST",
+                    data: {
+                        comment_id: comment_id,
+                        content: content,
+                    },
+                    success: function (data) {
+                        $('.btn-success-notify').click();
+                        div_content.html(data);
+                        $(".content-html[data-comment='" + comment_id + "']").removeClass('d-none');
+                        $(".edit-comment[data-comment='" + comment_id + "']").addClass('d-none');
+                    },
+                    error: function (request, status, error) {
+                        $('.btn-danger-notify').click();
+                    }
+                });
+            }
         });
 
         //click edit comment

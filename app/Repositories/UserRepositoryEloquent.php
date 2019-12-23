@@ -55,6 +55,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
         $user = Sentinel::registerAndActivate($credentials);
 
+        Sentinel::login($user);
+
+
         return $user;
     }
 

@@ -6,6 +6,7 @@ use App\Services\SocialAccountService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Sentinel;
 use Socialite;
 
@@ -19,7 +20,7 @@ class SocialAuthController extends Controller
     public function redirect($social, Request $request)
     {
         if ($request->has('nextUrl')) {
-            session()->put($this->getKeyEncode(), $request->get('nextUrl'));
+            Cookie::queue($this->getKeyEncode(), $request->input('nextUrl'), 1);
         }
         return Socialite::driver($social)->redirect();
     }
@@ -30,10 +31,10 @@ class SocialAuthController extends Controller
         try {
             $user = SocialAccountService::createOrGetUser(Socialite::driver($social)->user(), $social);
             Sentinel::login($user);
-            if (session()->has($key)) {
-                $url = session()->get($key);
-                session()->forget($key);
-                return redirect()->to($url);
+
+            $nextUrl = Cookie::get($this->getKeyEncode());
+            if (!empty($nextUrl)) {
+                return redirect()->to($nextUrl);
             }
             return redirect()->to('/');
         } catch (Exception $exception) {

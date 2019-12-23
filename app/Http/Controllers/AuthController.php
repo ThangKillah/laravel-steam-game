@@ -22,6 +22,9 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $this->userRepository->register($request->all());
+        if (!empty($request->input('nextUrl'))) {
+            return redirect()->to($request->input('nextUrl'));
+        }
         return redirect()->route('home');
     }
 
@@ -47,7 +50,10 @@ class AuthController extends Controller
         try {
             $remember = (bool)$request->get('remember', false);
             if (Sentinel::authenticate($request->all(), $remember)) {
-                return redirect()->intended($this->redirectTo);
+                if (!empty($request->input('nextUrl'))) {
+                    return redirect()->to($request->input('nextUrl'));
+                }
+                return redirect()->route('home');
             } else {
                 $err = __('That password was incorrect. Please try again.');
             }
@@ -57,6 +63,7 @@ class AuthController extends Controller
             $delay = $e->getDelay();
             $err = __('Your account is blocked in delay sec', ['delay' => $delay]);
         }
+
         return redirect()->back()
             ->withInput()
             ->with('errLogin', $err);
