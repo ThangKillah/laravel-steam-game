@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\BlogRepository;
 use App\Repositories\CommentRepository;
+use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
@@ -55,5 +56,11 @@ class BlogController extends Controller
             'comments' => $comments,
             'commentsCount' => $blog->comments_count
         ]);
+    }
+
+    public function ajaxGetListBlog(Request $request)
+    {
+        $blogs = $this->blogRepository->getBlogSearch();
+        return view('ajax.blogs')->with(['blogs' => $blogs]);
     }
 }
