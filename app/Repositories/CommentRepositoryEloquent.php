@@ -78,4 +78,21 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
             return view('sub.item_reply')->with(['reply' => $comment]);
         }
     }
+
+    public function editComment($id, $content)
+    {
+        $content = $this->contentImageEncodeBase64($content);
+        $this->update(['content' => $content], $id);
+        return $content;
+    }
+
+    public function getCommentById($id)
+    {
+        return $this->find($id);
+    }
+
+    public function deleteCommentById($id)
+    {
+        return $this->delete($id);
+    }
 }

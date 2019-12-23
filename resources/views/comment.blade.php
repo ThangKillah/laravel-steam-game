@@ -47,6 +47,29 @@
 </div>
 
 @push('modal')
+    <div class="modal fade" id="modal-delete-comment" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="overflow: hidden;">
+                <div class="modal-body" style="max-height: 773px; overflow-y: auto;">
+                    <div class="d-flex justify-content-between bg-secondary mb-3">
+                        <div>
+                            <p>{{ __('Are you sure delete this comment ?') }}</p>
+                        </div>
+                        <div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="delete-comment" type="button" data-comment="0" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modal-login">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -57,7 +80,7 @@
                     </button>
                 </div>
                 <div class="modal-body p-a-20">
-                    <form action="profile.html" method="post">
+                    <form>
                         @include('sub.social', ['nextUrl' => \Illuminate\Support\Facades\Request::url()])
                         <div class="divider">
                             <span>or</span>
@@ -83,13 +106,19 @@
         data-notification="success"
         data-toggle="notification"
         data-alignment="right"
-        data-title="{{ __('Post comment successful') }}"></button>
+        data-title="{{ __('Post your comment successful') }}"></button>
+
+<button hidden type="button" class="btn-success-delete"
+        data-notification="success"
+        data-toggle="notification"
+        data-alignment="right"
+        data-title="{{ __('Delete your comment successful') }}"></button>
 
 <button hidden type="button" class="btn-danger-notify"
         data-notification="danger"
         data-toggle="notification"
         data-alignment="right"
-        data-title="{{ __('Something is wrong') }}"></button>
+        data-title="{{ __('Something is wrong ~~!') }}"></button>
 
 @push('js')
     <script src="{{ asset('plugins/summernote/summernote-bs4.js') }}"></script>
@@ -103,8 +132,13 @@
         })(jQuery);
     </script>
     <script>
-        function initEditor(comment_id, content = null) {
-            let editor = $("form[data-comment='" + comment_id + "']");
+        function initEditor(comment_id, content = null, isEdit = 0) {
+            let editor;
+            if (isEdit === 1) {
+                editor = $(".edit-comment[data-comment='" + comment_id + "']");
+            } else {
+                editor = $("form[data-comment='" + comment_id + "']");
+            }
             editor.find('.summernote').summernote({
                 height: 150,
                 toolbar: [
@@ -128,6 +162,92 @@
         $(document).on("click", '.btn-comment-close', function (event) {
             event.preventDefault();
             $(this).closest('form').html('');
+        });
+
+        //click delete comment
+        $(document).on("click", '.delete-comment-drop', function (event) {
+            event.preventDefault();
+            $('#modal-delete-comment').modal('show');
+            $('#delete-comment').data('comment', $(this).data('comment'));
+        });
+
+        //submit delete comment
+        $(document).on("click", '#delete-comment', function (event) {
+            event.preventDefault();
+            $('#modal-delete-comment').modal('hide');
+            let comment_id = $(this).data('comment');
+            $.ajax({
+                url: "{{ route('ajax-delete-comment') }}",
+                type: "POST",
+                data: {
+                    comment_id: comment_id,
+                },
+                success: function (data) {
+                    let status = JSON.parse(data).status;
+                    if (status != 200) {
+                        $('.btn-danger-notify').click();
+                    } else {
+                        $('.btn-success-delete').click();
+                        $(".comment[data-comment='" + comment_id + "']").parent('li').remove();
+                    }
+                },
+                error: function (request, status, error) {
+                    $('.btn-danger-notify').click();
+                }
+            });
+        });
+
+
+        //submit edit comment
+        $(document).on("click", '.edit-comment-btn', function (event) {
+            event.preventDefault();
+            let comment_id = $(this).data('comment');
+            var div_content = $(".content-html[data-comment='" + comment_id + "']");
+
+            let div_editor = $(".edit-comment[data-comment='" + comment_id + "']");
+            let content = div_editor.find('.summernote').summernote('code');
+
+            $.ajax({
+                url: "{{ route('ajax-edit-comment') }}",
+                type: "POST",
+                data: {
+                    comment_id: comment_id,
+                    content: content,
+                },
+                success: function (data) {
+                    $('.btn-success-notify').click();
+                    div_content.html(data);
+                    $(".content-html[data-comment='" + comment_id + "']").removeClass('d-none');
+                    $(".edit-comment[data-comment='" + comment_id + "']").addClass('d-none');
+                },
+                error: function (request, status, error) {
+                    $('.btn-danger-notify').click();
+                }
+            });
+        });
+
+        //click edit comment
+        $(document).on("click", '.edit-comment-drop', function (event) {
+            event.preventDefault();
+            let comment_id = $(this).data('comment');
+            let div_content = $(".content-html[data-comment='" + comment_id + "']");
+            div_content.addClass('d-none');
+
+            let div_edit = $(".edit-comment[data-comment='" + comment_id + "']");
+            div_edit.removeClass('d-none');
+
+            let content = div_content.html();
+
+            initEditor(comment_id, content, 1);
+        });
+
+
+        //click cancel edit comment
+        $(document).on("click", '.cancel-edit-comment', function (event) {
+            event.preventDefault();
+            let comment_id = $(this).data('comment');
+            $(".content-html[data-comment='" + comment_id + "']").removeClass('d-none');
+            $(".edit-comment[data-comment='" + comment_id + "']").addClass('d-none');
         });
 
         $(document).on("summernote.change", '.summernote', function (event) {

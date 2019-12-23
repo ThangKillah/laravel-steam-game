@@ -48,6 +48,8 @@ Route::get('ajax-comments', 'CommentController@ajaxGetComment')->name('get-comme
 
 //Comment
 Route::post('post-comment', 'CommentController@postComment')->name('post-comment');
+Route::post('ajax-edit-comment', 'CommentController@ajaxEditComment')->name('ajax-edit-comment');
+Route::post('ajax-delete-comment', 'CommentController@ajaxDeleteComment')->name('ajax-delete-comment');
 
 
 

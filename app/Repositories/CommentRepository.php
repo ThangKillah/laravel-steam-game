@@ -15,4 +15,10 @@ interface CommentRepository extends RepositoryInterface
     public function getCommentByBlog($blogId, $sortBy = Comment::LATEST);
 
     public function postCommentAjax($data = []);
+
+    public function editComment($id, $content);
+
+    public function getCommentById($id);
+
+    public function deleteCommentById($id);
 }
