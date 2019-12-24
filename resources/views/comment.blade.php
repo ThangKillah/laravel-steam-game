@@ -182,7 +182,11 @@
                 data: {
                     comment_id: comment_id,
                 },
+                beforeSend: function () {
+                    showAjaxGif();
+                },
                 success: function (data) {
+                    hideAjaxGif();
                     let status = JSON.parse(data).status;
                     if (status != 200) {
                         $('.btn-danger-notify').click();
@@ -192,6 +196,7 @@
                     }
                 },
                 error: function (request, status, error) {
+                    hideAjaxGif();
                     $('.btn-danger-notify').click();
                 }
             });
@@ -217,13 +222,18 @@
                         comment_id: comment_id,
                         content: content,
                     },
+                    beforeSend: function () {
+                        showAjaxGif();
+                    },
                     success: function (data) {
+                        hideAjaxGif();
                         $('.btn-success-notify').click();
                         div_content.html(data);
                         $(".content-html[data-comment='" + comment_id + "']").removeClass('d-none');
                         $(".edit-comment[data-comment='" + comment_id + "']").addClass('d-none');
                     },
                     error: function (request, status, error) {
+                        hideAjaxGif();
                         $('.btn-danger-notify').click();
                     }
                 });
@@ -323,7 +333,11 @@
                     content: content,
                     parent_id: parent_id
                 },
+                beforeSend: function () {
+                    showAjaxGif();
+                },
                 success: function (data) {
+                    hideAjaxGif();
                     $('.btn-success-notify').click();
                     if (parent_id === 0) {
                         initEditor(0, '');
@@ -334,6 +348,7 @@
                     }
                 },
                 error: function (request, status, error) {
+                    hideAjaxGif();
                     $('.btn-danger-notify').click();
                 }
             });
@@ -350,13 +365,21 @@
                 $.ajax({
                     type: "GET",
                     url: "/ajax-comments?page=" + page + '&core_id=' + $('#core_id').val() + '&type=' + $('#type').val() + '&sortBy=' + $('#sort-comment').val(),
+                    beforeSend: function () {
+                        showAjaxGif();
+                    },
                     success: function (data) {
+                        hideAjaxGif();
                         $("#comments-list").html(data);
                         $('#loading-gif').html('');
                         if (page == $('#max_page').val()) {
                             $('#btn-load-more').hide(1000);
                         }
                         page = page + 1;
+                    },
+                    error: function (request, status, error) {
+                        hideAjaxGif();
+                        $('.btn-danger-notify').click();
                     }
                 });
             });
@@ -368,7 +391,11 @@
                 $.ajax({
                     type: "GET",
                     url: "/ajax-comments?page=" + page + '&core_id=' + $('#core_id').val() + '&type=' + $('#type').val() + '&sortBy=' + $('#sort-comment').val(),
+                    beforeSend: function () {
+                        showAjaxGif();
+                    },
                     success: function (data) {
+                        hideAjaxGif();
                         $("#comments-list").append(data);
                         $('#loading-gif').html('');
                         if (page == $('#max_page').val()) {
@@ -376,6 +403,10 @@
                         }
                         page = page + 1;
 
+                    },
+                    error: function (request, status, error) {
+                        hideAjaxGif();
+                        $('.btn-danger-notify').click();
                     }
                 });
             });

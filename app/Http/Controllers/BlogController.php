@@ -41,7 +41,7 @@ class BlogController extends Controller
         if (!empty($blog->gamespot_id)) {
             $blog->body = str_replace("/videos/embed", "https://www.gamespot.com/videos/embed", $blog->body);
             $blog->body = str_replace('href="/articles/', 'href="https://www.gamespot.com/articles/', $blog->body);
-            $blog->body = str_replace("/gallery/", "https://www.gamespot.com/gallery/", $blog->body);
+            //$blog->body = str_replace("/gallery/", "https://www.gamespot.com/gallery/", $blog->body);
         }
         $relatedBlog = $this->blogRepository->getRelatedBlog($blog->category);
 

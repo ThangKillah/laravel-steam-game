@@ -110,6 +110,11 @@
 @push('js')
     <script>
         $(document).ready(function () {
+            $('iframe').each(function () {
+                let attr_value = $(this).data("src");
+                $(this).attr('src', attr_value);
+            });
+
             $(document).on('click', 'a', function (e) {
                 let url = $(this).attr('href');
                 if (url !== undefined && url.indexOf('#') === -1

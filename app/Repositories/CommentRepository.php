@@ -16,7 +16,7 @@ interface CommentRepository extends RepositoryInterface
 
     public function postCommentAjax($data = []);
 
-    public function editComment($id, $content);
+    public function editComment($id, $content, $oldContent);
 
     public function getCommentById($id);
 

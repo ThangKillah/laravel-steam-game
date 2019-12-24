@@ -61,7 +61,7 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
         $commentDB = $this->create([
             'type' => $data['type'],
             'core_id' => $data['core_id'],
-            'content' => $this->contentImageEncodeBase64($data['content']),
+            'content' => $this->contentImageEncodeBase64($data['content'])['doom'],
             'parent_id' => $data['parent_id'],
             'user_id' => Sentinel::getUser()->id
         ]);
@@ -79,10 +79,12 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
         }
     }
 
-    public function editComment($id, $content)
+    public function editComment($id, $content, $oldContent)
     {
-        $content = $this->contentImageEncodeBase64($content);
+        $getDoom = $this->contentImageEncodeBase64($content);
+        $content = $getDoom['doom'];
         $this->update(['content' => $content], $id);
+        $this->deleteImageByContent($oldContent, $getDoom['arrSrcImg']);
         return $content;
     }
 
