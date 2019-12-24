@@ -16,25 +16,32 @@ trait Helper
         return $dom;
     }
 
-    public function deleteImageByContent($content)
+    public function deleteImageByContent($content, $arrSrcImg = [])
     {
         $dom = $this->getDoomImageFromContent($content);
         $images = $dom->getElementsByTagName('img');
         foreach ($images as $img) {
             $src = $img->getAttribute('src');
-            $split = explode('/', $src);
-            $imageName = $split[count($split) - 1];
-            Storage::disk('real')->delete(config('constant.image_comment_path') . $imageName);
+            if (!in_array($src, $arrSrcImg)) {
+                $split = explode('/', $src);
+                $imageName = $split[count($split) - 1];
+                Storage::disk('real')->delete(config('constant.image_comment_path') . $imageName);
+            }
         }
     }
 
     public function contentImageEncodeBase64($content)
     {
+        $arrSrcImg = [];
         $dom = $this->getDoomImageFromContent($content);
         $images = $dom->getElementsByTagName('img');
         // foreach <img> in the submited message
         foreach ($images as $img) {
             $src = $img->getAttribute('src');
+
+            if (strpos($src, config('constant.image_comment_path')) !== false) {
+                $arrSrcImg[] = $src;
+            }
 
             // if the img source is 'data-url'
             if (preg_match('/data:image/', $src)) {
@@ -62,6 +69,9 @@ trait Helper
                 $img->setAttribute('src', $new_src);
             } // <!--endif
         } // <!--endforeach
-        return $dom->saveHTML();
+        return [
+            'doom' => $dom->saveHTML(),
+            'arrSrcImg' => $arrSrcImg,
+        ];
     }
 }

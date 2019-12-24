@@ -53,7 +53,7 @@
                             <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">All Platform <i class="fa fa-caret-down"></i></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item active" href="#">All platform</a>
+                                <a class="dropdown-item" href="#">All platform</a>
                                 <a class="dropdown-item" href="#">Playstation 4</a>
                                 <a class="dropdown-item" href="#">Xbox One</a>
                                 <a class="dropdown-item" href="#">Origin</a>
@@ -77,9 +77,6 @@
                     </div>
 
                     <!-- post -->
-                    <div id="ajax-loading" style="display: none;">
-                        <img id="ajax-gif" src="{{ asset('img/ajax.gif') }}" alt="Loading..."/>
-                    </div>
                     <div id="blog-list">
                         @include('ajax.blogs', ['blogs' => $blogs])
                     </div>
@@ -297,16 +294,16 @@
                 type: "get",
                 datatype: "html",
                 beforeSend: function () {
-                    $("#ajax-loading").fadeIn();
+                    showAjaxGif();
                 },
                 success: function (data) {
-                    $("#ajax-loading").fadeOut();
+                    hideAjaxGif();
                     $('html, body').animate({scrollTop: $('#blog-list').position().top}, 'slow');
                     $("#blog-list").empty().html(data);
                     location.hash = page;
                 },
                 error: function (request, status, error) {
-                    $("#ajax-loading").fadeOut();
+                    showAjaxGif();
                 }
             });
         }

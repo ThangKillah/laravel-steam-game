@@ -19,7 +19,10 @@
 </head>
 <body>
 <div id="loading">
-    <img id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..." />
+    <img id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
+</div>
+<div id="ajax-loading" style="display: none;">
+    <img id="ajax-gif" src="{{ asset('img/ajax.gif') }}" alt="Loading..."/>
 </div>
 <!-- header -->
 <div class="fixed-header">
@@ -35,7 +38,15 @@
 <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script>
+    function showAjaxGif() {
+        $("#ajax-loading").fadeIn();
+    }
 
+    function hideAjaxGif() {
+        $("#ajax-loading").fadeOut();
+    }
+</script>
 <!-- theme js -->
 <script src="{{ asset('js/theme.min.js') }}"></script>
 <script>

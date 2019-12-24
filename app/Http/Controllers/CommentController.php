@@ -52,8 +52,7 @@ class CommentController extends Controller
             $idComment = $request->input('comment_id');
             $comment = $this->commentRepository->getCommentById($idComment);
             if (Sentinel::getUser()->id === $comment->user_id) {
-                $this->deleteImageByContent($comment->content);
-                return $this->commentRepository->editComment($request->input('comment_id'), $request->input('content'));
+                return $this->commentRepository->editComment($request->input('comment_id'), $request->input('content'), $comment->content);
             } else {
                 return $this->returnNotLogin();
             }
