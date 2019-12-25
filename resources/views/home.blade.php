@@ -65,9 +65,11 @@
                         </div>
 
                         <div class="btn-group float-right m-l-5 hidden-sm-down" role="group">
-                            <a class="btn btn-default btn-icon" href="#" role="button"><i
+                            <a onclick="gridView()" class="btn btn-default btn-icon" href="javascript:void(0)"
+                               role="button"><i
                                         class="fa fa-th-large"></i></a>
-                            <a class="btn btn-default btn-icon" href="#" role="button"><i class="fa fa-bars"></i></a>
+                            <a onclick="listView()" class="btn btn-default btn-icon" href="javascript:void(0)"
+                               role="button"><i class="fa fa-bars"></i></a>
                         </div>
 
                         <div class="dropdown float-right">
@@ -269,6 +271,26 @@
 
 @push('js')
     <script type="text/javascript">
+        var elements = document.getElementsByClassName("column");
+
+        // Declare a loop variable
+        var i;
+
+        // List View
+        function listView() {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.width = "100%";
+            }
+        }
+
+        // Grid View
+        function gridView() {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.width = "50%";
+            }
+        }
+
+
         $(window).on('hashchange', function () {
             if (window.location.hash) {
                 var page = window.location.hash.replace('#', '');
