@@ -272,12 +272,13 @@
 @push('js')
     <script type="text/javascript">
         var elements = document.getElementsByClassName("column");
-
         // Declare a loop variable
         var i;
+        var current_layout = 'grid';
 
         // List View
         function listView() {
+            current_layout = 'list';
             for (i = 0; i < elements.length; i++) {
                 elements[i].style.width = "100%";
             }
@@ -285,11 +286,11 @@
 
         // Grid View
         function gridView() {
+            current_layout = 'grid';
             for (i = 0; i < elements.length; i++) {
                 elements[i].style.width = "50%";
             }
         }
-
 
         $(window).on('hashchange', function () {
             if (window.location.hash) {
@@ -328,6 +329,11 @@
                     hideAjaxGif();
                     $('html, body').animate({scrollTop: $('#blog-list').position().top}, 'slow');
                     $("#blog-list").empty().html(data);
+                    if (current_layout === 'grid') {
+                        gridView();
+                    } else {
+                        listView();
+                    }
                     location.hash = page;
                 },
                 error: function (request, status, error) {

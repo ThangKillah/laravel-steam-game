@@ -2,7 +2,7 @@
     <div class="row">
         @foreach($blogSmallList as $blog)
             <div class="post column">
-                <h2 class="post-title"><a
+                <h2 class="post-title text-over-two-line"><a
                             href="{{ route('blog-detail', ['slug' => $blog->slug, 'id' => \Vinkla\Hashids\Facades\Hashids::encode($blog->id) ]) }}">{{ $blog->title }}</a>
                 </h2>
                 <div class="post-meta">
