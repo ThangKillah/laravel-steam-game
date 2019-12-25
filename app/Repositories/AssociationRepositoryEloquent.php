@@ -33,4 +33,10 @@ class AssociationRepositoryEloquent extends BaseRepository implements Associatio
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function getAllPlatform()
+    {
+        return $this->scopeQuery(function ($query) {
+            return $query->where('type', 'platform')->orderBy('name', 'ASC');
+        })->all();
+    }
 }

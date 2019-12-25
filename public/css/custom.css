@@ -367,3 +367,8 @@ small.error {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.dropdown-menu {
+    max-height: 500px !important;
+    overflow-y: auto !important;
+}

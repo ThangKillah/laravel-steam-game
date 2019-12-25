@@ -49,18 +49,21 @@
                         <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
                             <div class="form-group input-icon-right">
                                 <i class="fa fa-search"></i>
-                                <input type="text" class="form-control search-game" placeholder="Search Game...">
+                                <input type="text" id="title-blog-search" class="form-control search-game"
+                                       placeholder="Search Blog...">
                             </div>
                         </div>
                         <div class="dropdown float-left">
                             <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true">All Platform <i class="fa fa-caret-down"></i></button>
+                                    aria-expanded="true"><span id="span-platform">All Category</span></span><i
+                                        class="fa fa-caret-down"></i></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item active" href="#">All Platform</a>
-                                <a class="dropdown-item" href="#">Playstation 4</a>
-                                <a class="dropdown-item" href="#">Xbox One</a>
-                                <a class="dropdown-item" href="#">Origin</a>
-                                <a class="dropdown-item" href="#">Steam</a>
+                                <a class="dropdown-item drop-platform active" data-id="0" href="javascript:void(0)">All
+                                    Category</a>
+                                @foreach($platforms as $plat)
+                                    <a class="dropdown-item drop-platform" data-id="{{ $plat->id }}"
+                                       href="javascript:void(0)">{{ $plat->name }}</a>
+                                @endforeach
                             </div>
                         </div>
 
@@ -74,12 +77,15 @@
 
                         <div class="dropdown float-right">
                             <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true">Date Added <i class="fa fa-caret-down"></i></button>
+                                    aria-expanded="true"><span id="span-sort">Popular</span><i
+                                        class="fa fa-caret-down"></i></button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item active" href="#">Date Added</a>
-                                <a class="dropdown-item" href="#">Popular</a>
-                                <a class="dropdown-item" href="#">Newest</a>
-                                <a class="dropdown-item" href="#">Oldest</a>
+                                <a class="dropdown-item drop-sort active" data-id="{{ \App\Model\Blog::BEST }}"
+                                   href="javascript:void(0)">Popular</a>
+                                <a class="dropdown-item drop-sort" data-id="{{ \App\Model\Blog::NEWEST }}"
+                                   href="javascript:void(0)">Newest</a>
+                                <a class="dropdown-item drop-sort" data-id="{{ \App\Model\Blog::OLDEST }}"
+                                   href="javascript:void(0)">Oldest</a>
                             </div>
                         </div>
                     </div>
@@ -292,13 +298,49 @@
             }
         }
 
+        var page = 1;
+        var title = '';
+        var platform = '';
+        var sortBy = '{{ \App\Model\Blog::BEST }}';
+        var load_by_hash_change = 1;
+
+        $('#title-blog-search').on('change', function () {
+            page = 1;
+            title = $('#title-blog-search').val();
+            getData(page);
+        });
+
+        $('.drop-platform').on('click', function () {
+            if (!$(this).hasClass('active')) {
+                page = 1;
+                $('.drop-platform').removeClass('active');
+                $(this).addClass('active');
+                platform = $(this).data('id');
+                $('#span-platform').html($(this).html());
+                getData(page);
+            }
+        });
+
+        $('.drop-sort').on('click', function () {
+            if (!$(this).hasClass('active')) {
+                page = 1;
+                $('.drop-sort').removeClass('active');
+                $(this).addClass('active');
+                sortBy = $(this).data('id');
+                $('#span-sort').html($(this).html());
+                getData(page);
+            }
+        });
+
         $(window).on('hashchange', function () {
             if (window.location.hash) {
-                var page = window.location.hash.replace('#', '');
+                page = window.location.hash.replace('#', '');
                 if (page == Number.NaN || page <= 0) {
                     return false;
                 } else {
-                    getData(page);
+                    if (load_by_hash_change) {
+                        getData(page);
+                    }
                 }
             }
         });
@@ -310,7 +352,7 @@
                 $('li').removeClass('active');
                 $(this).parent('li').addClass('active');
 
-                var page = $(this).attr('href').split('page=')[1];
+                page = $(this).attr('href').split('page=')[1];
 
                 getData(page);
             });
@@ -319,25 +361,29 @@
 
         function getData(page) {
             $.ajax({
-                url: '{{ route('ajax-get-list-blog') }}' + '?page=' + page,
+                url: '{{ route('ajax-get-list-blog') }}' + '?page=' + page + '&title=' + title + '&platform=' + platform + '&sortBy=' + sortBy,
                 type: "get",
                 datatype: "html",
                 beforeSend: function () {
                     showAjaxGif();
                 },
                 success: function (data) {
+                    load_by_hash_change = 0;
                     hideAjaxGif();
-                    $('html, body').animate({scrollTop: $('#blog-list').position().top}, 'slow');
                     $("#blog-list").empty().html(data);
+                    $('html, body').animate({scrollTop: $('#blog-list').position().top}, 'slow');
                     if (current_layout === 'grid') {
                         gridView();
                     } else {
                         listView();
                     }
                     location.hash = page;
+                    setTimeout(function () {
+                        load_by_hash_change = 1
+                    }, 500);
                 },
                 error: function (request, status, error) {
-                    showAjaxGif();
+                    hideAjaxGif();
                 }
             });
         }

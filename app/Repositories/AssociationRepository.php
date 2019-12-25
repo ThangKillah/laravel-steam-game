@@ -11,5 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface AssociationRepository extends RepositoryInterface
 {
-    //
+    public function getAllPlatform();
 }

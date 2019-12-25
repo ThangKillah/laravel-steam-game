@@ -60,7 +60,7 @@ class BlogController extends Controller
 
     public function ajaxGetListBlog(Request $request)
     {
-        $blogs = $this->blogRepository->getBlogSearch();
+        $blogs = $this->blogRepository->getBlogSearch($request->all());
         return view('ajax.blogs')->with(['blogs' => $blogs]);
     }
 }

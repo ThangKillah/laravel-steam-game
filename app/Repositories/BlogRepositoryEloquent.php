@@ -36,12 +36,33 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
 
     public function getBlogSearch($condition = [])
     {
-        return $this->scopeQuery(function ($query) {
-            return $query->with([
+        return $this->scopeQuery(function ($query) use ($condition) {
+            $result = $query->with([
                 'category.association'
-            ])
-                ->orderBy('count_view', 'DESC')
-                ->orderBy('publish_date', 'DESC');
+            ]);
+
+            if (!empty($condition['title'])) {
+                $title = $condition['title'];
+                $result = $result->where('title', 'like', '%' . $title . '%');
+            }
+            if (!empty($condition['platform'])) {
+                $result = $result->whereHas('category', function ($q) use ($condition) {
+                    $q->where('association_id', $condition['platform']);
+                });
+            }
+            if (!empty($condition['sortBy'])) {
+                $sort = $condition['sortBy'];
+                if ($sort == Blog::BEST) {
+                    $result = $result->orderBy('count_view', 'DESC')->orderBy('publish_date', 'DESC');;
+                }
+                if ($sort == Blog::NEWEST) {
+                    $result = $result->orderBy('publish_date', 'DESC');
+                }
+                if ($sort == Blog::OLDEST) {
+                    $result = $result->orderBy('publish_date', 'ASC');
+                }
+            }
+            return $result;
         })->paginate(config('constant.paginate_blog'));
     }
 

@@ -16,6 +16,10 @@ class Blog extends Model implements Transformable
 {
     use TransformableTrait;
 
+    const BEST = 1;
+    const NEWEST = 2;
+    const OLDEST = 3;
+
     /**
      * The attributes that are mass assignable.
      *
