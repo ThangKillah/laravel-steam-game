@@ -4,11 +4,11 @@ return [
     'date_api_init' => '2015-01-01',
     'date_gamespot_blog' => '2019-12-01 00:00:00',
     'limit_top_blog' => 3,
-    'limit_upcoming_game' => 5,
+    'limit_upcoming_game' => 10,
     'limit_top_review' => 10,
     'limit_related_blog' => 4,
     'limit_comment' => 5,
-    'paginate_blog' => 8,
+    'paginate_blog' => 10,
     'image_comment_path' => '/storage/comments/img/',
     'height_image_resize' => 600
 ];

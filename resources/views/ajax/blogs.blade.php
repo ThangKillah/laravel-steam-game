@@ -17,7 +17,7 @@
                         <img src="{{ urlBlogImage($blog->image) }}"
                              alt="Uncharted The Lost Legacy First Gameplay Details Revealed">
                     </a>
-                    <span class="badge badge-ps4">{{ badgesBlog($blog->category) }}</span>
+                    <span class="badge badge-ps4 text-over-badge">{{ badgesBlog($blog->category) }}</span>
                 </div>
                 <p>{{ $blog->deck }}</p>
             </div>

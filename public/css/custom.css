@@ -368,6 +368,14 @@ small.error {
     text-overflow: ellipsis;
 }
 
+.text-over-badge {
+    display: block;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .dropdown-menu {
     max-height: 500px !important;
     overflow-y: auto !important;

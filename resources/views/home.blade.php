@@ -206,30 +206,18 @@
                                 <div role="tabpanel" class="tab-pane" id="popular">
                                     <div class="widget-post">
                                         <ul class="widget-list">
-                                            <li>
-                                                <img src="https://i1.ytimg.com/vi/B6qY-P4eo1Q/mqdefault.jpg" alt="">
-                                                <h4><a href="blog-post.html">How to Finish Mafia 3 With All of Your
-                                                        Underbosses</a></h4>
-                                                <span><i class="fa fa-clock-o"></i> July 12, 2017</span>
-                                                <span>19 comments</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-                                                    neque sed anter.</p>
-                                            </li>
-                                            <li>
-                                                <h4><a href="blog-post.html">Uncharted: The Lost Legacy's Demo</a></h4>
-                                                <span>June 28, 2017</span>
-                                                <span>41 comments</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-                                                    neque sed anter.</p>
-                                            </li>
-                                            <li>
-                                                <h4><a href="blog-post.html">Mafia III Stones Unturned DLC Launch
-                                                        Trailer</a></h4>
-                                                <span>June 17, 2017</span>
-                                                <span>7 comments</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-                                                    neque sed anter.</p>
-                                            </li>
+                                            @foreach($topBlog as $key => $blog)
+                                                <li>
+                                                    @if($key == 0)<img src="{{ urlBlogImage($blog->image) }}"
+                                                                       alt="">@endif
+                                                    <h4>
+                                                        <a href="{{ route('blog-detail', ['slug' => $blog->slug, 'id' => hashId($blog->id)]) }}">{{ $blog->title }}</a>
+                                                    </h4>
+                                                    <span><i class="fa fa-clock-o"></i> {{ $blog->blog_date }}</span>
+                                                    <span>{{ $blog->count_view }} views</span>
+                                                    <p>{{ $blog->deck }}</p>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

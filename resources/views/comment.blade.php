@@ -10,7 +10,7 @@
 
     <div class="comments-header">
         <h5><i class="fa fa-comment-o m-r-5"></i> Comments ({{ $totalComment }})</h5>
-        @if($comments->total() > 1)
+        @if($comments->total() >= 1)
             <div class="dropdown float-right">
                 <select class="form-control" id="sort-comment">
                     <option value="{{ \App\Model\Comment::LATEST }}">Sort by latest</option>
