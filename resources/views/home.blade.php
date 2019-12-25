@@ -46,14 +46,17 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="toolbar-custom">
-                        <a class="btn btn-default btn-icon m-r-10 float-left hidden-xs-down" href="#"
-                           data-toggle="tooltip" title="refresh" data-placement="bottom" role="button"><i
-                                    class="fa fa-refresh"></i></a>
+                        <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
+                            <div class="form-group input-icon-right">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control search-game" placeholder="Search Game...">
+                            </div>
+                        </div>
                         <div class="dropdown float-left">
                             <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">All Platform <i class="fa fa-caret-down"></i></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item active" href="#">All platform</a>
+                                <a class="dropdown-item active" href="#">All Platform</a>
                                 <a class="dropdown-item" href="#">Playstation 4</a>
                                 <a class="dropdown-item" href="#">Xbox One</a>
                                 <a class="dropdown-item" href="#">Origin</a>
@@ -61,9 +64,12 @@
                             </div>
                         </div>
 
-                        <a class="btn btn-default btn-icon m-l-10 float-right hidden-xs-down" href="#"
-                           data-toggle="tooltip" title="list" data-placement="bottom" role="button"><i
-                                    class="fa fa-bars"></i></a>
+                        <div class="btn-group float-right m-l-5 hidden-sm-down" role="group">
+                            <a class="btn btn-default btn-icon" href="#" role="button"><i
+                                        class="fa fa-th-large"></i></a>
+                            <a class="btn btn-default btn-icon" href="#" role="button"><i class="fa fa-bars"></i></a>
+                        </div>
+
                         <div class="dropdown float-right">
                             <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">Date Added <i class="fa fa-caret-down"></i></button>
@@ -77,9 +83,6 @@
                     </div>
 
                     <!-- post -->
-                    <div id="ajax-loading" style="display: none;">
-                        <img id="ajax-gif" src="{{ asset('img/ajax.gif') }}" alt="Loading..."/>
-                    </div>
                     <div id="blog-list">
                         @include('ajax.blogs', ['blogs' => $blogs])
                     </div>
@@ -297,16 +300,16 @@
                 type: "get",
                 datatype: "html",
                 beforeSend: function () {
-                    $("#ajax-loading").fadeIn();
+                    showAjaxGif();
                 },
                 success: function (data) {
-                    $("#ajax-loading").fadeOut();
+                    hideAjaxGif();
                     $('html, body').animate({scrollTop: $('#blog-list').position().top}, 'slow');
                     $("#blog-list").empty().html(data);
                     location.hash = page;
                 },
                 error: function (request, status, error) {
-                    $("#ajax-loading").fadeOut();
+                    showAjaxGif();
                 }
             });
         }
