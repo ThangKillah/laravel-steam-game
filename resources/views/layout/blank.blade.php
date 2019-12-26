@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- meta -->
-    <meta charset="utf-8">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -18,7 +18,7 @@
     @stack('styles')
 </head>
 <body>
-<div hidden id="loading">
+<div id="loading">
     <img id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
 </div>
 <div id="ajax-loading" style="display: none;">
@@ -65,7 +65,7 @@
     };
 
     // load me some stylesheet
-    let url = "https://blog-game.com/css/theme.min.css",
+    let url = "{{ asset('css/theme.min.css') }}",
         head = document.getElementsByTagName('head')[0],
         link = document.createElement('link');
 

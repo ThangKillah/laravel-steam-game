@@ -71,7 +71,7 @@
     </div>
 
     <div class="modal fade" id="modal-login">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fa fa-sign-in"></i>Login or register to comment</h5>
