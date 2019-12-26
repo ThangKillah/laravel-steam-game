@@ -18,4 +18,6 @@ interface BlogRepository extends RepositoryInterface
     public function getBlogDetail($slug, $id);
 
     public function getRelatedBlog($category);
+
+    public function getRecentBlog();
 }

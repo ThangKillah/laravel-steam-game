@@ -36,6 +36,22 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function getTopComment()
+    {
+        return $this->scopeQuery(function ($query) {
+            return $query
+                ->with(['user', 'blog'])
+                ->whereHas('blog', function ($q) {
+                    $q->where('type', '=', Comment::BLOG);
+
+                })
+                ->where('type', Comment::BLOG)
+                ->orderBy('created_at', 'DESC')
+                ->orderBy('like', 'DESC')
+                ->limit(config('constant.limit_comment'));
+        })->all();
+    }
+
     public function getCommentByBlog($blogId, $sortBy = Comment::LATEST)
     {
         return $this->scopeQuery(function ($query) use ($blogId, $sortBy) {

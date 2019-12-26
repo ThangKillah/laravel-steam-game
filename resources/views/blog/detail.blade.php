@@ -36,7 +36,7 @@
                         <h2 class="post-title">{{ $blog->title }}</h2>
                         <div class="post-meta">
                             <span><i class="fa fa-clock-o"></i> {{ $blog->blog_date }} by <a
-                                        href="profile.html">{{ $blog->authors }}</a></span>
+                                        href="javascript:void(0)">{{ $blog->authors }}</a></span>
                             {{--                            <span><a href="#comments"><i class="fa fa-comment-o"></i> 98 comments</a></span>--}}
                         </div>
                         <div class="post-thumbnail">
@@ -51,7 +51,7 @@
                         @if(!empty($associations))
                             <div class="post-tags">
                                 @foreach($associations as $itemAss)
-                                    <a href="#">#{{ $itemAss['name'] }}</a>
+                                    <a href="javascript:void(0)">#{{ $itemAss['name'] }}</a>
                                 @endforeach
                             </div>
                         @endif

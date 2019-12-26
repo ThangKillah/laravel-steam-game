@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\AssociationRepository;
 use App\Repositories\BlogRepository;
+use App\Repositories\CommentRepository;
 use App\Repositories\GameRepository;
 use App\Repositories\ReviewRepository;
 use App\Traits\GameApi;
@@ -17,13 +18,20 @@ class GamingController extends Controller
     private $gameRepository;
     private $reviewRepository;
     private $associationRepository;
+    private $commentRepository;
 
-    public function __construct(BlogRepository $blogRepository, GameRepository $gameRepository, ReviewRepository $reviewRepository, AssociationRepository $associationRepository)
+    public function __construct(
+        BlogRepository $blogRepository,
+        GameRepository $gameRepository,
+        ReviewRepository $reviewRepository,
+        AssociationRepository $associationRepository,
+        CommentRepository $commentRepository)
     {
         $this->blogRepository = $blogRepository;
         $this->gameRepository = $gameRepository;
         $this->reviewRepository = $reviewRepository;
         $this->associationRepository = $associationRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     public function test()
@@ -45,12 +53,18 @@ class GamingController extends Controller
 
         $topBlog = $this->blogRepository->getTopBlog();
 
+        $topComment = $this->commentRepository->getTopComment();
+
+        $recentBlog = $this->blogRepository->getRecentBlog();
+
         return view('home')->with([
             'topBlog' => $topBlog,
             'blogs' => $blogs,
             'upcomingGames' => $upComingGames,
             'topReviews' => $topReviews,
-            'platforms' => $platforms
+            'platforms' => $platforms,
+            'topComment' => $topComment,
+            'recentBlog' => $recentBlog
         ]);
     }
 }

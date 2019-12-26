@@ -129,4 +129,13 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 ->limit(config('constant.limit_related_blog'));
         })->all();
     }
+
+    public function getRecentBlog()
+    {
+        return $this->scopeQuery(function ($query) {
+            return $query
+                ->orderBy('publish_date', 'DESC')
+                ->limit(config('constant.limit_top_blog'));
+        })->all();
+    }
 }

@@ -370,7 +370,7 @@ small.error {
 
 .text-over-badge {
     display: block;
-    width: 150px;
+    max-width: 150px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -379,4 +379,9 @@ small.error {
 .dropdown-menu {
     max-height: 500px !important;
     overflow-y: auto !important;
+}
+
+.post .post-thumbnail .badge {
+    top: 10px !important;
+    left: 10px !important;
 }

@@ -49,4 +49,8 @@ class Comment extends Model implements Transformable
         return Carbon::parse($value)->diffForHumans();
     }
 
+    public function blog()
+    {
+        return $this->belongsTo(Blog::class, 'core_id', 'id');
+    }
 }

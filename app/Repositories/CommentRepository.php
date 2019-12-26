@@ -21,4 +21,6 @@ interface CommentRepository extends RepositoryInterface
     public function getCommentById($id);
 
     public function deleteCommentById($id);
+
+    public function getTopComment();
 }

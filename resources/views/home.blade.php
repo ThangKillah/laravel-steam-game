@@ -12,7 +12,7 @@
         <div class="owl-carousel owl-posts">
             @foreach($topBlog as $top)
                 <div class="post-carousel">
-                    <a href="blog-post.html"><img src="{{ urlBlogImage($top->image) }}" alt=""></a>
+                    <a href="{{ getRouteBlogDetail($top) }}"><img src="{{ urlBlogImage($top->image) }}" alt=""></a>
                     <span class="badge badge-ps4">{{ badgesBlog($top->category) }}</span>
                     <div class="post-block">
                         <div class="post-caption">
@@ -21,7 +21,7 @@
                             </h2>
                             <div class="post-meta">
                             <span><i class="fa fa-clock-o"></i> {{ $top->blog_date }} by <a
-                                        href="profile.html">{{ $top->authors }}</a></span>
+                                        href="javascript:void(0)">{{ $top->authors }}</a></span>
                                 <span>
                                     <a href="{{ route('blog-detail', ['slug' => $top->slug, 'id' => \Vinkla\Hashids\Facades\Hashids::encode($top->id) ]) . '#comments'}}">
                                         <i class="fa fa-eye"></i>
@@ -163,44 +163,17 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="comments">
                                     <ul class="widget-comments">
-                                        <li>
-                                            <div><a href="profile.html"><img src="img/user/user-2.jpg" alt=""></a></div>
-                                            <div>
-                                                <a href="blog-post.html#comments"><b>Elizabeth:</b> It would have taken
-                                                    a ridiculous amount of careful precise actions.</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div><a href="profile.html"><img src="img/user/user-3.jpg" alt=""></a></div>
-                                            <div>
-                                                <a href="blog-post-disqus.html#comments"><b>Clark:</b> Lorem ipsum dolor
-                                                    sit amet, consectetur adipiscing elit curabitur risque.</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div><a href="profile.html"><img src="img/user/user-1.jpg" alt=""></a></div>
-                                            <div>
-                                                <a href="blog-post-video.html#comments"><b>Venom:</b> Practically no
-                                                    verticality, which on levels like The Spire (Geonosis)
-                                                    incredible.</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div><a href="profile.html"><img src="img/user/user-3.jpg" alt=""></a></div>
-                                            <div>
-                                                <a href="blog-post-disqus.html#comments"><b>Clark:</b> I'm low level at
-                                                    this point and have almost nothing unlocked, and veteran players
-                                                    have an unfair advantage over me thanks.</a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div><a href="profile.html"><img src="img/user/user-5.jpg" alt=""></a></div>
-                                            <div>
-                                                <a href="blog-post-disqus.html#comments"><b>Trevor:</b> A lot of people
-                                                    would have stopped playing now if it wasn't for the online
-                                                    stuff!</a>
-                                            </div>
-                                        </li>
+                                        @foreach($topComment as $comment)
+                                            <li>
+                                                <div><a href="javascript:void(0)"><img
+                                                                src="{{ asset('img/avatar.png') }}"
+                                                                alt="{{ $comment->user->name }}"></a></div>
+                                                <div>
+                                                    <a href="{{ route('blog-detail', ['slug' => $comment->blog->slug, 'id' => hashId($comment->core_id)]) }}#comments"><b>{{ $comment->user->name }}
+                                                            :</b> {!! $comment->content !!}</a>
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="popular">
@@ -209,9 +182,10 @@
                                             @foreach($topBlog as $key => $blog)
                                                 <li>
                                                     @if($key == 0)<img src="{{ urlBlogImage($blog->image) }}"
-                                                                       alt="">@endif
+                                                                       alt="{{ $blog->image }}">
+                                                    @endif
                                                     <h4>
-                                                        <a href="{{ route('blog-detail', ['slug' => $blog->slug, 'id' => hashId($blog->id)]) }}">{{ $blog->title }}</a>
+                                                        <a href="{{ getRouteBlogDetail($blog) }}">{{ $blog->title }}</a>
                                                     </h4>
                                                     <span><i class="fa fa-clock-o"></i> {{ $blog->blog_date }}</span>
                                                     <span>{{ $blog->count_view }} views</span>
@@ -224,31 +198,17 @@
                                 <div role="tabpanel" class="tab-pane" id="recent">
                                     <div class="widget-post">
                                         <ul class="widget-list">
-                                            <li>
-                                                <img src="https://i1.ytimg.com/vi/ckUrcdnWZ2g/mqdefault.jpg" alt="">
-                                                <h4><a href="blog-post.html">Free Mass Effect: Andromeda Trial Now
-                                                        Available On All Platforms</a></h4>
-                                                <span><i class="fa fa-clock-o"></i> July 12, 2017</span>
-                                                <span>76 comments</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-                                                    neque sed anter.</p>
-                                            </li>
-                                            <li>
-                                                <h4><a href="blog-post.html">GTA 5 Online Players Find Secret Alien
-                                                        Mission</a></h4>
-                                                <span>June 23, 2017</span>
-                                                <span>34 comments</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-                                                    neque sed anter.</p>
-                                            </li>
-                                            <li>
-                                                <h4><a href="blog-post.html">Mafia III Stones Unturned DLC Launch
-                                                        Trailer</a></h4>
-                                                <span>June 17, 2017</span>
-                                                <span>7 comments</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-                                                    neque sed anter.</p>
-                                            </li>
+                                            @foreach($recentBlog as $key => $blog)
+                                                <li>
+                                                    @if($key == 0)<img src="{{ urlBlogImage($blog->image) }}"
+                                                                       alt="{{ $blog->title }}">@endif
+                                                    <h4><a href="{{ getRouteBlogDetail($blog) }}">{{ $blog->title }}</a>
+                                                    </h4>
+                                                    <span><i class="fa fa-clock-o"></i> {{ $blog->blog_date }}</span>
+                                                    <span>{{ $blog->count_view }} views</span>
+                                                    <p>{{ $blog->deck }}</p>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -365,6 +325,7 @@
                     } else {
                         listView();
                     }
+                    $('[data-toggle="tooltip"]').tooltip();
                     location.hash = page;
                     setTimeout(function () {
                         load_by_hash_change = 1

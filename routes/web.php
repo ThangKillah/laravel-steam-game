@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'GamingController@home')->name('home');
+
+Route::get('/home', function () {
     return view('welcome');
 })->name('home-demo');
 
@@ -39,7 +41,6 @@ Route::get('/comment', function () {
 })->name('test');
 
 Route::get('test-game', 'GamingController@test');
-Route::get('home', 'GamingController@home')->name('home');
 
 //Blog
 Route::get('blogs/{id}/{slug}.html', 'BlogController@detail')->name('blog-detail');

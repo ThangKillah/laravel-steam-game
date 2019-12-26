@@ -72,3 +72,8 @@ function getUserId()
     }
     return 0;
 }
+
+function getRouteBlogDetail($blog)
+{
+    return route('blog-detail', ['slug' => $blog->slug, 'id' => hashId($blog->id)]);
+}
