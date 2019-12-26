@@ -18,7 +18,7 @@
     @stack('styles')
 </head>
 <body>
-<div id="loading">
+<div hidden id="loading">
     <img id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
 </div>
 <div id="ajax-loading" style="display: none;">
