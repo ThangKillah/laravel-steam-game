@@ -51,7 +51,7 @@ class CommentController extends Controller
         if (Sentinel::check()) {
             $idComment = $request->input('comment_id');
             $comment = $this->commentRepository->getCommentById($idComment);
-            if (Sentinel::getUser()->id === $comment->user_id) {
+            if (Sentinel::getUser()->id == $comment->user_id) {
                 return $this->commentRepository->editComment($request->input('comment_id'), $request->input('content'), $comment->content);
             } else {
                 return $this->returnNotLogin();
@@ -66,7 +66,7 @@ class CommentController extends Controller
         if (Sentinel::check()) {
             $idComment = $request->input('comment_id');
             $comment = $this->commentRepository->getCommentById($idComment);
-            if (Sentinel::getUser()->id === $comment->user_id) {
+            if (Sentinel::getUser()->id == $comment->user_id) {
                 $this->deleteImageByContent($comment->content);
                 $this->commentRepository->deleteCommentById($idComment);
                 return json_encode([
