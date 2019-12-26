@@ -53,7 +53,7 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
             if (!empty($condition['sortBy'])) {
                 $sort = $condition['sortBy'];
                 if ($sort == Blog::BEST) {
-                    $result = $result->orderBy('count_view', 'DESC')->orderBy('publish_date', 'DESC');;
+                    $result = $result->orderBy('count_view', 'DESC')->orderBy('publish_date', 'DESC');
                 }
                 if ($sort == Blog::NEWEST) {
                     $result = $result->orderBy('publish_date', 'DESC');
@@ -61,6 +61,9 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 if ($sort == Blog::OLDEST) {
                     $result = $result->orderBy('publish_date', 'ASC');
                 }
+            }
+            else {
+                $result = $result->orderBy('count_view', 'DESC')->orderBy('publish_date', 'DESC');
             }
             return $result;
         })->paginate(config('constant.paginate_blog'));
