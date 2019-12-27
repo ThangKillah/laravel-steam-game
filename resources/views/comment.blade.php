@@ -47,8 +47,8 @@
 </div>
 
 @push('modal')
-    <div class="modal fade" id="modal-delete-comment" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bs-example-modal-xs" id="modal-delete-comment">
+        <div class="modal-dialog modal-xs" role="document">
             <div class="modal-content" style="overflow: hidden;">
                 <div class="modal-body" style="max-height: 773px; overflow-y: auto;">
                     <div class="d-flex justify-content-between bg-secondary mb-3">
