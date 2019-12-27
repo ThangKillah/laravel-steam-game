@@ -4,8 +4,8 @@
             <div class="navbar">
                 <div class="navbar-left">
                     <a class="navbar-toggle"><i class="fa fa-bars"></i></a>
-                    <a href="index.html" style="padding: 16px 0 !important;" class="logo"><img
-                                src="{{ asset('img/logo.png') }}" alt="Gameforest - Game Theme HTML"></a>
+                    <a href="{{ route('home') }}" style="padding: 16px 0 !important;" class="logo"><img
+                                src="{{ asset('img/logo.png') }}" alt="Game Immortal"></a>
                     <nav class="nav">
                         <ul>
                             <li>
