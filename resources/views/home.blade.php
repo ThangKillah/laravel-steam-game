@@ -12,7 +12,8 @@
         <div class="owl-carousel owl-posts">
             @foreach($topBlog as $top)
                 <div class="post-carousel">
-                    <a href="{{ getRouteBlogDetail($top) }}"><img src="{{ urlBlogImage($top->image) }}" alt=""></a>
+                    <a href="{{ getRouteBlogDetail($top) }}"><img class="lazyload"
+                                                                  data-src="{{ urlBlogImage($top->image) }}" alt=""></a>
                     <span class="badge badge-ps4">{{ badgesBlog($top->category) }}</span>
                     <div class="post-block">
                         <div class="post-caption">
@@ -126,7 +127,8 @@
                                     <li>
                                         <div class="widget-img">
                                             <a href="blog-post.html" style="position: relative">
-                                                <img src="{{ urlReviewImage($review->image) }}" alt="">
+                                                <img class="lazyload blur-up"
+                                                     data-src="{{ urlReviewImage($review->image) }}" alt="">
                                                 <div class="score-review">
                                                     @if($review->score >= 8)
                                                         <span class="badge badge-primary">{{ $review->score }}</span>
@@ -165,9 +167,10 @@
                                     <ul class="widget-comments">
                                         @foreach($topComment as $comment)
                                             <li>
-                                                <div><a href="javascript:void(0)"><img
-                                                                src="{{ asset('img/avatar.png') }}"
-                                                                alt="{{ $comment->user->name }}"></a></div>
+                                                <div><a href="javascript:void(0)"><img class="lazyload blur-up"
+                                                                                       data-src="{{ asset('img/avatar.png') }}"
+                                                                                       alt="{{ $comment->user->name }}"></a>
+                                                </div>
                                                 <div>
                                                     <a href="{{ route('blog-detail', ['slug' => $comment->blog->slug, 'id' => hashId($comment->core_id)]) }}#comments"><b>{{ $comment->user->name }}
                                                             :</b> {!! $comment->content !!}</a>
@@ -181,7 +184,8 @@
                                         <ul class="widget-list">
                                             @foreach($topBlog as $key => $blog)
                                                 <li>
-                                                    @if($key == 0)<img src="{{ urlBlogImage($blog->image) }}"
+                                                    @if($key == 0)<img class="lazyload blur-up"
+                                                                       data-src="{{ urlBlogImage($blog->image) }}"
                                                                        alt="{{ $blog->image }}">
                                                     @endif
                                                     <h4>
@@ -200,7 +204,8 @@
                                         <ul class="widget-list">
                                             @foreach($recentBlog as $key => $blog)
                                                 <li>
-                                                    @if($key == 0)<img src="{{ urlBlogImage($blog->image) }}"
+                                                    @if($key == 0)<img class="lazyload blur-up"
+                                                                       data-src="{{ urlBlogImage($blog->image) }}"
                                                                        alt="{{ $blog->title }}">@endif
                                                     <h4><a href="{{ getRouteBlogDetail($blog) }}">{{ $blog->title }}</a>
                                                     </h4>

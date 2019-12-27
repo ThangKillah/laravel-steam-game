@@ -13,7 +13,7 @@
                 </div>
                 <div class="post-thumbnail">
                     <a href="{{ route('blog-detail', ['slug' => $blog->slug, 'id' => hashId($blog->id) ]) }}">
-                        <img src="{{ urlBlogImage($blog->image) }}"
+                        <img class="lazyload blur-up" data-src="{{ urlBlogImage($blog->image) }}"
                              alt="Uncharted The Lost Legacy First Gameplay Details Revealed">
                     </a>
                     <span data-toggle="tooltip" data-placement="bottom" title=""
