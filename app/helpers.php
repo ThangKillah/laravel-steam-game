@@ -77,3 +77,13 @@ function getRouteBlogDetail($blog)
 {
     return route('blog-detail', ['slug' => $blog->slug, 'id' => hashId($blog->id)]);
 }
+
+function getUser()
+{
+    return \Cartalyst\Sentinel\Laravel\Facades\Sentinel::getUser();
+}
+
+function checkLoginUser()
+{
+    return \Cartalyst\Sentinel\Laravel\Facades\Sentinel::check();
+}

@@ -31,8 +31,26 @@
                 </div>
                 <div class="nav navbar-right">
                     <ul>
-                        <li class="hidden-xs-down"><a href="{{ route('login') }}">Login</a></li>
-                        <li class="hidden-xs-down"><a href="{{ route('register') }}">Register</a></li>
+                        @if(checkLoginUser())
+                            <li class="dropdown dropdown-profile">
+                                <a href="javascript:void(0)" data-toggle="dropdown"><img
+                                            src="{{ asset('img/avatar.png') }}" alt="">
+                                    <span>{{ getUser()->name }}</span></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    {{--                                    <a class="dropdown-item active" href="#"><i class="fa fa-user"></i> Profile</a>--}}
+                                    {{--                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope-open"></i> Inbox</a>--}}
+                                    {{--                                    <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Games</a>--}}
+                                    <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-cog"></i>
+                                        Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out"></i>
+                                        Logout</a>
+                                </div>
+                            </li>
+                        @else
+                            <li class="hidden-xs-down"><a href="{{ route('login') }}">Login</a></li>
+                            <li class="hidden-xs-down"><a href="{{ route('register') }}">Register</a></li>
+                        @endif
                         <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
