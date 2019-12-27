@@ -15,9 +15,10 @@
     <!-- theme css -->
     <link rel="stylesheet" href="{{ asset('css/theme.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dark.css') }}">
     @stack('styles')
 </head>
-<body>
+<body class="{{ \Illuminate\Support\Facades\Cookie::get('theme') == 'dark' ? 'dark' : '' }}">
 <div id="loading">
     <img hidden id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
 </div>
@@ -90,6 +91,50 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        let setTheme = function (theme) {
+            if (theme === 'dark') {
+                // dark
+                $("body").removeClass("standard");
+                $("body").addClass("dark");
+                ajaxSetThem(theme);
+            } else {
+                $("body").removeClass("dark");
+                $("body").addClass("standard");
+                ajaxSetThem(theme)
+            }
+        };
+
+        $("#checkbox-toggle").on("click", function () {
+            if ($("body").hasClass("dark")) {
+                // standard
+                setTheme('standard');
+            } else {
+                // dark mode
+                setTheme('dark');
+            }
+        });
+    });
+
+    function ajaxSetThem(theme) {
+        $.ajax({
+            url: '{{ route('switch-theme') }}' + '?theme=' + theme,
+            type: "get",
+            beforeSend: function () {
+                showAjaxGif();
+            },
+            success: function (data) {
+                hideAjaxGif();
+                console.log(data);
+            },
+            error: function (request, status, error) {
+                hideAjaxGif();
+            }
+        });
+    }
 </script>
 
 @stack('modal')

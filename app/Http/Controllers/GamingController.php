@@ -9,6 +9,8 @@ use App\Repositories\GameRepository;
 use App\Repositories\ReviewRepository;
 use App\Traits\GameApi;
 use App\Traits\GameSpotApi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class GamingController extends Controller
 {
@@ -66,5 +68,13 @@ class GamingController extends Controller
             'topComment' => $topComment,
             'recentBlog' => $recentBlog
         ]);
+    }
+
+    public function switchTheme(Request $request)
+    {
+        Cookie::queue('theme', $request->input('theme'), 525600);
+        return [
+            'status' => 'ok'
+        ];
     }
 }

@@ -47,11 +47,18 @@
                                         Logout</a>
                                 </div>
                             </li>
+                            <li class="dropdown">
+                                <a class="checkbox checkbox-toggle checkbox-primary">
+                                    <input type="checkbox"
+                                           id="checkbox-toggle" {{ \Illuminate\Support\Facades\Cookie::get('theme') == 'dark' ? 'checked' : ''}}>
+                                    <label for="checkbox-toggle"></label>
+                                </a>
+                            </li>
                         @else
                             <li class="hidden-xs-down"><a href="{{ route('login') }}">Login</a></li>
                             <li class="hidden-xs-down"><a href="{{ route('register') }}">Register</a></li>
                         @endif
-                        <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
+                        {{--                        <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>--}}
                     </ul>
                 </div>
             </div>

@@ -54,6 +54,7 @@ Route::post('ajax-edit-comment', 'CommentController@ajaxEditComment')->name('aja
 Route::post('ajax-delete-comment', 'CommentController@ajaxDeleteComment')->name('ajax-delete-comment');
 
 
-
+//Theme
+Route::get('switch-theme', 'GamingController@switchTheme')->name('switch-theme');
 
 

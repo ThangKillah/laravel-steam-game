@@ -1,0 +1,8 @@
+.dark {
+    background-color: #161625;
+    color: #e6e6e6;
+}
+
+.dark .post-title {
+    color: #e6e6e6 !important;
+}
