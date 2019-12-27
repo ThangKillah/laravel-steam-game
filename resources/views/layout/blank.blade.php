@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="loading">
-    <img id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
+    <img hidden id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
 </div>
 <div id="ajax-loading" style="display: none;">
     <img id="ajax-gif" src="{{ asset('img/ajax.gif') }}" alt="Loading..."/>

@@ -8,9 +8,7 @@
 
 @section('content')
     <!-- main -->
-    <section class="bg-image player p-y-70"
-             style="background-image: url('https://img.youtube.com/vi/1GWRDuL04-Q/maxresdefault.jpg');"
-             data-property="{videoURL:'1GWRDuL04-Q',containment:'self', stopMovieOnBlur:false, showControls: false, realfullscreen: true, showYTLogo: false, quality: 'highres',autoPlay:true,loop:true,opacity:1}">
+    <section class="bg-image bg-image-sm" style="background-image: url('img/bg/bg-login.jpg');">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
