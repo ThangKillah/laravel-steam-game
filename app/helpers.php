@@ -92,5 +92,3 @@ function showRating($rating)
 {
     return empty($rating) ? 0 : round($rating);
 }
-
-function showImage
