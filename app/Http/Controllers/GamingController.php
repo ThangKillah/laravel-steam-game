@@ -84,6 +84,8 @@ class GamingController extends Controller
         if (empty($game)) {
             return abort(404);
         }
-        dd($game);
+        return view('game.detail')->with([
+            'game' => $game
+        ]);
     }
 }

@@ -368,6 +368,14 @@ small.error {
     text-overflow: ellipsis;
 }
 
+.text-over-summary-game {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .text-over-badge {
     display: block;
     max-width: 150px;
@@ -395,4 +403,12 @@ small.error {
 .blur-up.lazyloaded {
     -webkit-filter: blur(0);
     filter: blur(0);
+}
+
+.tabs-color .tab-content {
+    padding: 30px 0 !important;
+    background-color: unset !important;
+    border: none !important;
+    -webkit-box-shadow: unset !important;
+    box-shadow: unset !important;
 }

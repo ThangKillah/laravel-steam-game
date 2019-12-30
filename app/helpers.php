@@ -87,3 +87,10 @@ function checkLoginUser()
 {
     return \Cartalyst\Sentinel\Laravel\Facades\Sentinel::check();
 }
+
+function showRating($rating)
+{
+    return empty($rating) ? 0 : round($rating);
+}
+
+function showImage

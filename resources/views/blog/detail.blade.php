@@ -2,13 +2,13 @@
 
 @section('title', $blog->title)
 
-@section('breadcrumb')
-    <section class="breadcrumbs">
-        <div class="container">
-            {{ Breadcrumbs::render('blog-detail', $blog) }}
-        </div>
-    </section>
-@endsection
+{{--@section('breadcrumb')--}}
+{{--    <section class="breadcrumbs">--}}
+{{--        <div class="container">--}}
+{{--            {{ Breadcrumbs::render('blog-detail', $blog) }}--}}
+{{--        </div>--}}
+{{--    </section>--}}
+{{--@endsection--}}
 
 @section('content')
     <section>
