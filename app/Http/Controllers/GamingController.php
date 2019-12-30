@@ -77,4 +77,13 @@ class GamingController extends Controller
             'status' => 'ok'
         ];
     }
+
+    public function gameDetail($slug)
+    {
+        $game = $this->gameRepository->getGameBySlug($slug);
+        if (empty($game)) {
+            return abort(404);
+        }
+        dd($game);
+    }
 }

@@ -12,4 +12,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface GameRepository extends RepositoryInterface
 {
     public function getTopUpComingGame(int $number);
+
+    public function getGameBySlug($slug);
 }

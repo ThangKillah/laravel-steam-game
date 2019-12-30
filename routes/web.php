@@ -57,4 +57,9 @@ Route::post('ajax-delete-comment', 'CommentController@ajaxDeleteComment')->name(
 //Theme
 Route::get('switch-theme', 'GamingController@switchTheme')->name('switch-theme');
 
+//game
+Route::get('games/{slug}', 'GamingController@gameDetail')->name('game-detail');
+
+
+
 

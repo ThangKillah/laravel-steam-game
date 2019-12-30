@@ -42,4 +42,11 @@ class GameRepositoryEloquent extends BaseRepository implements GameRepository
                 ->limit($number);
         })->all();
     }
+
+    public function getGameBySlug($slug)
+    {
+        return $this->scopeQuery(function ($query) use ($slug) {
+            return $query->where('slug', $slug);
+        })->first();
+    }
 }

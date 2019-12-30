@@ -65,7 +65,7 @@
         setTimeout(function () {
             $('#loading').fadeOut();
         }, 10000);
-    };
+    }
 
     // load me some stylesheet
     let url = "{{ asset('css/theme.min.css') }}",

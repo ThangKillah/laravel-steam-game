@@ -105,7 +105,7 @@
                         <div class="widget widget-games">
                             <h5 class="widget-title">Upcoming Games</h5>
                             @foreach($upcomingGames as $key => $game)
-                                <a href="#"
+                                <a href="{{ route('game-detail', ['slug'=> $game->slug]) }}"
                                    style="background-image: url('{{ showImageGameUrl($game->cover) }}')">
                                     <span class="overlay"></span>
                                     <div class="widget-block">
