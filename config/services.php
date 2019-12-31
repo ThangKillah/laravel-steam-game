@@ -14,6 +14,8 @@ return [
     |
     */
 
+    'igdb_api_image' => 'https://images.igdb.com/igdb/image/upload',
+
     'homepage_url' => env('APP_URL'),
 
     'mailgun' => [

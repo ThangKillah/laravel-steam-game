@@ -1,5 +1,10 @@
 <?php
 
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
+use Vinkla\Hashids\Facades\Hashids;
+
 function urlBlogImage($jsonImage)
 {
     $image = json_decode($jsonImage, true);
@@ -49,7 +54,7 @@ function showUrlSocial($social, $nextUrl)
         return route('social-redirect', ['social' => $social]);
     }
     $scrollTo = '';
-    if (\Illuminate\Support\Facades\Route::currentRouteName() === "blog-detail") {
+    if (Route::currentRouteName() === "blog-detail") {
         $scrollTo = '#comments';
     }
     return route('social-redirect', ['social' => $social]) . '?nextUrl=' . $nextUrl . $scrollTo;
@@ -57,18 +62,18 @@ function showUrlSocial($social, $nextUrl)
 
 function redirectSignIn($type)
 {
-    return route($type) . '?nextUrl=' . \Illuminate\Support\Facades\Request::url();
+    return route($type) . '?nextUrl=' . Request::url();
 }
 
 function hashId($id)
 {
-    return \Vinkla\Hashids\Facades\Hashids::encode($id);
+    return Hashids::encode($id);
 }
 
 function getUserId()
 {
-    if (\Cartalyst\Sentinel\Laravel\Facades\Sentinel::check()) {
-        return hashId(\Cartalyst\Sentinel\Laravel\Facades\Sentinel::getUser()->id);
+    if (Sentinel::check()) {
+        return hashId(Sentinel::getUser()->id);
     }
     return 0;
 }
@@ -80,15 +85,32 @@ function getRouteBlogDetail($blog)
 
 function getUser()
 {
-    return \Cartalyst\Sentinel\Laravel\Facades\Sentinel::getUser();
+    return Sentinel::getUser();
 }
 
 function checkLoginUser()
 {
-    return \Cartalyst\Sentinel\Laravel\Facades\Sentinel::check();
+    return Sentinel::check();
 }
 
 function showRating($rating)
 {
     return empty($rating) ? 0 : round($rating);
+}
+
+function gameBackgroundImg($game)
+{
+    $imgs = json_decode($game->screenshots, true);
+    return config('services.igdb_api_image') . '/t_screenshot_big/' . $imgs[0] . '.jpg';
+}
+
+function gameBigCover($game)
+{
+    return config('services.igdb_api_image') . '/t_cover_big/' . $game->cover . '.jpg';
+}
+
+function getUrlTrailerGame($game)
+{
+    $videos = json_decode($game->videos, true);
+    return 'https://www.youtube.com/watch?v='. $videos[0]['video_id'];
 }

@@ -46,7 +46,19 @@ class GameRepositoryEloquent extends BaseRepository implements GameRepository
     public function getGameBySlug($slug)
     {
         return $this->scopeQuery(function ($query) use ($slug) {
-            return $query->where('slug', $slug);
+            return $query
+                ->with([
+                    'platform.platform',
+                    'developed' => function ($query) {
+                        $query->where('developer', 1);
+                    },
+                    'publisher_game' => function ($query) {
+                        $query->where('publisher', 1);
+                    },
+                    'developed.company',
+                    'publisher_game.company'
+                ])
+                ->where('slug', $slug);
         })->first();
     }
 }

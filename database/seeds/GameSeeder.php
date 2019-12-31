@@ -195,6 +195,7 @@ class GameSeeder extends Seeder
 
                             array_push($idsCompany, $companyID);
                             $data = [
+                                'id' => $companyID,
                                 'country' => $company->country,
                                 'description' => $company->description,
                                 'name' => $company->name,
