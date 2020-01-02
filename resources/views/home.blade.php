@@ -112,7 +112,7 @@
                                         <div class="count">{{ $key + 1 }}</div>
                                         <div class="description">
                                             <h5 class="title">{{ $game->name }}</h5>
-                                            <span class="date">November 14, 2017</span>
+                                            <span class="date">{{ $game->release_date }}</span>
                                         </div>
                                     </div>
                                 </a>

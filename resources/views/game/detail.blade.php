@@ -1,6 +1,6 @@
 @extends('layout.blank')
 
-@section('title', 'Blank Page')
+@section('title', $game->name)
 
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick.css') }}"/>
@@ -69,11 +69,15 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="color-profile" role="tabpanel">
-                                <p class="m-b-0">Mauris ultrices semper sapien, nec mollis orci aliquam a. Praesent nec
-                                    urna quis enim venenatis faucibus. Aliquam hendrerit commodo diam, eu bibendum magna
-                                    sodales et. In vestibulum ornare dapibus. Ut posuere urna eget turpis eleifend, a
-                                    facilisis
-                                    justo aliquet.</p>
+                                @if(!empty(json_decode($game->videos)))
+                                    <div class="video-game" id="video-game">
+                                        @foreach(json_decode($game->videos) as $video)
+                                            <div class="video-game-item" id="{{ $video->video_id }}"
+                                                 data-plyr-provider="youtube"
+                                                 data-plyr-embed-id="{{ $video->video_id }}"></div>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                             <div class="tab-pane" id="color-settings" role="tabpanel">
                                 <p class="m-b-0">Mauris ultrices semper sapien, nec mollis orci aliquam a. Praesent nec
@@ -107,31 +111,45 @@
 
                                 @if(!empty($game->platform))
                                     @foreach($game->platform as $plat_cate)
-                                        <a href="javascript:void(0)"><span class="badge badge-ps4 mt-2">{{ $plat_cate->platform['name'] }}</span></a>
+                                        <a href="javascript:void(0)"><span
+                                                    class="badge badge-ps4 mt-2">{{ $plat_cate->platform['name'] }}</span></a>
                                     @endforeach
                                 @endif
 
 
                                 @if(!empty($game->developed))
-                                <h5>Developed</h5>
-                                <ul>
-                                    @foreach($game->developed as $cate)
-                                        <li><a href="#">{{ $cate->company['name'] }}</a></li>
-                                    @endforeach
-                                </ul>
+                                    <h5>Developed</h5>
+                                    <ul>
+                                        @foreach($game->developed as $cate)
+                                            <li><a href="javascript:void(0)">{{ $cate->company['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
                                 @endif
 
-                                @if(!empty($game->publisher_game))
                                 <h5>Published</h5>
-                                <ul>
-                                    @foreach($game->publisher_game as $cate)
-                                        <li><a href="#">{{ $cate->company['name'] }}</a></li>
-                                    @endforeach
-                                </ul>
+                                @if(!empty($game->publisher_game))
+                                    <ul>
+                                        @foreach($game->publisher_game as $cate)
+                                            <li><a href="javascript:void(0)">{{ $cate->company['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
                                 @endif
-                                <p>The Witcher 3: Wild Hunt is a story-driven, next-generation open world
-                                    role-playing game, set in a visually stunning fantasy universe, full of
-                                    meaningful choices and impactful consequences.</p>
+
+                                <h5>Engine</h5>
+                                @if(!empty($game->engine))
+                                    <ul>
+                                        @foreach($game->engine as $cate_engine)
+                                            <li><a href="javascript:void(0)">{{ $cate_engine->engine['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+
+                                <h5>Summary</h5>
+                                <p>{{ $game->summary ?? '' }}</p>
+
+
+                                <h5>Storyline</h5>
+                                <p>{{ $game->storyline ?? '' }}</p>
                             </div>
                         </div>
                     </div>
@@ -162,6 +180,68 @@
             });
 
             $('[data-lightbox]').lightbox();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".video-game-item").each(function () {
+                let test = new Plyr($(this), {
+                    //youtube: { controls: 10 }
+                });
+            });
+
+            function postMessageToPlayer(player, command) {
+                if (player == null || command == null) return;
+                player.contentWindow.postMessage(JSON.stringify(command), "*");
+            }
+
+            function playPauseVideo(slick, control) {
+                var currentSlide, player;
+
+                currentSlide = slick.find(".slick-current");
+                player = currentSlide.find("iframe").get(0);
+                switch (control) {
+                    case "play":
+                        postMessageToPlayer(player, {
+                            "event": "command",
+                            "func": "playVideo"
+                        });
+                        break;
+                    case "pause":
+                        postMessageToPlayer(player, {
+                            "event": "command",
+                            "func": "pauseVideo"
+                        });
+                        break;
+                }
+            }
+
+            var slideWrapper = $("#video-game");
+
+            slideWrapper.on("beforeChange", function (event, slick) {
+                slick = $(slick.$slider);
+                playPauseVideo(slick, "pause");
+            });
+
+            slideWrapper.on("afterChange", function (event, slick) {
+                slick = $(slick.$slider);
+                playPauseVideo(slick, "play");
+            });
+
+            $('#video-game').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                //autoplay: true,
+                infinite: true,
+                adaptiveHeight: true,
+                //autoplaySpeed: 4000,
+                lazyLoad: "progressive",
+                speed: 600,
+                arrows: true,
+                dots: true,
+                draggable: false
+            });
         });
     </script>
 @endpush

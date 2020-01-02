@@ -35,11 +35,16 @@ class Game extends Model implements Transformable
 
     public function developed()
     {
-        return $this->hasMany(InvolvedCompany::class, 'game_id','game_id');
+        return $this->hasMany(InvolvedCompany::class, 'game_id', 'game_id');
     }
 
     public function publisher_game()
     {
         return $this->hasMany(InvolvedCompany::class, 'game_id', 'game_id');
+    }
+
+    public function engine()
+    {
+        return $this->hasMany(GameEngine::class, 'game_id', 'game_id');
     }
 }

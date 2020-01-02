@@ -56,7 +56,8 @@ class GameRepositoryEloquent extends BaseRepository implements GameRepository
                         $query->where('publisher', 1);
                     },
                     'developed.company',
-                    'publisher_game.company'
+                    'publisher_game.company',
+                    'engine.engine'
                 ])
                 ->where('slug', $slug);
         })->first();
