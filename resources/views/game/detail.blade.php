@@ -73,12 +73,31 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="color-profile" role="tabpanel">
-                                @if(!empty(json_decode($game->videos)))
+                                @if(count(json_decode($game->videos)) >= 1)
                                     <div class="video-game" id="video-game">
                                         @foreach(json_decode($game->videos) as $video)
                                             <div class="video-game-item" id="{{ $video->video_id }}"
                                                  data-plyr-provider="youtube"
                                                  data-plyr-embed-id="{{ $video->video_id }}"></div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                                @if(count(json_decode($game->screenshots))>= 1)
+                                    <div class="slicker-show-up slider d-flex mb-5 p-2">
+                                        @foreach(json_decode($game->screenshots) as $img)
+                                            <div class="game-list-inline-item">
+                                                <a class="img-box" href="{{ gameScreenshot($img) }}" data-lightbox>
+                                                    <img class="img-responsive lazyload blur-up"
+                                                         data-src="{{ gameScreenshot($img) }}"
+                                                         alt="{{ $img }}">
+                                                    <div class="overlay-img">
+                                                        <div class="text"><i class="fa fa-search-plus"
+                                                                             aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         @endforeach
                                     </div>
                                 @endif
@@ -273,6 +292,45 @@
 
     <script>
         $(document).ready(function () {
+            //init slide img
+            $(".slicker-show-up").slick({
+                autoplay: true,
+                centerMode: true,
+                autoplaySpeed: 4000,
+                variableWidth: true,
+                lazyLoad: "progressive",
+                dots: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            //dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    },
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ],
+            });
+
+            //init slide video
             $(".video-game-item").each(function () {
                 let test = new Plyr($(this), {
                     //youtube: { controls: 10 }

@@ -109,6 +109,11 @@ function gameBigCover($game)
     return config('services.igdb_api_image') . '/t_cover_big/' . $game->cover . '.jpg';
 }
 
+function gameScreenshot($idImg)
+{
+    return config('services.igdb_api_image') . '/t_original/' . $idImg . '.jpg';
+}
+
 function getUrlTrailerGame($game)
 {
     $videos = json_decode($game->videos, true);
