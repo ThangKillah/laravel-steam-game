@@ -1,8 +1,31 @@
+:root {
+    --white-color: #e6e6e6;
+}
+
 .dark {
     background-color: #161625;
-    color: #e6e6e6;
+    color: var(--white-color);
 }
 
 .dark .post-title {
-    color: #e6e6e6 !important;
+    color: var(--white-color);
+!important;
+}
+
+.dark .slick-dots li.slick-active button:before {
+    opacity: .75;
+    color: white !important;
+}
+
+.dark .slick-dots li button:before {
+    color: white !important;
+}
+
+.dark .game-detail-information .nav-item a {
+    color: var(--white-color);
+!important;
+}
+
+.dark .nav-tabs .nav-item .nav-link.active {
+    color: var(--white-color) !important;
 }

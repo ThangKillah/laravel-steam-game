@@ -112,5 +112,13 @@ function gameBigCover($game)
 function getUrlTrailerGame($game)
 {
     $videos = json_decode($game->videos, true);
-    return 'https://www.youtube.com/watch?v='. $videos[0]['video_id'];
+    return 'https://www.youtube.com/watch?v=' . $videos[0]['video_id'];
+}
+
+function showCheckMark($check)
+{
+    if ($check) {
+        return '<i class="fa fa-check" style="color: #0E9A49;" aria-hidden="true"></i>';
+    }
+    return '<i class="fa fa-times"  style="color: #e74c3c;" aria-hidden="true"></i>';
 }

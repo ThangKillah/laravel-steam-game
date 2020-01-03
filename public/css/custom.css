@@ -412,3 +412,8 @@ small.error {
     -webkit-box-shadow: unset !important;
     box-shadow: unset !important;
 }
+
+.navbar .checkbox-toggle label {
+    height: 17px;
+!important;
+}

@@ -10,7 +10,8 @@
 @endpush
 
 @section('content')
-    <section class="hero hero-game" style="background-image: url('{{ empty(json_decode($game->screenshots)) ? asset('img/bg-empty.jpeg') : gameBackgroundImg($game) }}');">
+    <section class="hero hero-game"
+             style="background-image: url('{{ empty(json_decode($game->screenshots)) ? asset('img/bg-empty.jpeg') : gameBackgroundImg($game) }}');">
         <div class="overlay"></div>
         <div class="container">
             <div class="hero-block row">
@@ -21,7 +22,7 @@
                     @endif
                     @if(!empty(json_decode($game->videos)))
                         <a class="btn btn-primary btn-shadow btn-rounded btn-lg"
-                            href="{{ getUrlTrailerGame($game) }}" data-lightbox role="button">
+                           href="{{ getUrlTrailerGame($game) }}" data-lightbox role="button">
                             Watch Trailer<i class="fa fa-play"></i>
                         </a>
                     @endif
@@ -49,7 +50,7 @@
 
     <section class="p-t-30">
         <div class="container">
-            <div class="row">
+            <div class="row game-detail-information">
                 <div class="col-lg-8">
                     <div class="tabs-color">
                         <ul class="nav nav-tabs nav-icon-left" role="tablist">
@@ -57,14 +58,17 @@
                                                     aria-controls="profile" role="tab" data-toggle="tab"><i
                                             class="fa fa-video-camera"></i> Highlight</a></li>
                             <li class="nav-item"><a class="nav-link" href="#color-settings" aria-controls="settings"
-                                                    role="tab" data-toggle="tab"><i class="fa fa-user-plus"></i> Blog</a>
+                                                    role="tab" data-toggle="tab"><i class="fa fa-user-plus"></i>
+                                    Blog</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="#color-inbox" aria-controls="inbox"
                                                     role="tab" data-toggle="tab"><i class="fa fa-bar-chart"></i>
                                     Review</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#color-games" aria-controls="games"
-                                                    role="tab" data-toggle="tab"><i class="fa fa-heart-o"></i> Games</a>
-                            </li>
+                            @if($game->first_release_date <= now())
+                                <li class="nav-item"><a class="nav-link" href="#color-multiple" aria-controls="multiple"
+                                                        role="tab" data-toggle="tab"><i class="fa fa-users"></i>Multiplayer</a>
+                                </li>
+                            @endif
                         </ul>
 
                         <div class="tab-content">
@@ -91,10 +95,62 @@
                                     ligula ante, dignissim a suscipit in, rutrum ac nulla. Fusce sagittis dolor massa,
                                     in pellentesque erat ultricies vitae.</p>
                             </div>
-                            <div class="tab-pane" id="color-games" role="tabpanel">
-                                <p class="m-b-0">Suspendisse massa nisi, maximus eu ligula posuere, blandit scelerisque
-                                    neque. Praesent consequat leo malesuada, eleifend augue nec, porta quam.</p>
-                            </div>
+
+                            @if(!empty($game->multiple))
+                                <div class="tab-pane" id="color-multiple" role="tabpanel">
+                                    <div class="table-responsive m-b-0">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Campaign Coop</th>
+                                                <td>
+                                                    {!! showCheckMark($game->multiple->campaigncoop) !!}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Drop in/out</th>
+                                                <td>{!! showCheckMark($game->multiple->dropin) !!}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>LAN Co-op</th>
+                                                <td>{!! showCheckMark($game->multiple->lancoop) !!}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Offline Co-op</th>
+                                                <td>{!! showCheckMark($game->multiple->offlinecoop) !!}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Offline Co-op max players</th>
+                                                <td>{{ $game->multiple->offlinecoopmax }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Offline max players</th>
+                                                <td>{{ empty($game->multiple->offlinemax) ? '' : $game->multiple->offlinemax  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Online Co-op</th>
+                                                <td>{!! showCheckMark($game->multiple->onlinecoop) !!}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Online Co-op max players</th>
+                                                <td>{{ $game->multiple->onlinecoopmax }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Online max players</th>
+                                                <td>{{ empty($game->multiple->onlinemax)  ?  '' : $game->multiple->onlinemax }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Offline Split-Screen</th>
+                                                <td>{!! showCheckMark($game->multiple->splitscreen) !!}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Online Split-Screen</th>
+                                                <td>{!! showCheckMark($game->multiple->splitscreenonline) !!}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -121,7 +177,8 @@
                                     <h5>Developed</h5>
                                     <ul>
                                         @foreach($game->developed as $cate)
-                                            <li><a href="javascript:void(0)">{{ $cate->company['name'] }}</a></li>
+                                            <li class="mr-2"><a
+                                                        href="javascript:void(0)">{{ $cate->company['name'] }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -130,7 +187,8 @@
                                 @if(!empty($game->publisher_game))
                                     <ul>
                                         @foreach($game->publisher_game as $cate)
-                                            <li><a href="javascript:void(0)">{{ $cate->company['name'] }}</a></li>
+                                            <li class="mr-2"><a
+                                                        href="javascript:void(0)">{{ $cate->company['name'] }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -140,6 +198,36 @@
                                     <ul>
                                         @foreach($game->engine as $cate_engine)
                                             <li><a href="javascript:void(0)">{{ $cate_engine->engine['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+
+                                <h5>Genre</h5>
+                                @if(!empty($game->genre))
+                                    <ul>
+                                        @foreach($game->genre as $cate)
+                                            <li class="mr-2"><a href="javascript:void(0)">{{ $cate->genre['name'] }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+
+                                <h5>Game Mode</h5>
+                                @if(!empty($game->mode))
+                                    <ul>
+                                        @foreach($game->mode as $cate)
+                                            <li class="mr-2"><a href="javascript:void(0)">{{ $cate->mode['name'] }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+
+                                <h5>Theme</h5>
+                                @if(!empty($game->theme))
+                                    <ul>
+                                        @foreach($game->theme as $cate)
+                                            <li class="mr-2"><a href="javascript:void(0)">{{ $cate->theme['name'] }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 @endif

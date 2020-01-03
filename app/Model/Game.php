@@ -47,4 +47,24 @@ class Game extends Model implements Transformable
     {
         return $this->hasMany(GameEngine::class, 'game_id', 'game_id');
     }
+
+    public function genre()
+    {
+        return $this->hasMany(GameGenre::class, 'game_id', 'game_id');
+    }
+
+    public function mode()
+    {
+        return $this->hasMany(GameMode::class, 'game_id', 'game_id');
+    }
+
+    public function theme()
+    {
+        return $this->hasMany(GameTheme::class, 'game_id', 'game_id');
+    }
+
+    public function multiple()
+    {
+        return $this->hasOne(MultiplayerMode::class, 'game_id', 'game_id');
+    }
 }

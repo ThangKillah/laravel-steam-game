@@ -48,7 +48,7 @@
                 <div class="col-lg-8">
                     <div class="toolbar-custom">
                         <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
-                            <div class="form-group input-icon-right">
+                            <div class="form-group input-icon-right mb-3">
                                 <i class="fa fa-search"></i>
                                 <input type="text" id="title-blog-search" class="form-control search-game"
                                        placeholder="Search Blog...">
