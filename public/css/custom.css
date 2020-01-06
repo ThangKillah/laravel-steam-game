@@ -95,7 +95,7 @@ small.error {
     display: inline-block;
     position: relative;
     overflow: hidden;
-    max-width: 600px;
+    max-width: 850px;
     margin: 0 7px;
 }
 
@@ -116,6 +116,14 @@ small.error {
     font-size: 15px;
     font-weight: 400;
 
+}
+
+.video-game .slick-next {
+    width: 31px !important;
+}
+
+.video-game .slick-prev {
+    margin-left: 45px !important;
 }
 
 .slick-slide img {
