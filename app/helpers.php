@@ -109,9 +109,14 @@ function gameBigCover($game)
     return config('services.igdb_api_image') . '/t_cover_big/' . $game->cover . '.jpg';
 }
 
-function gameScreenshot($idImg)
+function gameScreenshotFull($idImg)
 {
     return config('services.igdb_api_image') . '/t_original/' . $idImg . '.jpg';
+}
+
+function gameScreenshot($idImg)
+{
+    return config('services.igdb_api_image') . '/t_screenshot_big/' . $idImg . '.jpg';
 }
 
 function getUrlTrailerGame($game)

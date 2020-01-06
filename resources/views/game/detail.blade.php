@@ -87,7 +87,7 @@
                                     <div class="slicker-show-up slider d-flex mb-5 p-2">
                                         @foreach(json_decode($game->screenshots) as $img)
                                             <div class="game-list-inline-item">
-                                                <a class="img-box" href="{{ gameScreenshot($img) }}" data-lightbox>
+                                                <a class="img-box" href="{{ gameScreenshotFull($img) }}" data-lightbox>
                                                     <img class="img-responsive lazyload blur-up"
                                                          data-src="{{ gameScreenshot($img) }}"
                                                          alt="{{ $img }}">
