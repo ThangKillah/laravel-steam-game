@@ -5,7 +5,6 @@
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick-theme.css') }}"/>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css"/>
     <link rel="stylesheet" href="{{ asset('plugins/jquery-bar-rating-master/dist/themes/bars-square.css') }}">
 @endpush
 
@@ -76,9 +75,13 @@
                                 @if(count(json_decode($game->videos)) >= 1)
                                     <div class="video-game" id="video-game">
                                         @foreach(json_decode($game->videos) as $video)
-                                            <div class="video-game-item" id="{{ $video->video_id }}"
-                                                 data-plyr-provider="youtube"
-                                                 data-plyr-embed-id="{{ $video->video_id }}"></div>
+                                            <div class="video-game-item">
+                                                <iframe
+                                                        loading="lazy"
+                                                        frameborder="0" allowfullscreen
+                                                        src="{{ 'https://www.youtube.com/embed/' . $video->video_id . '?autoplay=0&enablejsapi=1' }}">
+                                                </iframe>
+                                            </div>
                                         @endforeach
                                     </div>
                                 @endif
@@ -267,7 +270,6 @@
 @endsection
 
 @push('js')
-    <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
     <script type="text/javascript" src="{{ asset('plugins/slick/js/slick.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/lightbox/lightbox.js') }}"></script>
     <script src="{{ asset('plugins/jquery-bar-rating-master/dist/jquery.barrating.min.js') }}"></script>
@@ -303,13 +305,6 @@
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
-            });
-
-            //init slide video
-            $(".video-game-item").each(function () {
-                let test = new Plyr($(this), {
-                    //youtube: { controls: 10 }
-                });
             });
 
             function postMessageToPlayer(player, command) {

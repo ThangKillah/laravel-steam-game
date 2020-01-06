@@ -99,6 +99,11 @@ small.error {
     margin: 0 7px;
 }
 
+.video-game iframe {
+    width: 100%;
+    height: 400px;
+}
+
 .game-list-inline-item a {
     display: block;
 }

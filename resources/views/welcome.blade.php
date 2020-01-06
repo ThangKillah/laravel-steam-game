@@ -156,6 +156,7 @@
 
                 currentSlide = slick.find(".slick-current");
                 player = currentSlide.find("iframe").get(0);
+                console.log(player);
                 switch (control) {
                     case "play":
                         postMessageToPlayer(player, {
