@@ -10,8 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'GamingController@home')->name('home');
+Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
+    Route::get('/', 'GamingController@home')->name('home');
+    //game
+    Route::get('games/{slug}', 'GamingController@gameDetail')->name('game-detail');
+});
 
 Route::get('/home', function () {
     return view('welcome');
@@ -56,9 +59,6 @@ Route::post('ajax-delete-comment', 'CommentController@ajaxDeleteComment')->name(
 
 //Theme
 Route::get('switch-theme', 'GamingController@switchTheme')->name('switch-theme');
-
-//game
-Route::get('games/{slug}', 'GamingController@gameDetail')->name('game-detail');
 
 
 
