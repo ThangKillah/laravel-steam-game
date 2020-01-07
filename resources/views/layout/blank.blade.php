@@ -21,9 +21,6 @@
     @stack('styles')
 </head>
 <body class="{{ \Illuminate\Support\Facades\Cookie::get('theme') == 'dark' ? 'dark' : '' }}">
-<div id="loading">
-    <img hidden id="loading-image" src="{{ asset('img/pacman.gif') }}" alt="Loading..."/>
-</div>
 <div id="ajax-loading" style="display: none;">
     <img id="ajax-gif" src="{{ asset('img/ajax.gif') }}" alt="Loading..."/>
 </div>
@@ -54,38 +51,6 @@
 </script>
 <!-- theme js -->
 <script src="{{ asset('js/theme.min.js') }}"></script>
-<script>
-    // $(window).on('load', function(){
-    //     $('#loading').fadeOut();
-    //     setTimeout(function(){ $('#loading').fadeOut(); }, 10000);
-    // });
-    // my callback function
-    // which relies on CSS being loaded function
-    function CSSDone() {
-        console.log('done loaded css');
-        $('#loading').fadeOut(1000);
-        setTimeout(function () {
-            $('#loading').fadeOut();
-        }, 10000);
-    }
-
-    // load me some stylesheet
-    let url = "{{ asset('css/theme.min.css') }}",
-        head = document.getElementsByTagName('head')[0],
-        link = document.createElement('link');
-
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = url;
-
-    // MAGIC
-    // call CSSDone() when CSS arrives
-    head.appendChild(link);
-
-    link.onload = function () {
-        CSSDone('onload listener');
-    };
-</script>
 
 <script type="text/javascript">
     $.ajaxSetup({
