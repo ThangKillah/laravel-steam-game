@@ -76,11 +76,7 @@
                                     <div class="video-game" id="video-game">
                                         @foreach(json_decode($game->videos) as $video)
                                             <div class="video-game-item">
-                                                <iframe
-                                                        loading="lazy"
-                                                        frameborder="0" allowfullscreen
-                                                        src="{{ 'https://www.youtube.com/embed/' . $video->video_id . '?autoplay=0&enablejsapi=1' }}">
-                                                </iframe>
+                                                <div class="youtube-player" data-id="{{ $video->video_id }}"></div>
                                             </div>
                                         @endforeach
                                     </div>
@@ -340,11 +336,6 @@
                 playPauseVideo(slick, "pause");
             });
 
-            slideWrapper.on("afterChange", function (event, slick) {
-                slick = $(slick.$slider);
-                playPauseVideo(slick, "play");
-            });
-
             $('#video-game').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -361,6 +352,40 @@
                 cssEase: "cubic-bezier(0.87, 0.03, 0.41, 0.9)"
             });
         });
+    </script>
+
+    <script>
+        // Embed youtube
+        /* Light YouTube Embeds by @labnol */
+        /* Web: http://labnol.org/?p=27941 */
+        document.addEventListener("DOMContentLoaded",
+            function () {
+                var div, n,
+                    v = document.getElementsByClassName("youtube-player");
+                for (n = 0; n < v.length; n++) {
+                    div = document.createElement("div");
+                    div.setAttribute("data-id", v[n].dataset.id);
+                    div.innerHTML = labnolThumb(v[n].dataset.id);
+                    div.onclick = labnolIframe;
+                    v[n].appendChild(div);
+                }
+            });
+
+        function labnolThumb(id) {
+            var thumb = '<img src="https://i.ytimg.com/vi/ID/sddefault.jpg">',
+                play = '<div class="play"></div>';
+            return thumb.replace("ID", id) + play;
+        }
+
+        function labnolIframe() {
+            var iframe = document.createElement("iframe");
+            var embed = "https://www.youtube.com/embed/ID?autoplay=1&enablejsapi=1";
+            iframe.setAttribute("src", embed.replace("ID", this.dataset.id));
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allowfullscreen", "1");
+            iframe.setAttribute("allow", "autoplay");
+            this.parentNode.replaceChild(iframe, this);
+        }
     </script>
 @endpush
 
