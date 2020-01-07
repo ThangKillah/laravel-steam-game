@@ -28,6 +28,5 @@
 
 
 <div class="pagination-results d-flex justify-content-between">
-    <span>Showing {{ $blogs->perPage() }} to {{ $blogs->count() * $blogs->currentPage() }} of {{ $blogs->total() }} results</span>
     {{ $blogs->links() }}
 </div>

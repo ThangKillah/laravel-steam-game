@@ -1,5 +1,8 @@
 :root {
     --white-color: #e6e6e6;
+    --dark-color: #161625;
+    --core-color: #e45454;
+    --old-color: #2575dc;
 }
 
 .dark {

@@ -508,3 +508,10 @@ small.error {
     width: 40px;
     height: 40px;
 }
+
+.page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: #e45454 !important;
+    border-color: #e45454 !important;
+}
