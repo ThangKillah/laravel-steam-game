@@ -8,8 +8,8 @@
 
 @section('content')
     <!-- main -->
-    <section class="p-y-5">
-        <div class="owl-carousel owl-posts">
+    <section class="bg-secondary p-y-5">
+        <div class="owl-carousel owl-posts home-top">
             @foreach($topBlog as $top)
                 <div class="post-carousel">
                     <a href="{{ getRouteBlogDetail($top) }}"><img class="lazyload"
@@ -353,6 +353,19 @@
                 loop: true,
                 dots: false,
                 autoplay: true,
+                autoplayTimeout: 5000,
+                nav: true,
+                navText: [
+                    '<a class="carousel-control-prev" href="javascript:void(0)" role="button" data-slide="prev">\n' +
+                    '        <span class="carousel-control-prev-icon" aria-hidden="true"></span>\n' +
+                    '        <span class="sr-only">Previous</span>\n' +
+                    '      </a>',
+
+                    '<a class="carousel-control-next" href="javascript:void(0)" role="button" data-slide="next">\n' +
+                    '        <span class="carousel-control-next-icon" aria-hidden="true"></span>\n' +
+                    '        <span class="sr-only">Next</span>\n' +
+                    '      </a>'
+                ],
                 responsive: {
                     0: {
                         items: 1
