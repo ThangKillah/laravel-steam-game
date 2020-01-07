@@ -65,7 +65,3 @@ Route::get('games/{slug}', 'GamingController@gameDetail')->name('game-detail');
 //    //game
 //    Route::get('games/{slug}', 'GamingController@gameDetail')->name('game-detail');
 //});
-
-
-
-
