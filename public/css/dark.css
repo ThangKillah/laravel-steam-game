@@ -10,6 +10,10 @@
     color: var(--white-color);
 }
 
+.dark .widget-comments b {
+    color: var(--white-color);
+}
+
 .dark .post-title {
     color: var(--white-color);
 !important;
@@ -30,5 +34,22 @@
 }
 
 .dark .nav-tabs .nav-item .nav-link.active {
-    color: var(--white-color) !important;
+    color: var(--dark-color);
+}
+
+.dark .nav-item:hover {
+    background-color: var(--core-color);
+    color: var(--white-color);
+}
+
+.dark .nav-item .nav-link:hover {
+    color: var(--white-color);
+}
+
+.dark .widget-title {
+    color: var(--white-color);
+}
+
+.dark .widget-list a {
+    color: var(--white-color);
 }
