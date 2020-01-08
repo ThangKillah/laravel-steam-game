@@ -4,52 +4,45 @@
     --core-color: #e45454;
     --old-color: #2575dc;
 }
-
 .dark {
     background-color: #161625;
     color: var(--white-color);
 }
-
 .dark .widget-comments b {
     color: var(--white-color);
 }
-
 .dark .post-title {
     color: var(--white-color);
-!important;
 }
-
 .dark .slick-dots li.slick-active button:before {
-    opacity: .75;
+    opacity: 0.75;
     color: white !important;
 }
-
 .dark .slick-dots li button:before {
     color: white !important;
 }
 
 .dark .game-detail-information .nav-item a {
     color: var(--white-color);
-!important;
+}
+
+.dark .game-detail-information .nav-link.active {
+    color: var(--white-color) !important;
 }
 
 .dark .nav-tabs .nav-item .nav-link.active {
     color: var(--dark-color);
 }
-
 .dark .nav-item:hover {
     background-color: var(--core-color);
     color: var(--white-color);
 }
-
 .dark .nav-item .nav-link:hover {
     color: var(--white-color);
 }
-
 .dark .widget-title {
     color: var(--white-color);
 }
-
 .dark .widget-list a {
     color: var(--white-color);
 }

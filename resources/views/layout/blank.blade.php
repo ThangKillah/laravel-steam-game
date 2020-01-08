@@ -11,6 +11,8 @@
     <!-- vendor css -->
     <link rel="stylesheet"
           href="{{ asset('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap') }}">
+    <link rel="preload" href="{{ asset('plugins/font-awesome/fonts/fontawesome-webfont.woff2' . '?v=4.7.0') }}"
+          as="font" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/animate/animate.min.css') }}">
