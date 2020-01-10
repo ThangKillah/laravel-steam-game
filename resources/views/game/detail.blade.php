@@ -102,11 +102,7 @@
                                 @endif
                             </div>
                             <div class="tab-pane" id="color-settings" role="tabpanel">
-                                <p class="m-b-0">Mauris ultrices semper sapien, nec mollis orci aliquam a. Praesent nec
-                                    urna quis enim venenatis faucibus. Aliquam hendrerit commodo diam, eu bibendum magna
-                                    sodales et. In vestibulum ornare dapibus. Ut posuere urna eget turpis eleifend, a
-                                    facilisis
-                                    justo aliquet.</p>
+                                @include('game.sub.blog')
                             </div>
                             <div class="tab-pane" id="color-inbox" role="tabpanel">
                                 <p class="m-b-0">Quisque et tincidunt dolor. Praesent nec lacinia dolor. Pellentesque
