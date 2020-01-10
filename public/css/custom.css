@@ -512,19 +512,19 @@ small.error {
     border-color: #e45454 !important;
 }
 
-.chart {
+.review-homepage .chart {
     position: relative;
     display: inline-block;
     text-align: center;
 }
 
-.chart canvas {
+.review-homepage .chart canvas {
     position: absolute;
     top: -20px;
     left: 40px;
 }
 
-.percent {
+.review-homepage .percent {
     display: inline-block;
     line-height: 40px;
     z-index: 2;
@@ -535,7 +535,7 @@ small.error {
     font-style: normal;
 }
 
-.percent:after {
+.review-homepage .percent:after {
     content: '%';
     margin-left: 0.1em;
     font-size: .8em;

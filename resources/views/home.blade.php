@@ -119,7 +119,7 @@
                             @endforeach
                         </div>
 
-                        <div class="widget widget-games">
+                        <div class="widget widget-games review-homepage">
                             <h5 class="widget-title">Reviews</h5>
                             @foreach($topReviews as $key => $review)
                                 <a href="{{ route('game-detail', ['slug'=> $game->slug]) }}"
