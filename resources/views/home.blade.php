@@ -119,36 +119,26 @@
                             @endforeach
                         </div>
 
-                        <!-- widget post -->
-                        <div class="widget widget-post">
+                        <div class="widget widget-games">
                             <h5 class="widget-title">Reviews</h5>
-                            <ul class="widget-list">
-                                @foreach($topReviews as $review)
-                                    <li>
-                                        <div class="widget-img">
-                                            <a href="blog-post.html" style="position: relative">
-                                                <img class="lazyload blur-up"
-                                                     data-src="{{ urlReviewImage($review->image) }}" alt="">
-                                                <div class="score-review">
-                                                    @if($review->score >= 8)
-                                                        <span class="badge badge-primary">{{ $review->score }}</span>
-                                                    @elseif($review->score <8 && $review->score >= 7)
-                                                        <span class="badge badge-success">{{ $review->score }}</span>
-                                                    @elseif($review->score < 7 && $review->score >= 4)
-                                                        <span class="badge badge-warning">{{ $review->score }}</span>
-                                                    @else
-                                                        <span class="badge badge-danger">{{ $review->score }}</span>
-                                                    @endif
-                                                </div>
-                                            </a>
+                            @foreach($topReviews as $key => $review)
+                                <a href="{{ route('game-detail', ['slug'=> $game->slug]) }}"
+                                   style="background-image: url('{{ urlReviewImage($review->image) }}')">
+                                    <span class="overlay"></span>
+                                    <div class="widget-block">
+                                        <div class="description">
+                                            <h5 class="title text-capitalize text-over-two-line">{{ str_replace('-', ' ', $review->game ) }}</h5>
+                                            <span class="date">{{ $review->date_by_format }}</span>
                                         </div>
-                                        <div>
-                                            <h4><a href="blog-post.html">{{ $review->title }}</a></h4>
-                                            <span>{{ $review->date_by_format }}</span>
+                                        <div class="description">
+                                            <div class="chart" data-percent="{{ $review->score / 10 * 100 }}"
+                                                 data-scale-color="#ffb400">
+                                                <span class="percent">{{ $review->score / 10 * 100 }}</span>
+                                            </div>
                                         </div>
-                                    </li>
-                                @endforeach
-                            </ul>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
 
                         <!-- widget tabs -->
@@ -229,6 +219,22 @@
 @endsection
 
 @push('js')
+    <script src="{{ asset('plugins/easypiechart/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('plugins/easypiechart/jquery.easypiechart.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $('.chart').easyPieChart({
+                    barColor: '#e45454',
+                    trackColor: '#e3e3e3',
+                    easing: 'easeOutBounce',
+                    size: 80,
+                    lineCap: 'square',
+                    scaleLength: 2
+                });
+            });
+        });
+    </script>
     <script type="text/javascript">
         var elements = document.getElementsByClassName("column");
         // Declare a loop variable

@@ -23,7 +23,7 @@ function urlReviewImage($jsonImage)
     $image = json_decode($jsonImage, true);
     $urlOrigin = $image['original'];
     if (strpos($urlOrigin, 'gamespot1') !== false) {
-        return str_replace("/original/", "/screen_tiny/", $urlOrigin);
+        return str_replace("/original/", "/screen_kubrick/", $urlOrigin);
     }
     return $urlOrigin;
 }
