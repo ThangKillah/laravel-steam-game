@@ -15,9 +15,9 @@ class CreateTableAssociations extends Migration
     {
         Schema::create('associations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('association_id');
+            $table->integer('core_id');
             $table->string('name');
-            $table->string('type');
+            $table->integer('type');
         });
     }
 

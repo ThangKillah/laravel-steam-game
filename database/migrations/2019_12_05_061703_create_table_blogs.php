@@ -15,9 +15,9 @@ class CreateTableBlogs extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('authors');
-            $table->string('author_id')->default(0);
-            $table->integer('gamespot_id')->nullable();
+            //$table->string('authors');
+            $table->integer('author_id')->default(0);
+           // $table->integer('gamespot_id')->nullable();
             $table->string('title');
             $table->string('slug');
             $table->text('deck')->nullable();
