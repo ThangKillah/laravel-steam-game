@@ -25,10 +25,9 @@ class GameSpotBlogSeeder extends Seeder
                     break;
                 }
                 foreach ($blogs['results'] as $blog) {
-                    $blogDB = Blog::firstOrCreate(
-                        ['gamespot_id' => $blog['id']],
+                    $blogDB = Blog::create(
                         [
-                            'authors' => $blog['authors'],
+                            'author_id' => 0,
                             'title' => $blog['title'],
                             'slug' => Str::slug($blog['title'], '-'),
                             'deck' => $blog['deck'],
@@ -41,26 +40,41 @@ class GameSpotBlogSeeder extends Seeder
                     );
                     if (!empty($blog['associations'])) {
                         foreach ($blog['associations'] as $item) {
-                            $type = '';
+                            $type = 0;
+                            $core_id = 0;
                             if (!empty($item['api_detail_url'])) {
                                 if (strpos($item['api_detail_url'], 'www.gamespot.com/api/events') !== false) {
-                                    $type = 'events';
+                                    $type = Association::EVENTS;
+                                    $event = \App\Model\Event::firstOrCreate(
+                                        ['name' => $item['name']],
+                                        [
+                                            'name' => $item['name']
+                                        ]
+                                    );
+                                    $core_id = $event->id;
                                 }
                                 if (strpos($item['api_detail_url'], 'www.gamespot.com/api/games') !== false) {
-                                    $type = 'games';
+                                    $type = Association::GAMES;
+                                    $game = \App\Model\Game::where('name', 'like', '%' . $item['name'] . '%')->first();
+                                    $core_id = empty($game) ? 0 : $game->id;
                                 }
                             } else {
-                                $type = 'platform';
+                                $type = Association::PLATFORMS;
+                                $platform = \App\Model\Platform::where('name', $item['name'])->first();
+                                $core_id = empty($platform) ? 0 : $platform->id;
                             }
-                            $association = Association::firstOrCreate(
-                                ['association_id' => $item['id'], 'type' => $type],
-                                [
-                                    'name' => $item['name']
-                                ]
-                            );
-                            AssociationBlog::firstOrCreate(
-                                ['association_id' => $association->id, 'blog_id' => $blogDB->id]
-                            );
+
+                            if ($type != 0 && $core_id != 0) {
+                                $association = Association::firstOrCreate(
+                                    ['core_id' => $core_id, 'type' => $type],
+                                    [
+                                        'name' => $item['name']
+                                    ]
+                                );
+                                AssociationBlog::firstOrCreate(
+                                    ['association_id' => $association->id, 'blog_id' => $blogDB->id]
+                                );
+                            }
                         }
                     }
                 }

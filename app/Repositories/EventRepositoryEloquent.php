@@ -2,17 +2,17 @@
 
 namespace App\Repositories;
 
-use App\Model\Association;
-use App\Validators\AssociationValidator;
+use App\Model\Event;
+use App\Validators\EventValidator;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
- * Class AssociationRepositoryEloquent.
+ * Class EventRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class AssociationRepositoryEloquent extends BaseRepository implements AssociationRepository
+class EventRepositoryEloquent extends BaseRepository implements EventRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class AssociationRepositoryEloquent extends BaseRepository implements Associatio
      */
     public function model()
     {
-        return Association::class;
+        return Event::class;
     }
 
 
@@ -33,10 +33,4 @@ class AssociationRepositoryEloquent extends BaseRepository implements Associatio
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getAllPlatform()
-    {
-        return $this->scopeQuery(function ($query) {
-            return $query->where('type', Association::PLATFORMS)->orderBy('name', 'ASC');
-        })->all();
-    }
 }

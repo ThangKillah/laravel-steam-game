@@ -38,27 +38,29 @@ class GameSpotReviewSeeder extends Seeder
                                 ['Linux', 'PC', 'PlayStation 3', 'Xbox 360', 'Mac', 'PlayStation 4', 'Xbox One', 'Nintendo Switch']
                             );
 
-                            $insertData = [
-                                'gamespot_id' => $item['id'],
-                                'authors' => $item['authors'],
-                                'title' => $item['title'],
-                                'slug' => Str::slug($item['title'], '-'),
-                                'deck' => $item['deck'],
-                                'body' => $item['body'],
-                                'good' => $item['good'],
-                                'bad' => $item['bad'],
-                                'publish_date' => $item['publish_date'],
-                                'edit_date' => $item['update_date'],
-                                'score' => $item['score'],
-                                'review_type' => $item['review_type'],
-                                'image' => json_encode($item['image']),
-                                'game' => explode("/", $item['game']["site_detail_url"])[3],
-                                'created_at' => now(),
-                                'updated_at' => now(),
-                                'platform' => empty($arrPlat) ? null : $arrPlat[array_rand($arrPlat)],
-                                'stt' => 2
-                            ];
-                            array_push($data, $insertData);
+                            $game = \App\Model\Game::where('slug', explode("/", $item['game']["site_detail_url"])[3])->first();
+
+                            if (!empty($game)) {
+                                $insertData = [
+                                    'author_id' => 0,
+                                    'title' => $item['title'],
+                                    'slug' => Str::slug($item['title'], '-'),
+                                    'deck' => $item['deck'],
+                                    'body' => $item['body'],
+                                    'good' => $item['good'],
+                                    'bad' => $item['bad'],
+                                    'publish_date' => $item['publish_date'],
+                                    'edit_date' => $item['update_date'],
+                                    'score' => $item['score'],
+                                    'review_type' => $item['review_type'],
+                                    'image' => json_encode($item['image']),
+                                    'game_id' => $game->game_id,
+                                    'created_at' => now(),
+                                    'updated_at' => now(),
+                                    'platform_id' => empty($arrPlat) ? 0 : \App\Model\Platform::where('name', $arrPlat[array_rand($arrPlat)])->first()->id,
+                                ];
+                                array_push($data, $insertData);
+                            }
                         }
                     }
                     DB::table('reviews')->insert($data);

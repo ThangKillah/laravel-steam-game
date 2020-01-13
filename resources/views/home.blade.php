@@ -56,11 +56,11 @@
                         </div>
                         <div class="dropdown float-left">
                             <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true"><span id="span-platform">All Category</span></span><i
+                                    aria-expanded="true"><span id="span-platform">All Platform</span></span><i
                                         class="fa fa-caret-down"></i></button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item drop-platform active" data-id="0" href="javascript:void(0)">All
-                                    Category</a>
+                                    Platform</a>
                                 @foreach($platforms as $plat)
                                     <a class="dropdown-item drop-platform" data-id="{{ $plat->id }}"
                                        href="javascript:void(0)">{{ $plat->name }}</a>
@@ -341,6 +341,9 @@
                     setTimeout(function () {
                         load_by_hash_change = 1
                     }, 500);
+                    $("img").each(function () {
+                        $(this).attr("onerror", "this.src='{{ asset('img/bg-empty.jpeg') }}'");
+                    });
                 },
                 error: function (request, status, error) {
                     hideAjaxGif();
@@ -350,6 +353,13 @@
     </script>
     <script src="{{ asset('plugins/owl-carousel/js/owl.carousel.min.js') }}"></script>
     <script>
+        //load img default if 404 img
+        $(document).ready(function () {
+            $("img").each(function () {
+                $(this).attr("onerror", "this.src='{{ asset('img/bg-empty.jpeg') }}'");
+            });
+        });
+
         (function ($) {
             "use strict";
             // owl carousel

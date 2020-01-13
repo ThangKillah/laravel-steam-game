@@ -36,7 +36,7 @@ function badgesBlog($cates)
     }
     $arr = [];
     foreach ($cates as $cate) {
-        if (!empty($cate->association) && $cate->association->type === 'platform') {
+        if (!empty($cate->association) && $cate->association->type === \App\Model\Association::PLATFORMS) {
             $arr[] = $cate->association->name;
         }
     }
