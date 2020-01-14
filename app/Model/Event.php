@@ -7,16 +7,12 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Association.
+ * Class Event.
  *
  * @package namespace App\Model;
  */
-class Association extends Model implements Transformable
+class Event extends Model implements Transformable
 {
-    const GAMES = 1;
-    const EVENTS = 2;
-    const PLATFORMS = 3;
-
     use TransformableTrait;
 
     /**
@@ -24,7 +20,6 @@ class Association extends Model implements Transformable
      *
      * @var array
      */
-    public $timestamps = false;
     protected $fillable = [];
 
 }

@@ -15,8 +15,8 @@ class CreateTableGamespotReviews extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('gamespot_id')->nullable();
-            $table->string('authors');
+            //$table->integer('gamespot_id')->nullable();
+            $table->integer('author_id');
             $table->string('title')->index('title_reviews');
             $table->string('slug');
             $table->text('deck')->nullable();
@@ -28,9 +28,9 @@ class CreateTableGamespotReviews extends Migration
             $table->dateTime('edit_date');
             $table->double('score');
             $table->string('review_type');
-            $table->string('game')->nullable();
-            $table->string('platform')->nullable();
-            $table->smallInteger('stt');
+            $table->integer('game_id')->nullable();
+            $table->integer('platform_id')->nullable();
+            //$table->smallInteger('stt');
             $table->timestamps();
         });
     }

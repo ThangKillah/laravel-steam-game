@@ -41,7 +41,7 @@ class BlogController extends Controller
             }
         }
 
-        if (!empty($blog->gamespot_id)) {
+        if ($blog->author_id == 0) {
             $blog->body = $this->editContentGameSpot($blog->body);
             $blog->body = str_replace("/videos/embed", "https://www.gamespot.com/videos/embed", $blog->body);
             //           $blog->body = str_replace('href="/articles/', 'href="https://www.gamespot.com/articles/', $blog->body);

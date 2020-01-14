@@ -2,9 +2,11 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-class CreateTableAssociations extends Migration
+/**
+ * Class CreateEventsTable.
+ */
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +15,10 @@ class CreateTableAssociations extends Migration
      */
     public function up()
     {
-        Schema::create('associations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('core_id');
+        Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
-            $table->integer('type');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateTableAssociations extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('associations');
+        Schema::drop('events');
     }
 }
