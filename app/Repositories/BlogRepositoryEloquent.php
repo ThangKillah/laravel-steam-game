@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Model\Association;
 use App\Model\Blog;
 use App\Model\Comment;
 use Illuminate\Database\Eloquent\Builder;
@@ -61,8 +62,7 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 if ($sort == Blog::OLDEST) {
                     $result = $result->orderBy('publish_date', 'ASC');
                 }
-            }
-            else {
+            } else {
                 $result = $result->orderBy('count_view', 'DESC')->orderBy('publish_date', 'DESC');
             }
             return $result;
@@ -111,7 +111,7 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
         if (!empty($category)) {
             foreach ($category as $cate) {
                 $blogId = $cate->blog_id;
-                if ($cate->association->type == 'games') {
+                if ($cate->association->type == Association::GAMES) {
                     $associationIds[] = $cate->association->id;
                 }
             }

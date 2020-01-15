@@ -63,7 +63,7 @@
                             <li class="nav-item"><a class="nav-link" href="#color-inbox" aria-controls="inbox"
                                                     role="tab" data-toggle="tab"><i class="fa fa-bar-chart"></i>
                                     Review</a></li>
-                            @if($game->first_release_date <= now())
+                            @if($game->first_release_date <= now() && !empty($game->multiple))
                                 <li class="nav-item"><a class="nav-link" href="#color-multiple" aria-controls="multiple"
                                                         role="tab" data-toggle="tab"><i class="fa fa-users"></i>Multiplayer</a>
                                 </li>
