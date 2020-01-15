@@ -114,22 +114,6 @@
                 let attr_value = $(this).data("src");
                 $(this).attr('src', attr_value);
             });
-
-            $(document).on('click', 'a', function (e) {
-                let url = $(this).attr('href');
-                if (url !== undefined && url.indexOf('#') === -1
-                    && url.indexOf('javascript:void(0)') === -1
-                    && url.indexOf('redirect/facebook') === -1
-                    && url.indexOf('redirect/google') === -1
-                    && url.indexOf('redirect/steam') === -1
-                    && url.indexOf('redirect/twitch') === -1
-                    && url.indexOf('register?nextUrl') === -1
-                    && url.indexOf('login?nextUrl') === -1
-                ) {
-                    e.preventDefault();
-                    window.open(url, '_blank');
-                }
-            });
         });
     </script>
 @endpush

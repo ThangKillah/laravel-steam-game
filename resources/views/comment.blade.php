@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.css" rel="stylesheet">
 @endpush
 
 <div id="comments" class="comments anchor">
@@ -121,7 +121,7 @@
         data-title="{{ __('Something is wrong ~~!') }}"></button>
 
 @push('js')
-    <script src="{{ asset('plugins/summernote/summernote-bs4.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.js"></script>
     <script src="{{ asset('plugins/notification/notification.js') }}" charset="utf-8"></script>
     <script src="{{ asset('messages.js') }}" charset="utf-8"></script>
     <script>

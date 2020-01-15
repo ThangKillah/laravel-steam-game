@@ -14,7 +14,8 @@
     <link rel="preload" href="{{ asset('plugins/font-awesome/fonts/fontawesome-webfont.woff2' . '?v=4.7.0') }}"
           as="font" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('plugins/animate/animate.min.css') }}">
     <!-- theme css -->
     <link rel="stylesheet" href="{{ asset('css/theme.min.css') }}">
