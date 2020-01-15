@@ -42,13 +42,21 @@ class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
                 'category.association'
             ]);
 
+            if (!empty($condition['game_id'])) {
+                $result = $result->whereHas('category.association', function ($q) use ($condition) {
+                    $q->where('core_id', $condition['game_id'])
+                        ->where('type', Association::GAMES);
+                });
+            }
+
             if (!empty($condition['title'])) {
                 $title = $condition['title'];
                 $result = $result->where('title', 'like', '%' . $title . '%');
             }
             if (!empty($condition['platform'])) {
-                $result = $result->whereHas('category', function ($q) use ($condition) {
-                    $q->where('association_id', $condition['platform']);
+                $result = $result->whereHas('category.association', function ($q) use ($condition) {
+                    $q->where('core_id', $condition['platform'])
+                        ->where('type', Association::PLATFORMS);
                 });
             }
             if (!empty($condition['sortBy'])) {

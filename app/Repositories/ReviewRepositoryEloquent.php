@@ -37,6 +37,7 @@ class ReviewRepositoryEloquent extends BaseRepository implements ReviewRepositor
     {
         return $this->scopeQuery(function ($query) use ($number) {
             return $query::orderBy('publish_date', 'DESC')
+                ->with(['game'])
                 ->limit($number);
         })->all();
     }

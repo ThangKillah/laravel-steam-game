@@ -46,50 +46,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="toolbar-custom">
-                        <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
-                            <div class="form-group input-icon-right mb-3">
-                                <i class="fa fa-search"></i>
-                                <input type="text" id="title-blog-search" class="form-control search-game"
-                                       placeholder="Search Blog...">
-                            </div>
-                        </div>
-                        <div class="dropdown float-left">
-                            <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true"><span id="span-platform">All Platform</span></span><i
-                                        class="fa fa-caret-down"></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item drop-platform active" data-id="0" href="javascript:void(0)">All
-                                    Platform</a>
-                                @foreach($platforms as $plat)
-                                    <a class="dropdown-item drop-platform" data-id="{{ $plat->id }}"
-                                       href="javascript:void(0)">{{ $plat->name }}</a>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="btn-group float-right m-l-5 hidden-sm-down" role="group">
-                            <a onclick="gridView()" class="btn btn-default btn-icon" href="javascript:void(0)"
-                               role="button"><i
-                                        class="fa fa-th-large"></i></a>
-                            <a onclick="listView()" class="btn btn-default btn-icon" href="javascript:void(0)"
-                               role="button"><i class="fa fa-bars"></i></a>
-                        </div>
-
-                        <div class="dropdown float-right">
-                            <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true"><span id="span-sort">Popular</span><i
-                                        class="fa fa-caret-down"></i></button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item drop-sort active" data-id="{{ \App\Model\Blog::BEST }}"
-                                   href="javascript:void(0)">Popular</a>
-                                <a class="dropdown-item drop-sort" data-id="{{ \App\Model\Blog::NEWEST }}"
-                                   href="javascript:void(0)">Newest</a>
-                                <a class="dropdown-item drop-sort" data-id="{{ \App\Model\Blog::OLDEST }}"
-                                   href="javascript:void(0)">Oldest</a>
-                            </div>
-                        </div>
-                    </div>
+                    @include('game.sub.search_condition', ['game_id'=> 0])
 
                     <!-- post -->
                     <div id="blog-list">
@@ -127,7 +84,7 @@
                                     <span class="overlay"></span>
                                     <div class="widget-block">
                                         <div class="description">
-                                            <h5 class="title text-capitalize text-over-two-line">{{ str_replace('-', ' ', $review->game ) }}</h5>
+                                            <h5 class="title text-capitalize text-over-two-line">{{ $review->game['name'] }}</h5>
                                             <span class="date">{{ $review->date_by_format }}</span>
                                         </div>
                                         <div class="description">
@@ -235,122 +192,7 @@
             });
         });
     </script>
-    <script type="text/javascript">
-        var elements = document.getElementsByClassName("column");
-        // Declare a loop variable
-        var i;
-        var current_layout = 'grid';
-
-        // List View
-        function listView() {
-            current_layout = 'list';
-            for (i = 0; i < elements.length; i++) {
-                elements[i].style.width = "100%";
-            }
-        }
-
-        // Grid View
-        function gridView() {
-            current_layout = 'grid';
-            for (i = 0; i < elements.length; i++) {
-                elements[i].style.width = "50%";
-            }
-        }
-
-        var page = 1;
-        var title = '';
-        var platform = '';
-        var sortBy = '{{ \App\Model\Blog::BEST }}';
-        var load_by_hash_change = 1;
-
-        $('#title-blog-search').on('change', function () {
-            page = 1;
-            title = $('#title-blog-search').val();
-            getData(page);
-        });
-
-        $('.drop-platform').on('click', function () {
-            if (!$(this).hasClass('active')) {
-                page = 1;
-                $('.drop-platform').removeClass('active');
-                $(this).addClass('active');
-                platform = $(this).data('id');
-                $('#span-platform').html($(this).html());
-                getData(page);
-            }
-        });
-
-        $('.drop-sort').on('click', function () {
-            if (!$(this).hasClass('active')) {
-                page = 1;
-                $('.drop-sort').removeClass('active');
-                $(this).addClass('active');
-                sortBy = $(this).data('id');
-                $('#span-sort').html($(this).html());
-                getData(page);
-            }
-        });
-
-        $(window).on('hashchange', function () {
-            if (window.location.hash) {
-                page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
-                    return false;
-                } else {
-                    if (load_by_hash_change) {
-                        getData(page);
-                    }
-                }
-            }
-        });
-
-        $(document).ready(function () {
-            $(document).on('click', '.pagination a', function (event) {
-                event.preventDefault();
-
-                $('li').removeClass('active');
-                $(this).parent('li').addClass('active');
-
-                page = $(this).attr('href').split('page=')[1];
-
-                getData(page);
-            });
-
-        });
-
-        function getData(page) {
-            $.ajax({
-                url: '{{ route('ajax-get-list-blog') }}' + '?page=' + page + '&title=' + title + '&platform=' + platform + '&sortBy=' + sortBy,
-                type: "get",
-                datatype: "html",
-                beforeSend: function () {
-                    showAjaxGif();
-                },
-                success: function (data) {
-                    load_by_hash_change = 0;
-                    hideAjaxGif();
-                    $("#blog-list").empty().html(data);
-                    $('html, body').animate({scrollTop: $('#blog-list').position().top}, 'slow');
-                    if (current_layout === 'grid') {
-                        gridView();
-                    } else {
-                        listView();
-                    }
-                    $('[data-toggle="tooltip"]').tooltip();
-                    location.hash = page;
-                    setTimeout(function () {
-                        load_by_hash_change = 1
-                    }, 500);
-                    $("img").each(function () {
-                        $(this).attr("onerror", "this.src='{{ asset('img/bg-empty.jpeg') }}'");
-                    });
-                },
-                error: function (request, status, error) {
-                    hideAjaxGif();
-                }
-            });
-        }
-    </script>
+    <script src="{{ asset('js/blog.search.js') }}"></script>
     <script src="{{ asset('plugins/owl-carousel/js/owl.carousel.min.js') }}"></script>
     <script>
         //load img default if 404 img

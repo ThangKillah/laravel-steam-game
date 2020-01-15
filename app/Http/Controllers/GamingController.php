@@ -80,13 +80,19 @@ class GamingController extends Controller
 
     public function gameDetail($slug)
     {
+        $platforms = $this->associationRepository->getAllPlatform();
         $game = $this->gameRepository->getGameBySlug($slug);
         if (empty($game)) {
             return abort(404);
         }
+        $blogs = $this->blogRepository->getBlogSearch([
+            'game_id' => $game->game_id
+        ]);
         //dd($game);
         return view('game.detail')->with([
-            'game' => $game
+            'game' => $game,
+            'blogs' => $blogs,
+            'platforms' => $platforms,
         ]);
     }
 }

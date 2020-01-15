@@ -56,7 +56,7 @@ class GameSpotBlogSeeder extends Seeder
                                 if (strpos($item['api_detail_url'], 'www.gamespot.com/api/games') !== false) {
                                     $type = Association::GAMES;
                                     $game = \App\Model\Game::where('name', 'like', '%' . $item['name'] . '%')->first();
-                                    $core_id = empty($game) ? 0 : $game->id;
+                                    $core_id = empty($game) ? 0 : $game->game_id;
                                 }
                             } else {
                                 $type = Association::PLATFORMS;

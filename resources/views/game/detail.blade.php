@@ -56,7 +56,7 @@
                             <li class="nav-item"><a class="nav-link active" href="#color-profile"
                                                     aria-controls="profile" role="tab" data-toggle="tab"><i
                                             class="fa fa-video-camera"></i> Highlight</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#color-settings" aria-controls="settings"
+                            <li class="nav-item"><a class="nav-link" href="#list-blog" aria-controls="blog"
                                                     role="tab" data-toggle="tab"><i class="fa fa-user-plus"></i>
                                     Blog</a>
                             </li>
@@ -99,10 +99,14 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                @endif
+                                    @endif
                             </div>
-                            <div class="tab-pane" id="color-settings" role="tabpanel">
-                                @include('game.sub.blog')
+                            <div class="tab-pane" id="list-blog" role="tabpanel">
+                            @include('game.sub.search_condition', ['game_id' => $game->game_id])
+                            <!-- post -->
+                                <div id="blog-list">
+                                    @include('ajax.blogs', ['blogs' => $blogs])
+                                </div>
                             </div>
                             <div class="tab-pane" id="color-inbox" role="tabpanel">
                                 <p class="m-b-0">Quisque et tincidunt dolor. Praesent nec lacinia dolor. Pellentesque
@@ -268,6 +272,7 @@
     <script src="{{ asset('plugins/sticky/jquery.sticky.js') }}"></script>
     <script src="{{ asset('plugins/easypiechart/jquery.easing.1.3.js') }}"></script>
     <script src="{{ asset('plugins/easypiechart/jquery.easypiechart.min.js') }}"></script>
+    <script src="{{ asset('js/blog.search.js') }}"></script>
 
     <script>
         $(document).ready(function () {

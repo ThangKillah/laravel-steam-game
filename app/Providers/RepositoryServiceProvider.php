@@ -24,7 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function boot()
     {
         $models = array(
-            'User', 'Blog', 'Game', 'Review', 'Comment', 'Association'
+            'User', 'Blog', 'Game', 'Review', 'Comment', 'Association', 'Platform'
         );
 
         foreach ($models as $model) {

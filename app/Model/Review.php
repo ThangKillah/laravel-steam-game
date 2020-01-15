@@ -27,4 +27,9 @@ class Review extends Model implements Transformable
     {
         return Carbon::parse($this->publish_date)->format('M d, Y');
     }
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class, 'game_id', 'game_id');
+    }
 }

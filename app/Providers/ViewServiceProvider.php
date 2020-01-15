@@ -28,5 +28,8 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             'user.register', 'App\View\Composers\RecaptchaComposer'
         );
+        View::composer(
+            '*', 'App\View\Composers\PlatformComposer'
+        );
     }
 }

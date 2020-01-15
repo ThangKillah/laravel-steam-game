@@ -44,7 +44,7 @@ Route::get('test-game', 'GamingController@test');
 //Blog
 Route::get('blogs/{id}/{slug}.html', 'BlogController@detail')->name('blog-detail');
 Route::get('ajax-comments', 'CommentController@ajaxGetComment')->name('get-comment');
-Route::get('blog-list', 'BlogController@ajaxGetListBlog')->name('ajax-get-list-blog');
+Route::get('blog-list-ajax', 'BlogController@ajaxGetListBlog')->name('ajax-get-list-blog');
 
 
 //Comment
