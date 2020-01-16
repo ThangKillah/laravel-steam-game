@@ -29,7 +29,7 @@ class ViewServiceProvider extends ServiceProvider
             'user.register', 'App\View\Composers\RecaptchaComposer'
         );
         View::composer(
-            '*', 'App\View\Composers\PlatformComposer'
+            'game.sub.search_condition', 'App\View\Composers\PlatformComposer'
         );
     }
 }

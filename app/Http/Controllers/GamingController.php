@@ -51,8 +51,6 @@ class GamingController extends Controller
 
         $blogs = $this->blogRepository->getBlogSearch();
 
-        $platforms = $this->associationRepository->getAllPlatform();
-
         $topBlog = $this->blogRepository->getTopBlog();
 
         $topComment = $this->commentRepository->getTopComment();
@@ -64,7 +62,6 @@ class GamingController extends Controller
             'blogs' => $blogs,
             'upcomingGames' => $upComingGames,
             'topReviews' => $topReviews,
-            'platforms' => $platforms,
             'topComment' => $topComment,
             'recentBlog' => $recentBlog
         ]);
@@ -80,7 +77,6 @@ class GamingController extends Controller
 
     public function gameDetail($slug)
     {
-        $platforms = $this->associationRepository->getAllPlatform();
         $game = $this->gameRepository->getGameBySlug($slug);
         if (empty($game)) {
             return abort(404);
@@ -92,7 +88,6 @@ class GamingController extends Controller
         return view('game.detail')->with([
             'game' => $game,
             'blogs' => $blogs,
-            'platforms' => $platforms,
         ]);
     }
 }

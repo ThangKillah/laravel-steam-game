@@ -276,6 +276,10 @@
 
     <script>
         $(document).ready(function () {
+            $("img").each(function () {
+                $(this).attr("onerror", "this.src='{{ asset('img/bg-empty.jpeg') }}'");
+            });
+
             $('.chart').easyPieChart({
                 barColor: '#5eb404',
                 trackColor: '#e3e3e3',

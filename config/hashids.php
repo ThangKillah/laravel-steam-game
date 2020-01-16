@@ -42,6 +42,7 @@ return [
         'main' => [
             'salt' => 'thangbt',
             'length' => '5',
+            'alphabet' => 'abcdefhijklmnopqrstuvwxyz1234567890'
         ],
 
         'alternative' => [
