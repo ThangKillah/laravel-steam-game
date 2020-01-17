@@ -111,7 +111,7 @@
 
 @push('js')
     <script async defer crossorigin="anonymous"
-            src="{{ 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId='. config('services.facebook.app_id') .'&autoLogAppEvents=1' }}"></script>
+            src="{{ 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId='. config('services.facebook.client_id') .'&autoLogAppEvents=1' }}"></script>
     <script>
         $(document).ready(function () {
             $('iframe').each(function () {
