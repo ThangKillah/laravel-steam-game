@@ -1,7 +1,5 @@
 @extends('layout.blank')
 
-@section('title', $blog->title)
-
 {{--@section('breadcrumb')--}}
 {{--    <section class="breadcrumbs">--}}
 {{--        <div class="container">--}}
@@ -18,9 +16,12 @@
                     <!-- widget share -->
                     <div class="widget widget-share" data-fixed="widget">
                         <div class="widget-block">
-                            <a class="btn btn-social btn-facebook btn-circle" href="#" data-toggle="tooltip"
+                            <a class="btn btn-social btn-facebook btn-circle fb-share" href="#"
+                               target="_blank"
+                               data-toggle="tooltip"
                                title="Share on Facebook" data-placement="right" role="button"><i
                                         class="fa fa-facebook"></i></a>
+                            <div id="fb-root"></div>
                             <a class="btn btn-social btn-twitter btn-circle" href="#" data-toggle="tooltip"
                                title="Share on Twitter" data-placement="right" role="button"><i
                                         class="fa fa-twitter"></i></a>
@@ -55,17 +56,18 @@
                                 @endforeach
                             </div>
                         @endif
-                        <div class="social-share">
-                            <a class="btn btn-social btn-facebook btn-circle" href="#" data-toggle="tooltip"
-                               title="Share on Facebook" data-placement="bottom" role="button"><i
-                                        class="fa fa-facebook"></i></a>
-                            <a class="btn btn-social btn-twitter btn-circle" href="#" data-toggle="tooltip"
-                               title="Share on Twitter" data-placement="bottom" role="button"><i
-                                        class="fa fa-twitter"></i></a>
-                            <a class="btn btn-social btn-google-plus btn-circle" href="#" data-toggle="tooltip"
-                               title="Share on Google Plus" data-placement="bottom" role="button"><i
-                                        class="fa fa-google-plus"></i></a>
-                        </div>
+                            <div class="social-share">
+                                <a class="fb-share btn btn-social btn-facebook btn-circle" href="#"
+                                   data-toggle="tooltip"
+                                   title="Share on Facebook" data-placement="bottom" role="button"><i
+                                            class="fa fa-facebook"></i></a>
+                                <a class="btn btn-social btn-twitter btn-circle" href="#" data-toggle="tooltip"
+                                   title="Share on Twitter" data-placement="bottom" role="button"><i
+                                            class="fa fa-twitter"></i></a>
+                                <a class="btn btn-social btn-google-plus btn-circle" href="#" data-toggle="tooltip"
+                                   title="Share on Google Plus" data-placement="bottom" role="button"><i
+                                            class="fa fa-google-plus"></i></a>
+                            </div>
                     </div>
 
                     @if(!empty($relatedBlog) && count($relatedBlog) >= 1)
@@ -108,11 +110,23 @@
 @endsection
 
 @push('js')
+    <script async defer crossorigin="anonymous"
+            src="{{ 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId='. config('services.facebook.app_id') .'&autoLogAppEvents=1' }}"></script>
     <script>
         $(document).ready(function () {
             $('iframe').each(function () {
                 let attr_value = $(this).data("src");
                 $(this).attr('src', attr_value);
+            });
+
+            $('.fb-share').click(function () {
+                FB.ui({
+                    method: 'feed',
+                    name: '{{ $blog->title }}',
+                    link: '{{ Request::url() }}',
+                    picture: '{{ urlBlogImage($blog->image) }}',
+                    description: '{{ $blog->deck }}'
+                });
             });
 
             $(document).on('click', 'a', function (e) {

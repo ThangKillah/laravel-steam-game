@@ -9,12 +9,13 @@ use App\Repositories\GameRepository;
 use App\Repositories\ReviewRepository;
 use App\Traits\GameApi;
 use App\Traits\GameSpotApi;
+use App\Traits\Seo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
 class GamingController extends Controller
 {
-    use GameApi, GameSpotApi;
+    use GameApi, GameSpotApi, Seo;
 
     private $blogRepository;
     private $gameRepository;
@@ -45,6 +46,8 @@ class GamingController extends Controller
 
     public function home()
     {
+        $this->homeSeo();
+
         $upComingGames = $this->gameRepository->getTopUpComingGame(config('constant.limit_upcoming_game'));
 
         $topReviews = $this->reviewRepository->getTopReview(config('constant.limit_top_review'));

@@ -1,7 +1,5 @@
 @extends('layout.blank')
 
-@section('title', $game->name)
-
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slick/css/slick-theme.css') }}"/>

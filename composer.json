@@ -9,7 +9,9 @@
     "license": "MIT",
     "require": {
       "php": "^7.1.3",
+      "ext-json": "*",
       "anhskohbo/no-captcha": "^3.1",
+      "artesaos/seotools": "^0.16.0",
       "cartalyst/sentinel": "^3.0",
       "davejamesmiller/laravel-breadcrumbs": "5.x",
       "doctrine/dbal": "^2.9",
@@ -27,8 +29,7 @@
       "stevebauman/location": "^5.0",
       "stichoza/google-translate-php": "^4.0",
       "thiagocordeiro/laravel-translator": "^1.0",
-      "vinkla/hashids": "^7.0",
-      "ext-json": "*"
+      "vinkla/hashids": "^7.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

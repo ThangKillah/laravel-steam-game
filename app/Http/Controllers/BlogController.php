@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Repositories\BlogRepository;
 use App\Repositories\CommentRepository;
 use App\Traits\Helper;
+use App\Traits\Seo;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    use Helper;
+    use Helper, Seo;
 
     private $blogRepository;
     private $commentRepository;
@@ -40,6 +41,8 @@ class BlogController extends Controller
                 ];
             }
         }
+
+        $this->blogSEO($blog, $associations);
 
         if ($blog->author_id == 0) {
             $blog->body = $this->editContentGameSpot($blog->body);
