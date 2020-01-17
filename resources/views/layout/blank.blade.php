@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- vendor css -->
+    <link rel="icon" href="{{ asset('img/game.png') }}">
+
     <link rel="stylesheet"
           href="{{ asset('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap') }}">
     <link rel="preload" href="{{ asset('plugins/font-awesome/fonts/fontawesome-webfont.woff2' . '?v=4.7.0') }}"
