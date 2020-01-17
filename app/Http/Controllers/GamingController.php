@@ -84,6 +84,7 @@ class GamingController extends Controller
         if (empty($game)) {
             return abort(404);
         }
+        $this->gameSEO($game);
         $blogs = $this->blogRepository->getBlogSearch([
             'game_id' => $game->game_id
         ]);

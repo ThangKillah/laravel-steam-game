@@ -36,7 +36,7 @@ trait Seo
         //SEOMeta::addMeta('article:section', $post->category, 'property');
 
         if (count($associations) >= 1) {
-            SEOMeta::addKeyword(array_column($associations, 'name'));
+            SEOMeta::addKeyword((string)array_column($associations, 'name'));
         }
 
         OpenGraph::setDescription($post->deck);
@@ -59,5 +59,25 @@ trait Seo
         JsonLd::setDescription($post->deck);
         JsonLd::setType('Article');
         JsonLd::addImage(urlBlogImage($post->image));
+    }
+
+    public function gameSEO($game)
+    {
+        $des = $game->summary;
+        if (!empty($des)) {
+            SEOMeta::setDescription($des);
+            OpenGraph::setDescription($des);
+            JsonLd::setDescription($des);
+        }
+
+        SEOMeta::setTitle($game->name);
+        SEOMeta::setCanonical(route('game-detail', ['slug' => $game->slug]));
+
+        OpenGraph::setTitle($game->name);
+        OpenGraph::setUrl(route('game-detail', ['slug' => $game->slug]));
+        OpenGraph::addProperty('type', 'website');
+
+        JsonLd::setTitle($game->name);
+        JsonLd::addImage(gameScreenshot($game->cover));
     }
 }
