@@ -36,7 +36,7 @@ trait Seo
         //SEOMeta::addMeta('article:section', $post->category, 'property');
 
         if (count($associations) >= 1) {
-            SEOMeta::addKeyword((string)array_column($associations, 'name'));
+            SEOMeta::addKeyword(array_column($associations, 'name'));
         }
 
         OpenGraph::setDescription($post->deck);
