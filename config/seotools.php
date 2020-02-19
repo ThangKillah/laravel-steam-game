@@ -11,7 +11,7 @@ return [
         'defaults' => [
             'title' => "Game Immortal", // set false to total remove
             'titleBefore' => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
-            'description' => __('Discover something new to play, no matter the platform!'), // set false to total remove
+            'description' => false, // set false to total remove
             'separator' => ' - ',
             'keywords' => [],
             'canonical' => false, // Set null for using Url::current(), set false to total remove
@@ -36,7 +36,7 @@ return [
          */
         'defaults' => [
             'title' => 'Game Immortal', // set false to total remove
-            'description' => __('Discover something new to play, no matter the platform!'), // set false to total remove
+            'description' => false, // set false to total remove
             'url' => false, // Set null for using Url::current(), set false to total remove
             'type' => false,
             'site_name' => false,
