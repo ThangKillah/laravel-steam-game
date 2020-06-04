@@ -18,7 +18,7 @@ class GameSpotBlogSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 10000; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $blogs = $this->getBlog($i);
             if (!empty($blogs)) {
                 if ($blogs['number_of_page_results'] === 0) {

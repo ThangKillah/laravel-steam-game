@@ -16,8 +16,9 @@ class GameSpotReviewSeeder extends Seeder
     public function run()
     {
         $reviewIds = \App\Model\Review::all()->pluck('gamespot_id')->toArray();
+        $platIds = \App\Model\Platform::all()->pluck('id')->toArray();
 
-        for ($i = 1; $i <= 10000; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $reviews = $this->getReview($i);
             if (!empty($reviews)) {
                 if ($reviews['number_of_page_results'] === 0) {
@@ -41,6 +42,7 @@ class GameSpotReviewSeeder extends Seeder
                             $game = \App\Model\Game::where('slug', explode("/", $item['game']["site_detail_url"])[3])->first();
 
                             if (!empty($game)) {
+                                $random_keys=array_rand($platIds,3);
                                 $insertData = [
                                     'author_id' => 0,
                                     'title' => $item['title'],
@@ -57,7 +59,7 @@ class GameSpotReviewSeeder extends Seeder
                                     'game_id' => $game->game_id,
                                     'created_at' => now(),
                                     'updated_at' => now(),
-                                    'platform_id' => empty($arrPlat) ? 0 : \App\Model\Platform::where('name', $arrPlat[array_rand($arrPlat)])->first()->id,
+                                    'platform_id' => $platIds[$random_keys[0]],
                                 ];
                                 array_push($data, $insertData);
                             }

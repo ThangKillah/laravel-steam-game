@@ -14,16 +14,16 @@ class DatabaseSeeder extends Seeder
     {
         DB::beginTransaction();
         try {
-//            $this->call(CategorySeeder::class);
-//            $this->call(DateFormatSeeder::class);
-//            $this->call(PlatformSeeder::class);
-//            $this->call(ThemeSeeder::class);
-//            $this->call(ModeSeeder::class);
-//            $this->call(GenreSeeder::class);
-//            $this->call(GameSeeder::class);
-//            $this->call(GameSpotReviewSeeder::class);
+            $this->call(CategorySeeder::class);
+            $this->call(DateFormatSeeder::class);
+            $this->call(PlatformSeeder::class);
+            $this->call(ThemeSeeder::class);
+            $this->call(ModeSeeder::class);
+            $this->call(GenreSeeder::class);
+            $this->call(GameSeeder::class);
+            $this->call(GameSpotReviewSeeder::class);
             $this->call(GameSpotBlogSeeder::class);
-//            $this->call(UserSeeder::class);
+            $this->call(UserSeeder::class);
             DB::commit();
         } catch (Exception $e) {
             Log::info($e);
